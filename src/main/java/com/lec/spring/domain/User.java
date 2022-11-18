@@ -15,11 +15,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
-import com.lec.spring.domain.item.Buy;
-import com.lec.spring.domain.item.Cart;
-import com.lec.spring.domain.item.Like;
-import com.lec.spring.domain.item.Review;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -53,7 +48,7 @@ public class User extends BaseEntity{
 	@Column(nullable = false)
 	private String address;
 	@Column(nullable = false)
-	private Boolean flag;
+	private Boolean isusing; // true이면 회원, false이면 탈퇴한 회원
 	@Column(nullable = false)
 	private Long point;
 	

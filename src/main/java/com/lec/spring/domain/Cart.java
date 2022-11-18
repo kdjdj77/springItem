@@ -1,4 +1,4 @@
-package com.lec.spring.domain.item;
+package com.lec.spring.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,8 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import com.lec.spring.domain.BaseEntity;
-import com.lec.spring.domain.User;
+import org.hibernate.annotations.ColumnDefault;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,4 +33,7 @@ public class Cart extends BaseEntity{
 	@ManyToOne
 	@ToString.Exclude
 	private User user;
+	
+	@ColumnDefault(value = "1")
+	private Long count;
 }

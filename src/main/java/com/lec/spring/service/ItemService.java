@@ -1,4 +1,4 @@
-package com.lec.spring.service.item;
+package com.lec.spring.service;
 
 import org.springframework.stereotype.Service;
 

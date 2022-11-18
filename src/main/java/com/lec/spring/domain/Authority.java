@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name = "t6_authority")
+@Entity(name = "db_authority")
 public class Authority {
 	
 	@Id

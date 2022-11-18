@@ -1,4 +1,4 @@
-package com.lec.spring.domain.item;
+package com.lec.spring.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ public class Category {
 	private Long id;
 	
 	@Column(nullable = false)
-	private String categoryname;
+	private String name;
 	
 	@ManyToOne
 	@ToString.Exclude
@@ -40,5 +40,5 @@ public class Category {
 	@OneToMany(mappedBy ="category" , cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
-    private List<Tag> tag = new ArrayList<>();
+    private List<Tag> tags = new ArrayList<>();
 }

@@ -1,4 +1,4 @@
-package com.lec.spring.domain.item;
+package com.lec.spring.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,17 +18,17 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString(callSuper = true)
-@Entity(name = "db_tag")
-public class Tag {
+@Entity(name = "db_color")
+public class Color {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(nullable = false)
-	private String tagname;
+	private String color;
 	
 	@ManyToOne
 	@ToString.Exclude
-	private Category category;
+	private Item item;
 }

@@ -1,4 +1,4 @@
-package com.lec.spring.domain.item;
+package com.lec.spring.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,12 +19,16 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString(callSuper = true)
-@Entity(name = "db_itemfile")
-public class Itemfile {
+@Entity(name = "db_contentfile")
+public class Contentfile {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@ManyToOne
+	@ToString.Exclude
+	private Item item;
 	
 	@Column(nullable = false)
 	private String source;  
@@ -33,8 +37,4 @@ public class Itemfile {
 	
 	@Transient
 	private boolean isImage;
-	
-	@ManyToOne
-	@ToString.Exclude
-	private Item item;
 }

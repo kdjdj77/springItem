@@ -1,4 +1,4 @@
-package com.lec.spring.domain.item;
+package com.lec.spring.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +26,7 @@ public class Size {
 	private Long id;
 	
 	@Column(nullable = false)
-	private String size;
+	private String name;
 	
 	@ManyToOne
 	@ToString.Exclude

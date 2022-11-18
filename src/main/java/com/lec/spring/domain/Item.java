@@ -1,4 +1,4 @@
-package com.lec.spring.domain.item;
+package com.lec.spring.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.ColumnDefault;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,21 +32,25 @@ public class Item {
 	private Long id;
 	
 	@Column(nullable = false)
-	private String itemname;
+	private String name;
 	@Column(nullable = false)
-	private Boolean itemflag;
+	private Boolean onsale; // false 이면 판매중지, true 이면 판매중
 	@Column(nullable = false)
 	private Double discount;
 	@Column(nullable = false)
-	private String itemcontent;
+	private String content;
 	@Column(nullable = false)
 	private Double price;
 	@Column(nullable = false)
 	private Long stock;
-	@Column(nullable = false)
+	@ColumnDefault(value = "0")
 	private Long reviewCnt;
-	@Column(nullable = false)
+	@ColumnDefault(value = "0")
 	private Double avgstar;
+	@ColumnDefault(value = "0")
+	private	Long sell;
+	@ColumnDefault(value = "0")
+	private	Long like;
 	
 	@OneToMany(mappedBy ="item" , cascade = CascadeType.ALL)
     @ToString.Exclude
@@ -69,15 +75,10 @@ public class Item {
 	@OneToMany(mappedBy ="item" , cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
+    private List<Contentfile> contentfiles = new ArrayList<>();
+	
+	@OneToMany(mappedBy ="item" , cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @Builder.Default
     private List<Review> reviews = new ArrayList<>();
-	
-	@OneToMany(mappedBy ="item" , cascade = CascadeType.ALL)
-    @ToString.Exclude
-    @Builder.Default
-    private List<Cart> carts = new ArrayList<>();
-	
-	@OneToMany(mappedBy ="item" , cascade = CascadeType.ALL)
-    @ToString.Exclude
-    @Builder.Default
-    private List<Buy> buies = new ArrayList<>();
 }

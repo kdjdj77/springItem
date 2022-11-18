@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 import lombok.AllArgsConstructor;
@@ -18,20 +19,22 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString(callSuper = true)
-@Entity(name = "t6_file")
-public class FileDTO {
+@Entity(name = "db_itemfile")
+public class Itemfile {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Column(name = "write_id")
-	private Long write; // 어느 글의 첨부파일 ? (FK)
-
+	
+	@ManyToOne
+	@ToString.Exclude
+	private Item item;
+	
 	@Column(nullable = false)
-	private String source;   // 원본 파일 명
+	private String source;  
 	@Column(nullable = false)
-	private String file;     // 저장된 파일 명 (rename 된 파일명)
+	private String file;   
 	
 	@Transient
-	private boolean isImage; // 이미지 여부
+	private boolean isImage;
 }

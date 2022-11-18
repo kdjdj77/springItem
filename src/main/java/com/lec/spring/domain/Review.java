@@ -1,13 +1,11 @@
-package com.lec.spring.domain.item;
+package com.lec.spring.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
-import com.lec.spring.domain.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,8 +18,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString(callSuper = true)
-@Entity(name = "db_like")
-public class Like {
+@Entity(name = "db_reivew")
+public class Review extends BaseEntity{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,4 +32,10 @@ public class Like {
 	@ManyToOne
 	@ToString.Exclude
 	private User user;
+	
+	@Column(nullable = false)
+	private String content;
+	
+	@Column(nullable = false)
+	private Double star;
 }
