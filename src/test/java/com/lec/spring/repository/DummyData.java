@@ -6,11 +6,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.lec.spring.domain.Authority;
+import com.lec.spring.domain.Buy;
+import com.lec.spring.domain.Cart;
 import com.lec.spring.domain.Category;
 import com.lec.spring.domain.Color;
 import com.lec.spring.domain.Contentfile;
 import com.lec.spring.domain.Item;
 import com.lec.spring.domain.Itemfile;
+import com.lec.spring.domain.Like;
+import com.lec.spring.domain.Review;
 import com.lec.spring.domain.Size;
 import com.lec.spring.domain.Tag;
 import com.lec.spring.domain.User;
@@ -218,8 +222,81 @@ public class DummyData {
 		contentfileRepository.save(cf8);
 		contentfileRepository.save(cf9);
 		
+		Review rv1 = Review.builder().user(user1).item(i1).content("이뻐요").star(2.0D).build();
+		Review rv2 = Review.builder().user(user1).item(i1).content("좋아요").star(5.0D).build();
+		Review rv3 = Review.builder().user(user1).item(i1).content("괜찮아요").star(3.0D).build();
+		Review rv4 = Review.builder().user(user1).item(i2).content("나쁘지않아요").star(4.0D).build();
+		Review rv5 = Review.builder().user(user1).item(i2).content("이뻐요").star(4.0D).build();
+		Review rv6 = Review.builder().user(user1).item(i2).content("핏굿요").star(2.0D).build();
+		Review rv7 = Review.builder().user(user1).item(i3).content("짱이에요").star(2.0D).build();
+		Review rv8 = Review.builder().user(user1).item(i3).content("가격이싸요").star(1.0D).build();
+		Review rv9 = Review.builder().user(user2).item(i3).content("쫌별로에요").star(3.0D).build();
+	
+		Review rv10 = Review.builder().user(user2).item(i1).content("짱이에요").star(2.0D).build();
+		Review rv11 = Review.builder().user(user2).item(i1).content("가격이싸요").star(1.0D).build();
+		Review rv12 = Review.builder().user(user2).item(i1).content("쫌별로에요").star(3.0D).build();
+		Review rv13 = Review.builder().user(user2).item(i2).content("짱이에요").star(2.0D).build();
+		Review rv14 = Review.builder().user(user2).item(i2).content("가격이싸요").star(1.0D).build();
+		Review rv15 = Review.builder().user(user2).item(i2).content("쫌별로에요").star(3.0D).build();
+		Review rv16 = Review.builder().user(user2).item(i3).content("짱이에요").star(2.0D).build();
+		Review rv17 = Review.builder().user(user2).item(i3).content("가격이싸요").star(1.0D).build();
+		Review rv18 = Review.builder().user(user2).item(i3).content("쫌별로에요").star(3.0D).build();
+	
+		reviewRepository.save(rv1);
+		reviewRepository.save(rv2);
+		reviewRepository.save(rv3);
+		reviewRepository.save(rv4);
+		reviewRepository.save(rv5);
+		reviewRepository.save(rv6);
+		reviewRepository.save(rv7);
+		reviewRepository.save(rv8);
+		reviewRepository.save(rv9);
+		reviewRepository.save(rv10);
+		reviewRepository.save(rv11);
+		reviewRepository.save(rv12);
+		reviewRepository.save(rv13);
+		reviewRepository.save(rv14);
+		reviewRepository.save(rv15);
+		reviewRepository.save(rv16);
+		reviewRepository.save(rv17);
+		reviewRepository.save(rv18);
 		
+		Cart ct1 = Cart.builder().user(user1).item(i1).count(2L).build();
+		Cart ct2 = Cart.builder().user(user1).item(i2).count(4L).build();
+		Cart ct3 = Cart.builder().user(user1).item(i3).count(1L).build();
+		Cart ct4 = Cart.builder().user(user2).item(i1).count(3L).build();
+		Cart ct5 = Cart.builder().user(user2).item(i2).count(5L).build();
+		Cart ct6 = Cart.builder().user(user2).item(i3).count(7L).build();
 		
+		cartRepository.save(ct1);
+		cartRepository.save(ct2);
+		cartRepository.save(ct3);
+		cartRepository.save(ct4);
+		cartRepository.save(ct5);
+		cartRepository.save(ct6);
+		
+		Buy b1 = Buy.builder().user(user1).item(i1).count(1L).build();
+		Buy b2 = Buy.builder().user(user1).item(i2).count(2L).build();
+		Buy b3 = Buy.builder().user(user1).item(i3).count(1L).build();
+		Buy b4 = Buy.builder().user(user2).item(i1).count(2L).build();
+		Buy b5 = Buy.builder().user(user2).item(i2).count(3L).build();
+		Buy b6 = Buy.builder().user(user2).item(i3).count(5L).build();
+		buyRepository.save(b1);
+		buyRepository.save(b2);
+		buyRepository.save(b3);
+		buyRepository.save(b4);
+		buyRepository.save(b5);
+		buyRepository.save(b6);
+		
+		Like l1 = Like.builder().user(user1).item(i1).build();
+		Like l2 = Like.builder().user(user1).item(i2).build();
+		Like l3 = Like.builder().user(user2).item(i1).build();
+		Like l4 = Like.builder().user(user2).item(i3).build();
+		
+		likeRepository.save(l1);
+		likeRepository.save(l2);
+		likeRepository.save(l3);
+		likeRepository.save(l4);
 	}
 	public static Item registerItem(String q, Boolean w, Double e, String r, Double t, Long y, Long u, Double i, Long o, Long p) {
 		Item a = Item.builder().name(q).onsale(w).discount(e).content(r).price(t).stock(y).reviewCnt(u).avgstar(i).sell(o).like(p).build();
