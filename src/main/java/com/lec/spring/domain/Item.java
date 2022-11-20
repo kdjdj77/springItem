@@ -27,17 +27,10 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @Entity(name = "db_item")
 public class Item {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne
-	@ToString.Exclude
-	private Tag tag;
-	@ManyToOne
-	@ToString.Exclude
-	private Category category;
 	@Column(nullable = false)
 	private String name;
 	@Column(nullable = false)
@@ -51,13 +44,17 @@ public class Item {
 	@Column(nullable = false)
 	private Long stock;
 	@ColumnDefault(value = "0")
-	private Long reviewCnt;
+	private Long reviewcnt;
 	@ColumnDefault(value = "0")
 	private Double avgstar;
 	@ColumnDefault(value = "0")
 	private	Long sell;
 	@ColumnDefault(value = "0")
-	private	Long like;
+	private	Long likecnt; // 이름이 like이면 sql문의 like와 혼동하여 테이블 생성 안됨 ㅋㅋ
+	
+	@ManyToOne
+	@ToString.Exclude
+	private Tag tag;
 	
 	@OneToMany(mappedBy ="item" , cascade = CascadeType.ALL)
     @ToString.Exclude
