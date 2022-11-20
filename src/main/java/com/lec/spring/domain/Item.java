@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.ColumnDefault;
@@ -31,6 +32,12 @@ public class Item {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@ManyToOne
+	@ToString.Exclude
+	private Tag tag;
+	@ManyToOne
+	@ToString.Exclude
+	private Category category;
 	@Column(nullable = false)
 	private String name;
 	@Column(nullable = false)
@@ -61,11 +68,6 @@ public class Item {
     @ToString.Exclude
     @Builder.Default
     private List<Size> sizes = new ArrayList<>();
-	
-	@OneToMany(mappedBy ="item" , cascade = CascadeType.ALL)
-    @ToString.Exclude
-    @Builder.Default
-    private List<Category> categories = new ArrayList<>();
 	
 	@OneToMany(mappedBy ="item" , cascade = CascadeType.ALL)
     @ToString.Exclude

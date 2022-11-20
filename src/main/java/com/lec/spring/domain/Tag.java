@@ -1,11 +1,16 @@
 package com.lec.spring.domain;
 
+import java.util.List;
+import java.util.ArrayList;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,4 +36,9 @@ public class Tag {
 	@ManyToOne
 	@ToString.Exclude
 	private Category category;
+	
+	@OneToMany(mappedBy ="tag" , cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @Builder.Default
+    private List<Item> items = new ArrayList<>();
 }
