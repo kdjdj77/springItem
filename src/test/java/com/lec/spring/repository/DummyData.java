@@ -159,23 +159,44 @@ public class DummyData {
 		contentfileRepository.save(cf4); contentfileRepository.save(cf5); contentfileRepository.save(cf6);
 		contentfileRepository.save(cf7); contentfileRepository.save(cf8); contentfileRepository.save(cf9);
 // 댓글
-		User[] us = {user1,	user2,	user1,	user1,	user2,	user2,	user1,	user2};
-		Item[] it = {i1,	i1,		i1,		i2,		i2,		i2,		i3,		i3};
-		String[] co = {
-				"소라색 러버들에게 강력 추천하는 패딩이에요!! 안에 하얀색 후드집업과 붙어있어서 훨씬 스타일리쉬하게 코디 가능하답니다:) 색감 진짜 예뻐서 더 추워지면 겨울 내내 착용하고 다닐 것 같아요! 핏도 색감도 정말 인생 패딩이라 만족하는 제품이랍니다;)",
-				"뒷쪽 후드도 있는 귀여운 패딩 점퍼! :)\n부해보여서 어깡만들어주는 패딩이 많은데 요 아이는 그렇지 않아서 너무 좋았어요ㅠㅠ 잠구거나 풀어서 착용해도 모두 핏 예쁘고 후드도 있어서 추울 때 딱입니당 ♥",
-				"숏패딩 정말 갖고 싶었는데 드디어ㅜ♡ 갖게 됐네요 패딩 구매하면서 내심 부해보이지는 않을까?,따뜻할까? 걱정 많이 했는데 전혀 부해보이지 않고 따뜻함을 넘어서 어쩔때는 실내에선 덥다 느낄 정도로 따뜻합니다ㅎㅎ 진짜 너무 만족스러운 패딩이에요",
-				"입고지연 인한 배송 늦게 왔습니다 집에 없어서 주문했어요 그리고 한번 입어봤는데 사이즈 잘 맞아요 ! 팔이 들었는데 작지 않네요 너무 좋아요 ㅋㅋㅋ",
-				"조아요 ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ",
-				"외출할 때 가볍게 입을 누빔 패딩을 찾다 발견했어요! 사진이랑 똑같고, 제가 상체에 살이 없는 편이라 약간 넉넉하게 입고 있는데도 부해보이지 않아서 좋아요 ㅎㅎ 목이 허전해서 목도리까지 매면 이번 겨울 따뜻하게 보낼 수 있을 것 같아요!",
-				"후드집업은 너무 편해보이고 코트는 너무 포멀해서 애매할때 입기 좋은 아우터에요! 손목과 밑단이 쫀쫀해서 아방한 핏잡기 좋아요! 지퍼 올리는 정도에 따라서 카라넥이나 목폴라로 연출할 수 있는점이 좋아용",
-				"스쿨룩으로 딱 좋은 니트 집업 가디건이랍니다! 도톰하지만 무겁지 않아서 좋아요 ~ 그레이 색상이라 무난해서 어느 하의든 잘 어울리는 것 같아요! :)"
-		};
-		Double[] st = {4D, 5D, 5D, 3D, 5D, 5D, 2D, 5D};
-		for(int i = 0; i < us.length; i++) {
-			Review rv = Review.builder().user(us[i]).item(it[i]).content(co[i]).star(st[i]).build();
-			reviewRepository.save(rv);
-		}
+		Review rv1 = Review.builder().user(user1).item(i1).content("이뻐요").star(2.0D).build();
+		Review rv2 = Review.builder().user(user1).item(i1).content("좋아요").star(5.0D).build();
+		Review rv3 = Review.builder().user(user1).item(i1).content("괜찮아요").star(3.0D).build();
+		Review rv4 = Review.builder().user(user1).item(i2).content("나쁘지않아요").star(4.0D).build();
+		Review rv5 = Review.builder().user(user1).item(i2).content("이뻐요").star(4.0D).build();
+		Review rv6 = Review.builder().user(user1).item(i2).content("핏굿요").star(2.0D).build();
+		Review rv7 = Review.builder().user(user1).item(i3).content("짱이에요").star(2.0D).build();
+		Review rv8 = Review.builder().user(user1).item(i3).content("가격이싸요").star(1.0D).build();
+		Review rv9 = Review.builder().user(user2).item(i3).content("쫌별로에요").star(3.0D).build();
+	
+		Review rv10 = Review.builder().user(user2).item(i1).content("짱이에요").star(2.0D).build();
+		Review rv11 = Review.builder().user(user2).item(i1).content("가격이싸요").star(1.0D).build();
+		Review rv12 = Review.builder().user(user2).item(i1).content("쫌별로에요").star(3.0D).build();
+		Review rv13 = Review.builder().user(user2).item(i2).content("짱이에요").star(2.0D).build();
+		Review rv14 = Review.builder().user(user2).item(i2).content("가격이싸요").star(1.0D).build();
+		Review rv15 = Review.builder().user(user2).item(i2).content("쫌별로에요").star(3.0D).build();
+		Review rv16 = Review.builder().user(user2).item(i3).content("짱이에요").star(2.0D).build();
+		Review rv17 = Review.builder().user(user2).item(i3).content("가격이싸요").star(1.0D).build();
+		Review rv18 = Review.builder().user(user2).item(i3).content("쫌별로에요").star(3.0D).build();
+	
+		reviewRepository.save(rv1);
+		reviewRepository.save(rv2);
+		reviewRepository.save(rv3);
+		reviewRepository.save(rv4);
+		reviewRepository.save(rv5);
+		reviewRepository.save(rv6);
+		reviewRepository.save(rv7);
+		reviewRepository.save(rv8);
+		reviewRepository.save(rv9);
+		reviewRepository.save(rv10);
+		reviewRepository.save(rv11);
+		reviewRepository.save(rv12);
+		reviewRepository.save(rv13);
+		reviewRepository.save(rv14);
+		reviewRepository.save(rv15);
+		reviewRepository.save(rv16);
+		reviewRepository.save(rv17);
+		reviewRepository.save(rv18);
 // 좋아요
 		Like l1 = Like.builder().user(user1).item(i1).build(); likeRepository.save(l1);
 		Like l2 = Like.builder().user(user2).item(i1).build(); likeRepository.save(l2);
