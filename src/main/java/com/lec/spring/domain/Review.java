@@ -20,7 +20,7 @@ import lombok.ToString;
 @Builder
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-@Entity(name = "db_review") // db_reivew로 되어 있었음 ㅋㅋ
+@Entity(name = "db_review")
 public class Review extends BaseEntity{
 	
 	@Id

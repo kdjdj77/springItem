@@ -50,11 +50,15 @@ public class Item {
 	@ColumnDefault(value = "0")
 	private	Long sell;
 	@ColumnDefault(value = "0")
-	private	Long likecnt; // 이름이 like이면 sql문의 like와 혼동하여 테이블 생성 안됨 ㅋㅋ
+	private	Long likecnt;
 	
 	@ManyToOne
 	@ToString.Exclude
 	private Tag tag;
+	
+	@ManyToOne
+	@ToString.Exclude
+	private Category category;
 	
 	@OneToMany(mappedBy ="item" , cascade = CascadeType.ALL)
     @ToString.Exclude

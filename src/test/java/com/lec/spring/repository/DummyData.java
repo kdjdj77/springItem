@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.lec.spring.domain.Authority;
+import com.lec.spring.domain.Buy;
 import com.lec.spring.domain.Category;
 import com.lec.spring.domain.Color;
 import com.lec.spring.domain.Contentfile;
@@ -101,17 +102,19 @@ public class DummyData {
 		Tag t18 = Tag.builder().category(cg4).name("구두/워커").build(); tagRepository.save(t18);
 		Tag t19 = Tag.builder().category(cg4).name("샌들/슬리퍼/장화").build(); tagRepository.save(t19);
 
-// 상품		
-		// 이름, 판매중/판매중지, 할인, 내용, 가격, 재고, 댓글개수, 평균평점, 판매량, 좋아요 받은수, 태그
+// 상품
 		Item i1 = Item.builder()
 				.name("후드 레이어드 패딩점퍼").onsale(true).discount(1D).content("푹신해요").price(27500D)
-				.stock(3L).reviewcnt(3L).avgstar(4.6D).sell(5L).likecnt(3L).tag(t8).build();
+				.stock(3L).reviewcnt(3L).avgstar(4.6D).sell(5L).likecnt(3L).tag(t8)
+				.category(t8.getCategory()).build();
 		Item i2 = Item.builder()
 				.name("누빔 데일리 캐주얼 박시 패딩").onsale(true).discount(10D).content("따뜻해요").price(13000D)
-				.stock(5L).reviewcnt(3L).avgstar(4.3D).sell(9L).likecnt(2L).tag(t4).build();
+				.stock(5L).reviewcnt(3L).avgstar(4.3D).sell(9L).likecnt(2L).tag(t4)
+				.category(t4.getCategory()).build();
 		Item i3 = Item.builder()
 				.name("터닝 도톰 케이블 니트 집업 가디건").onsale(true).discount(10D).content("따뜻해요").price(33000D)
-				.stock(23L).reviewcnt(3L).avgstar(3.5D).sell(3L).likecnt(1L).tag(t10).build();
+				.stock(23L).reviewcnt(3L).avgstar(3.5D).sell(3L).likecnt(1L).tag(t10)
+				.category(t10.getCategory()).build();
 		
 		itemRepository.save(i1); itemRepository.save(i2); itemRepository.save(i3);
 // 색상		
@@ -200,6 +203,12 @@ public class DummyData {
 		Like l4 = Like.builder().user(user1).item(i2).build(); likeRepository.save(l4);
 		Like l5 = Like.builder().user(user2).item(i2).build(); likeRepository.save(l5);
 		Like l6 = Like.builder().user(user1).item(i3).build(); likeRepository.save(l6);
-
+// 구매내역
+		Buy b1 = Buy.builder().user(user1).item(i1).count(1L).build(); buyRepository.save(b1);
+		Buy b2 = Buy.builder().user(user1).item(i2).count(2L).build(); buyRepository.save(b2);
+		Buy b3 = Buy.builder().user(user1).item(i3).count(1L).build(); buyRepository.save(b3);
+		Buy b4 = Buy.builder().user(user2).item(i1).count(2L).build(); buyRepository.save(b4);
+		Buy b5 = Buy.builder().user(user2).item(i2).count(3L).build(); buyRepository.save(b5);
+		Buy b6 = Buy.builder().user(user2).item(i3).count(5L).build(); buyRepository.save(b6);
 	}
 }
