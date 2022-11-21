@@ -1,7 +1,5 @@
 package com.lec.spring.controller;
 
-import java.security.Security;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;

@@ -7,10 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -19,7 +22,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 @Entity(name = "db_buy")
+@DynamicInsert
+@DynamicUpdate
 public class Buy extends BaseEntity{
 	
 	@Id
