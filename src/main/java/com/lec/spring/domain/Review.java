@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -18,7 +19,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString(callSuper = true)
-@Entity(name = "db_reivew")
+@EqualsAndHashCode(callSuper = true)
+@Entity(name = "db_review")
 public class Review extends BaseEntity{
 	
 	@Id

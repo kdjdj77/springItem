@@ -64,13 +64,5 @@ public class U {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-
-
-
-		
 	}
-
-
-
 }

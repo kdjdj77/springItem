@@ -33,12 +33,13 @@ public class Category {
 	@Column(nullable = false)
 	private String name;
 	
-	@ManyToOne
-	@ToString.Exclude
-	private Item item;
-	
 	@OneToMany(mappedBy ="category" , cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
     private List<Tag> tags = new ArrayList<>();
+	
+	@OneToMany(mappedBy ="category" , cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @Builder.Default
+    private List<Item> items = new ArrayList<>();
 }

@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.ColumnDefault;
@@ -26,7 +27,6 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @Entity(name = "db_item")
 public class Item {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -44,13 +44,21 @@ public class Item {
 	@Column(nullable = false)
 	private Long stock;
 	@ColumnDefault(value = "0")
-	private Long reviewCnt;
+	private Long reviewcnt;
 	@ColumnDefault(value = "0")
 	private Double avgstar;
 	@ColumnDefault(value = "0")
 	private	Long sell;
 	@ColumnDefault(value = "0")
-	private	Long like;
+	private	Long likecnt;
+	
+	@ManyToOne
+	@ToString.Exclude
+	private Tag tag;
+	
+	@ManyToOne
+	@ToString.Exclude
+	private Category category;
 	
 	@OneToMany(mappedBy ="item" , cascade = CascadeType.ALL)
     @ToString.Exclude
@@ -61,11 +69,6 @@ public class Item {
     @ToString.Exclude
     @Builder.Default
     private List<Size> sizes = new ArrayList<>();
-	
-	@OneToMany(mappedBy ="item" , cascade = CascadeType.ALL)
-    @ToString.Exclude
-    @Builder.Default
-    private List<Category> categories = new ArrayList<>();
 	
 	@OneToMany(mappedBy ="item" , cascade = CascadeType.ALL)
     @ToString.Exclude
