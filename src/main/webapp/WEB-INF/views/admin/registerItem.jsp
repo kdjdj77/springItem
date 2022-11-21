@@ -25,6 +25,9 @@
 		    -webkit-appearance: none;
 		    margin: 0;
 		}
+		th, td {
+		  vertical-align : top;
+		}
     </style>
 </head>
  
@@ -51,6 +54,23 @@
            		
 	            </div>
             </div>
+            
+            <table style="width:100%;">
+            	<tr>
+            		<td style="width:40%;">
+            			색상
+            			<button class="btn btn-sm btn-outline-dark ms-3" type="button" id="colorAdd">추가</button>
+            		</td>
+            		<td style="width:40%;">
+            			사이즈
+            			<button class="btn btn-sm btn-outline-dark ms-3" type="button" id="sizeAdd">추가</button>
+            		</td>
+            	</tr>
+            	<tr style="padding-right:10rem;">
+            		<td id="colors"></td>
+            		<td id="sizes"></td>
+            	</tr>
+            </table>
             
             <div class="mb-3 mt-3" style="width:100%">
                 <label for="discount">할인율</label>
@@ -82,20 +102,6 @@
 					<button type="button" id="btnAdd" class="btn btn-secondary">추가</button>
 				</div>
 			</div>
-			<script>
-			<%-- 주의! jsp 파일 안에서 Template Literal 사용하면 ${} 는 EL 구문으로 인식되어 서버단에서 먼저 처리된다
-			     응답에 출력해야 하는 경우 \${ }  처럼 escaping 해야 한다 --%>
-			let i = 0;
-			$("#btnAdd").click(function(){
-				$("#files").append(`
-					<div class="input-group mb-2">
-					<input class="form-control col-xs-3" type="file" name="ifile"/>
-					<button type="button" class="btn btn-outline-danger" onclick="$(this).parent().remove()">삭제</button>
-					</div>
-				`);
-				i++;
-			});
-			</script>
 			
 			<div class="container mt-3 mb-3 border rounded">
 				<div class="mb-3 mt-3">
@@ -106,26 +112,14 @@
 					<button type="button" id="btnAdd2" class="btn btn-secondary">추가</button>
 				</div>
 			</div>
-			<script>
-			<%-- 주의! jsp 파일 안에서 Template Literal 사용하면 ${} 는 EL 구문으로 인식되어 서버단에서 먼저 처리된다
-			     응답에 출력해야 하는 경우 \${ }  처럼 escaping 해야 한다 --%>
-			let j = 0;
-			$("#btnAdd2").click(function(){
-				$("#files2").append(`
-					<div class="input-group mb-2">
-					<input class="form-control col-xs-3" type="file" name="cfile"/>
-					<button type="button" class="btn btn-outline-danger" onclick="$(this).parent().remove()">삭제</button>
-					</div>
-				`);
-				j++;
-			});
-			</script>
 			<!-- 이미지 -->
 
-            <button type="submit" class="btn btn-outline-dark">작성완료</button>
-            <a class="btn btn-outline-dark" href="${pageContext.request.contextPath }/home">취소</a>
+            <button id="submitBtn" type="button" class="btn btn-success">등록</button>
+            <a class="btn btn-danger" href="${pageContext.request.contextPath }/home">취소</a>
         </form>
     </div>
+    <div style="height:100px;">
+    </div>
 </body>
-<script src="${pageContext.request.contextPath}/js/getTagsAjax.js"></script>
+<script src="${pageContext.request.contextPath}/js/registerItem.js"></script>
 </html>

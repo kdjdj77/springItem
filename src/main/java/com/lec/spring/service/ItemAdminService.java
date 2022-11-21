@@ -19,34 +19,33 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.lec.spring.domain.Category;
+import com.lec.spring.domain.Color;
 import com.lec.spring.domain.Contentfile;
 import com.lec.spring.domain.Item;
 import com.lec.spring.domain.Itemfile;
+import com.lec.spring.domain.Size;
 import com.lec.spring.domain.Tag;
 import com.lec.spring.domain.ajax.TagQryList;
 import com.lec.spring.repository.CategoryRepository;
+import com.lec.spring.repository.ColorRepository;
 import com.lec.spring.repository.ContentfileRepository;
 import com.lec.spring.repository.ItemRepository;
 import com.lec.spring.repository.ItemfileRepository;
+import com.lec.spring.repository.SizeRepository;
 import com.lec.spring.repository.TagRepository;
 
 
 @Service
 public class ItemAdminService {
-	@Autowired
-	private CategoryRepository categoryRepository;
-	@Autowired
-	private TagRepository tagRepository;
-	@Autowired
-	private ItemRepository itemRepository;
-	@Autowired
-	private ItemfileRepository itemfileRepository;
-	@Autowired
-	private ContentfileRepository contentfileRepository;
-	@Value("${app.upload.path}")
-	private String uploadDir;
-	@Autowired
-	ServletContext context;
+	@Autowired private CategoryRepository categoryRepository;
+	@Autowired private TagRepository tagRepository;
+	@Autowired private ItemRepository itemRepository;
+	@Autowired private ItemfileRepository itemfileRepository;
+	@Autowired private ContentfileRepository contentfileRepository;
+	@Autowired private ColorRepository colorRepository;
+	@Autowired private SizeRepository sizeRepository;
+	@Autowired ServletContext context;
+	@Value("${app.upload.path}") private String uploadDir;
 	
 	public List<Tag> getTagList() {
 		return tagRepository.findAll();
@@ -68,7 +67,7 @@ public class ItemAdminService {
 		list.setStatus("OK");
 		return list;
 	}
-	public int registerItem(String name, String category, String tag, Double discount, Double price, Long stock,
+	public Item registerItem(String name, String category, String tag, Double discount, Double price, Long stock,
 			String content, List<MultipartFile> ifile, List<MultipartFile> cfile) {
 		Item item = Item.builder()
 				.name(name)
@@ -76,12 +75,24 @@ public class ItemAdminService {
 				.tag(tagRepository.findById(Long.parseLong(tag)).orElse(null)).onsale(true)
 				.discount(discount).price(price).stock(stock).content(content)
 				.build();
-		itemRepository.saveAndFlush(item);
+		item = itemRepository.saveAndFlush(item);
 		addItemFiles(ifile, item.getId());
 		addContentFiles(cfile, item.getId());
+		return item;
+	}
+	public int registerColorAndSize(Item item, List<String> colors, List<String> sizes) {
+		for(String c : colors) {
+			if (c.trim().equals("")) continue;
+			Color co = Color.builder().color(c).item(item).build();
+			colorRepository.saveAndFlush(co);
+		}
+		for(String s : sizes) {
+			if (s.trim().equals("")) continue;
+			Size si = Size.builder().name(s).item(item).build();
+			sizeRepository.saveAndFlush(si);
+		}
 		return 1;
 	}
-	
 	
 	
 	
