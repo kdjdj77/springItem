@@ -1,6 +1,7 @@
 package com.lec.spring.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,14 +29,17 @@ import lombok.ToString;
 @Builder
 @ToString(callSuper = true)
 @Entity(name = "db_item")
+@DynamicInsert
+@DynamicUpdate
 public class Item {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(nullable = false)
 	private String name;
-	@Column(nullable = false)
+	@ColumnDefault(value = "true")
 	private Boolean onsale; // false 이면 판매중지, true 이면 판매중
 	@Column(nullable = false)
 	private Double discount;
@@ -84,4 +90,15 @@ public class Item {
     @ToString.Exclude
     @Builder.Default
     private List<Review> reviews = new ArrayList<>();
+	
+	public void addItemFiles(Itemfile... files) {  // xxxToMany 의 경우 만들어두면 편리
+		if(files != null) {
+			Collections.addAll(this.itemfiles, files);
+		}
+	}
+	public void addContentFiles(Contentfile... files) {  // xxxToMany 의 경우 만들어두면 편리
+		if(files != null) {
+			Collections.addAll(this.contentfiles, files);
+		}
+	}
 }

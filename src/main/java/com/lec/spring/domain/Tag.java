@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -37,6 +39,7 @@ public class Tag {
 	@ToString.Exclude
 	private Category category;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy ="tag" , cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
