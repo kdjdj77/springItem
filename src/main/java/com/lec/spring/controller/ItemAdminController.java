@@ -28,18 +28,42 @@ public class ItemAdminController {
 	}
 	@PostMapping("/item/registerOk")
 	public String itemRegisterOk(
-			@RequestParam List<MultipartFile> ifile,
-			@RequestParam List<MultipartFile> cfile,
-			@RequestParam List<String> colors,
-			@RequestParam List<String> sizes,
-			String name, String category, String tag,
-			Double discount, Double price, Long stock,
-			String content,
-			Model model) {
+			@RequestParam(required=false) List<MultipartFile> ifile, 
+			@RequestParam(required=false) List<MultipartFile> cfile,
+			@RequestParam List<String> rcolors, @RequestParam List<String> rsizes,
+			Item itemParam, String category, String tag, Model model) {
 		int result = 0;
-		Item item = itemadminService.registerItem(name, category, tag, discount, price, stock, content, ifile, cfile);
-		result = itemadminService.registerColorAndSize(item, colors, sizes);
+		Item item = itemadminService.registerItem(itemParam, category, tag, ifile, cfile);
+		result = itemadminService.registerColorAndSize(item, rcolors, rsizes);
 		model.addAttribute("result", result);
+		model.addAttribute("id", item.getId());
+		return "admin/registerOk";
+	}
+	@GetMapping("/item/update")
+	public String itemUpdate(String id, Model model) {
+		model.addAttribute("item", itemadminService.getItemById(id));
+		model.addAttribute("categoryList", itemadminService.getCategoryList());
+		return "admin/updateItem";
+	}
+	@PostMapping("/item/updateOk")
+	public String itemUpdateOk(
+			@RequestParam(required=false) List<MultipartFile> ifile, 
+			@RequestParam(required=false) List<MultipartFile> cfile,
+			@RequestParam(required=false) List<String> delifile, 
+			@RequestParam(required=false) List<String> delcfile,
+			@RequestParam(required=false) List<String> rcolors, 
+			@RequestParam(required=false) List<String> rsizes,
+			@RequestParam(required=false) List<String> delcolors, 
+			@RequestParam(required=false) List<String> delsizes,
+			Item itemParam, String id, String category, String tag, Model model) {
+		int result = 0;
+		itemParam.setId(Long.parseLong(id));		
+		itemadminService.deleteColorAndSize(delcolors, delsizes);
+		itemadminService.deletefile(itemParam, delifile, delcfile);
+		itemadminService.registerItem(itemParam, category, tag, ifile, cfile);
+		result = itemadminService.registerColorAndSize(itemParam, rcolors, rsizes);
+		model.addAttribute("result", result);
+		model.addAttribute("id", itemParam.getId());
 		return "admin/registerOk";
 	}
 }

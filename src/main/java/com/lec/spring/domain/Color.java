@@ -7,6 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,6 +23,8 @@ import lombok.ToString;
 @Builder
 @ToString(callSuper = true)
 @Entity(name = "db_color")
+@DynamicInsert
+@DynamicUpdate
 public class Color {
 	
 	@Id
@@ -27,6 +33,9 @@ public class Color {
 	
 	@Column(nullable = false)
 	private String color;
+	
+	@ColumnDefault(value="true")
+	private Boolean isvalid;
 	
 	@ManyToOne
 	@ToString.Exclude

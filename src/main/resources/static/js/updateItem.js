@@ -76,6 +76,8 @@ function buildTagList(result) {
 }
 
 function submitForm() {
+	let existcolorCnt = $(".itemcolor").length;
+	let existsizeCnt = $(".itemsize").length;
 	let colorCnt = $("input[name='rcolors']").length;
 	let cnt = colorCnt;
 	for(let i = 0; i < colorCnt; i++) if ($("input[name=colors]").eq(i).val().trim() == "") cnt--;
@@ -86,6 +88,6 @@ function submitForm() {
 	for(let i = 0; i < sizeCnt; i++) if ($("input[name=sizes]").eq(i).val().trim() == "") cnt--;
 	sizeCnt = cnt;
 	
-	if (colorCnt == 0) {alert("색상을 추가해주세요"); return false;}
-	if (sizeCnt == 0) {alert("사이즈를 추가해주세요"); return false;}
+	if (colorCnt + existcolorCnt == 0) {alert("색상을 추가해주세요"); return false;}
+	if (sizeCnt + existsizeCnt == 0) {alert("사이즈를 추가해주세요"); return false;}
 }
