@@ -92,12 +92,10 @@
 							</div>
 							<div class="mb-3 mt-3" style="padding-right:10%;">
 								<c:forEach var="fileDto" items="${item.colors}">
-									<c:if test="${fileDto.isvalid}">
-										<div class="input-group mb-2">
-											<input class="itemcolor form-control col-xs-3" type="text" readonly value="${fileDto.color}">
-											<button type="button"  class="btn btn-outline-danger" onclick="deleteColors(${fileDto.id}); $(this).parent().remove(); ">삭제</button> 
-										</div>
-									</c:if>
+									<div class="input-group mb-2">
+										<input class="itemcolor form-control col-xs-3" type="text" readonly value="${fileDto.color}">
+										<button type="button"  class="btn btn-outline-danger" onclick="deleteColors(${fileDto.id}); $(this).parent().remove(); ">삭제</button> 
+									</div>
 								</c:forEach>
 							</div>		
 						</c:if>			
@@ -110,12 +108,10 @@
 							</div>
 							<div class="mb-3 mt-3" style="padding-right:10%;">
 								<c:forEach var="fileDto" items="${item.sizes}">
-									<c:if test="${fileDto.isvalid}">
-										<div class="input-group mb-2">
-											<input class="itemsize form-control col-xs-3" type="text" readonly value="${fileDto.name}">
-											<button type="button"  class="btn btn-outline-danger" onclick="deleteSizes(${fileDto.id}); $(this).parent().remove(); ">삭제</button> 
-										</div>
-									</c:if>
+									<div class="input-group mb-2">
+										<input class="itemsize form-control col-xs-3" type="text" readonly value="${fileDto.name}">
+										<button type="button"  class="btn btn-outline-danger" onclick="deleteSizes(${fileDto.id}); $(this).parent().remove(); ">삭제</button> 
+									</div>
 								</c:forEach>
 							</div>			
 						</c:if>			

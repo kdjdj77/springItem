@@ -64,15 +64,15 @@ public class DummyData {
 		User user1 = User.builder()
 				.username("USER1").password(passwordEncoder.encode("1234"))
 				.name("회원1").phonenum("01011111111").email("111@gmail.com")
-				.address("경기도 평택시").point(200L).isusing(true).build();		
+				.address("경기도 평택시").point(200L).build();		
 		User user2 = User.builder()
 				.username("USER2").password(passwordEncoder.encode("1234"))
 				.name("회원2").phonenum("01022222222").email("222@gmail.com")
-				.address("경기도 하남시").point(50L).isusing(true).build();
+				.address("경기도 하남시").point(50L).build();
 		User admin = User.builder()
 				.username("ADMIN").password(passwordEncoder.encode("1234"))
 				.name("관리자").phonenum("01076767676").email("asdf@gmail.com")
-				.address("서울특별시 강서구").point(400L).isusing(true).build();
+				.address("서울특별시 강서구").point(400L).build();
 		
 		user1.addAuthority(auth_member); user2.addAuthority(auth_member); admin.addAuthority(auth_admin);
 		user1 = userRepository.save(user1); user2 = userRepository.save(user2); 
@@ -105,15 +105,15 @@ public class DummyData {
 
 // 상품
 		Item i1 = Item.builder()
-				.name("후드 레이어드 패딩점퍼").onsale(true).discount(1D).content("푹신해요").price(27500D)
+				.name("후드 레이어드 패딩점퍼").discount(1D).content("푹신해요").price(27500D)
 				.stock(3L).reviewcnt(3L).avgstar(4.6D).sell(5L).likecnt(3L).tag(t8)
 				.category(t8.getCategory()).build();
 		Item i2 = Item.builder()
-				.name("누빔 데일리 캐주얼 박시 패딩").onsale(true).discount(10D).content("따뜻해요").price(13000D)
+				.name("누빔 데일리 캐주얼 박시 패딩").discount(10D).content("따뜻해요").price(13000D)
 				.stock(5L).reviewcnt(3L).avgstar(4.3D).sell(9L).likecnt(2L).tag(t4)
 				.category(t4.getCategory()).build();
 		Item i3 = Item.builder()
-				.name("터닝 도톰 케이블 니트 집업 가디건").onsale(true).discount(10D).content("따뜻해요").price(33000D)
+				.name("터닝 도톰 케이블 니트 집업 가디건").discount(10D).content("따뜻해요").price(33000D)
 				.stock(23L).reviewcnt(3L).avgstar(3.5D).sell(3L).likecnt(1L).tag(t10)
 				.category(t10.getCategory()).build();
 		

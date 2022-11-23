@@ -7,7 +7,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -72,7 +71,6 @@ public class ItemAdminService {
 			List<MultipartFile> ifile, List<MultipartFile> cfile) {
 		item.setCategory(categoryRepository.findById(Long.parseLong(category)).orElse(null));
 		item.setTag(tagRepository.findById(Long.parseLong(tag)).orElse(null));
-		item.setOnsale(true);
 		item = itemRepository.saveAndFlush(item);
 		addItemFiles(ifile, item.getId());
 		addContentFiles(cfile, item.getId());

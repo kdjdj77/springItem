@@ -40,7 +40,7 @@ public class Item {
 	@Column(nullable = false)
 	private String name;
 	@ColumnDefault(value = "true")
-	private Boolean onsale; // false 이면 판매중지, true 이면 판매중
+	private Boolean isvalid; // false 이면 판매중지, true 이면 판매중
 	@Column(nullable = false)
 	private Double discount;
 	@Column(nullable = false)
@@ -70,11 +70,21 @@ public class Item {
     @ToString.Exclude
     @Builder.Default
     private List<Color> colors = new ArrayList<>();
+	public List<Color> getColors() {
+		List<Color> result = new ArrayList<>();
+		for(Color c : this.colors) if (c.getIsvalid()) result.add(c);
+		return result;
+	}
 	
 	@OneToMany(mappedBy ="item" , cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
     private List<Size> sizes = new ArrayList<>();
+	public List<Size> getSizes() {
+		List<Size> result = new ArrayList<>();
+		for(Size c : this.sizes) if (c.getIsvalid()) result.add(c);
+		return result;
+	}
 	
 	@OneToMany(mappedBy ="item" , cascade = CascadeType.ALL)
     @ToString.Exclude
