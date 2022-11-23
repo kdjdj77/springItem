@@ -91,29 +91,29 @@
                 <label for="content">상품설명</label>
                 <textarea class="form-control" rows="5" id="content" placeholder="상품설명을 입력하세요" name="content"></textarea>
             </div>
-
-			<!-- 이미지 -->
-			<div class="container mt-3 mb-3 border rounded">
-				<div class="mb-3 mt-3">
-					<label>썸네일 이미지</label>
-					<div id="files">
-					
+			<div class="d-flex flex-wrap">
+				<!-- 이미지 -->
+				<div class="container mt-3 mb-3 border rounded" style="width:50%">
+					<div class="mb-3 mt-3">
+						<label>썸네일 이미지</label>
+						<div id="files">
+						
+						</div>
+						<button type="button" id="btnAdd" class="btn btn-secondary">추가</button>
 					</div>
-					<button type="button" id="btnAdd" class="btn btn-secondary">추가</button>
 				</div>
-			</div>
-			
-			<div class="container mt-3 mb-3 border rounded">
-				<div class="mb-3 mt-3">
-					<label>상품설명 이미지</label>
-					<div id="files2">
-					
+				
+				<div class="container mt-3 mb-3 border rounded" style="width:50%">
+					<div class="mb-3 mt-3">
+						<label>상품설명 이미지</label>
+						<div id="files2">
+						
+						</div>
+						<button type="button" id="btnAdd2" class="btn btn-secondary">추가</button>
 					</div>
-					<button type="button" id="btnAdd2" class="btn btn-secondary">추가</button>
 				</div>
+				<!-- 이미지 -->
 			</div>
-			<!-- 이미지 -->
-
             <button class="btn btn-success">등록</button>
             <a class="btn btn-danger" href="${pageContext.request.contextPath }/home">취소</a>
         </form>

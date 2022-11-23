@@ -139,72 +139,71 @@
                 <label for="content">상품설명</label>
                 <textarea class="form-control" rows="5" id="content" placeholder="상품설명을 입력하세요" name="content">${item.content}</textarea>
             </div>
-
-			<!-- 이미지 -->
-			<div class="container mt-3 mb-3 border rounded">
-				<!-- 기존 첨부파일  목록 (삭제 가능) -->
-				<c:if test="${not empty item.itemfiles && fn:length(item.itemfiles) > 0 }">
-					<div class="container mt-3 mb-3 border rounded">					
-						<div id="delItemFiles">
-						
+			<div class="d-flex flex-wrap">
+				<!-- 이미지 -->
+				<div class="container mt-3 mb-3 border rounded" style="width:50%">
+					<!-- 기존 첨부파일  목록 (삭제 가능) -->
+					<c:if test="${not empty item.itemfiles && fn:length(item.itemfiles) > 0 }">
+						<div class="container mt-3 mb-3 border rounded">					
+							<div id="delItemFiles">
+							
+							</div>
+							<div class="mb-3 mt-3">
+								<label>썸네일 이미지</label>
+								<c:forEach var="fileDto" items="${item.itemfiles}">
+									<div class="input-group mb-2">
+										<input class="form-control col-xs-3" type="text" readonly value="${fileDto.source }">
+										<button type="button"  class="btn btn-outline-danger" onclick="deleteIFiles(${fileDto.id }); $(this).parent().remove(); ">삭제</button> 
+									</div>
+								</c:forEach>
+							</div>
+						</div>				
+					</c:if>			
+					<script>
+					function deleteIFiles(fileId){
+						$("#delItemFiles").append(`<input type='hidden' name='delifile' value='\${fileId}'>`);
+					}
+					</script>
+					<div class="mb-3 mt-3">
+						<div id="files">
+							
 						</div>
-						<div class="mb-3 mt-3">
-							<label>썸네일 이미지</label>
-							<c:forEach var="fileDto" items="${item.itemfiles}">
-								<div class="input-group mb-2">
-									<input class="form-control col-xs-3" type="text" readonly value="${fileDto.source }">
-									<button type="button"  class="btn btn-outline-danger" onclick="deleteIFiles(${fileDto.id }); $(this).parent().remove(); ">삭제</button> 
-								</div>
-							</c:forEach>
-						</div>
-					</div>				
-				</c:if>			
-				<script>
-				function deleteIFiles(fileId){
-					$("#delItemFiles").append(`<input type='hidden' name='delifile' value='\${fileId}'>`);
-				}
-				</script>
-				<div class="mb-3 mt-3">
-					<label>썸네일 이미지</label>
-					<div id="files">
-						
+						<button type="button" id="btnAdd" class="btn btn-secondary">추가</button>
 					</div>
-					<button type="button" id="btnAdd" class="btn btn-secondary">추가</button>
 				</div>
-			</div>
-			
-			<div class="container mt-3 mb-3 border rounded">
-				<!-- 기존 첨부파일  목록 (삭제 가능) -->
-				<c:if test="${not empty item.contentfiles && fn:length(item.contentfiles) > 0 }">
-					<div class="container mt-3 mb-3 border rounded">					
-						<div id="delContentFiles">
+				
+				<div class="container mt-3 mb-3 border rounded" style="width:50%">
+					<!-- 기존 첨부파일  목록 (삭제 가능) -->
+					<c:if test="${not empty item.contentfiles && fn:length(item.contentfiles) > 0 }">
+						<div class="container mt-3 mb-3 border rounded">					
+							<div id="delContentFiles">
+							
+							</div>
+							<div class="mb-3 mt-3">
+								<label>상품설명 이미지</label>
+								<c:forEach var="fileDto" items="${item.contentfiles}">
+									<div class="input-group mb-2">
+										<input class="form-control col-xs-3" type="text" readonly value="${fileDto.source }">
+										<button type="button"  class="btn btn-outline-danger" onclick="deleteCFiles(${fileDto.id }); $(this).parent().remove(); ">삭제</button> 
+									</div>
+								</c:forEach>
+							</div>
+						</div>				
+					</c:if>			
+					<script>
+					function deleteCFiles(fileId){
+						$("#delContentFiles").append(`<input type='hidden' name='delcfile' value='\${fileId}'>`);
+					}
+					</script>
+					<div class="mb-3 mt-3">
+						<div id="files2">
 						
 						</div>
-						<div class="mb-3 mt-3">
-							<label>상품설명 이미지</label>
-							<c:forEach var="fileDto" items="${item.contentfiles}">
-								<div class="input-group mb-2">
-									<input class="form-control col-xs-3" type="text" readonly value="${fileDto.source }">
-									<button type="button"  class="btn btn-outline-danger" onclick="deleteCFiles(${fileDto.id }); $(this).parent().remove(); ">삭제</button> 
-								</div>
-							</c:forEach>
-						</div>
-					</div>				
-				</c:if>			
-				<script>
-				function deleteCFiles(fileId){
-					$("#delContentFiles").append(`<input type='hidden' name='delcfile' value='\${fileId}'>`);
-				}
-				</script>
-				<div class="mb-3 mt-3">
-					<label>상품설명 이미지</label>
-					<div id="files2">
-					
+						<button type="button" id="btnAdd2" class="btn btn-secondary">추가</button>
 					</div>
-					<button type="button" id="btnAdd2" class="btn btn-secondary">추가</button>
 				</div>
+				<!-- 이미지 -->
 			</div>
-			<!-- 이미지 -->
 
             <button class="btn btn-success">등록</button>
             <a class="btn btn-danger" href="${pageContext.request.contextPath }/home">취소</a>

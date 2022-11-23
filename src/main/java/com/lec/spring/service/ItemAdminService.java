@@ -11,10 +11,17 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,6 +40,8 @@ import com.lec.spring.repository.ItemRepository;
 import com.lec.spring.repository.ItemfileRepository;
 import com.lec.spring.repository.SizeRepository;
 import com.lec.spring.repository.TagRepository;
+import com.lec.spring.util.C;
+import com.lec.spring.util.U;
 
 
 @Service
@@ -121,7 +130,41 @@ public class ItemAdminService {
 		
 		return 1;
 	}
+	public void getSearchItem(String search, Pageable pageable, Integer page, Model model) {
+		HttpSession session = U.getSession();
+		Integer adminPages = (Integer)session.getAttribute("adminPages");
+		if(adminPages == null) adminPages = C.LIST_PAGES;
+		Integer pageRows = (Integer)session.getAttribute("pageRows");
+		if(pageRows == null) pageRows = C.PAGE_ROWS;
+		session.setAttribute("page", page);
+		Page<Item> pageItems = itemRepository.findByIsvalidAndNameContaining(true, search, PageRequest.of(page - 1, pageRows, Sort.by(Order.desc("id"))));
 	
+		long cnt = pageItems.getTotalElements();   // 글 목록 전체의 개수
+		int totalPage = pageItems.getTotalPages(); //총 몇 '페이지' 분량인가?
+		if(page > totalPage) page = totalPage;   // 페이지 보정
+
+		// [페이징] 에 표시할 '시작페이지' 와 '마지막페이지' 계산
+		int startPage = ((int)((page - 1) / adminPages) * adminPages) + 1;
+		int endPage = startPage + adminPages - 1;
+		if (endPage >= totalPage) endPage = totalPage;
+		
+		model.addAttribute("cnt", cnt);  // 전체 글 개수
+		model.addAttribute("page", page); // 현재 페이지
+		model.addAttribute("totalPage", totalPage);  // 총 '페이지' 수
+		
+		// [페이징]
+		model.addAttribute("url", U.getRequest().getRequestURI());  // 목록 url
+		model.addAttribute("startPage", startPage);  // [페이징] 에 표시할 시작 페이지
+		model.addAttribute("endPage", endPage);   // [페이징] 에 표시할 마지막 페이지
+		model.addAttribute("itemList", pageItems.getContent());
+	}
+	public int deleteItemById(String id) {
+		Long lid = Long.parseLong(id);
+		Item item = itemRepository.findById(lid).orElse(null);
+		item.setIsvalid(false);
+		itemRepository.saveAndFlush(item);
+		return 1;
+	}
 	
 	
 //file//////////////////////////////////////////////////////////////////////////////
