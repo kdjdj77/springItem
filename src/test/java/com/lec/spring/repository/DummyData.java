@@ -36,6 +36,8 @@ public class DummyData {
 	@Autowired
 	private ContentfileRepository contentfileRepository;
 	@Autowired
+	private TagRepository tagRepository;
+	@Autowired
 	private ItemRepository itemRepository;
 	@Autowired
 	private LikeRepository likeRepository;
@@ -43,8 +45,6 @@ public class DummyData {
 	private ReviewRepository reviewRepository;
 	@Autowired
 	private SizeRepository sizeRepository;
-	@Autowired
-	private TagRepository tagRepository;
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
@@ -64,59 +64,60 @@ public class DummyData {
 		User user1 = User.builder()
 				.username("USER1").password(passwordEncoder.encode("1234"))
 				.name("회원1").phonenum("01011111111").email("111@gmail.com")
-				.address("경기도 평택시").point(200L).isusing(true).build();		
+				.address("경기도 평택시").point(200L).build();		
 		User user2 = User.builder()
 				.username("USER2").password(passwordEncoder.encode("1234"))
 				.name("회원2").phonenum("01022222222").email("222@gmail.com")
-				.address("경기도 하남시").point(50L).isusing(true).build();
+				.address("경기도 하남시").point(50L).build();
 		User admin = User.builder()
 				.username("ADMIN").password(passwordEncoder.encode("1234"))
 				.name("관리자").phonenum("01076767676").email("asdf@gmail.com")
-				.address("서울특별시 강서구").point(400L).isusing(true).build();
+				.address("서울특별시 강서구").point(400L).build();
 		
 		user1.addAuthority(auth_member); user2.addAuthority(auth_member); admin.addAuthority(auth_admin);
-		userRepository.save(user1); userRepository.save(user2); userRepository.save(admin);
+		user1 = userRepository.save(user1); user2 = userRepository.save(user2); 
+		admin = userRepository.save(admin);
 // 카테고리		
-		Category cg1 = Category.builder().name("아우터").build(); categoryRepository.save(cg1);
-		Category cg2 = Category.builder().name("상의").build(); categoryRepository.save(cg2);
-		Category cg3 = Category.builder().name("신발").build(); categoryRepository.save(cg3);
-		Category cg4 = Category.builder().name("하의").build(); categoryRepository.save(cg4);
+		Category cg1 = Category.builder().name("아우터").build(); cg1 = categoryRepository.save(cg1);
+		Category cg2 = Category.builder().name("상의").build(); cg2 = categoryRepository.save(cg2);
+		Category cg3 = Category.builder().name("하의").build(); cg3 = categoryRepository.save(cg3);
+		Category cg4 = Category.builder().name("신발").build(); cg4 = categoryRepository.save(cg4);
 // 태그
-		Tag t1 = Tag.builder().category(cg1).name("가디건/조끼").build(); tagRepository.save(t1);
-		Tag t2 = Tag.builder().category(cg1).name("야상/점퍼").build(); tagRepository.save(t2);
-		Tag t3 = Tag.builder().category(cg1).name("자켓/코트").build(); tagRepository.save(t3);
-		Tag t4 = Tag.builder().category(cg1).name("패딩").build(); tagRepository.save(t4);
-		Tag t5 = Tag.builder().category(cg1).name("플리스").build(); tagRepository.save(t5);
-		Tag t6 = Tag.builder().category(cg2).name("긴팔티셔츠").build(); tagRepository.save(t6);
-		Tag t7 = Tag.builder().category(cg2).name("맨투맨").build(); tagRepository.save(t7);
-		Tag t8 = Tag.builder().category(cg2).name("후드").build(); tagRepository.save(t8);
-		Tag t9 = Tag.builder().category(cg2).name("반팔/민소매티셔츠").build(); tagRepository.save(t9);
-		Tag t10 = Tag.builder().category(cg2).name("니트").build(); tagRepository.save(t10);
-		Tag t11 = Tag.builder().category(cg3).name("청바지").build(); tagRepository.save(t11);
-		Tag t12 = Tag.builder().category(cg3).name("롱팬츠").build(); tagRepository.save(t12);
-		Tag t13 = Tag.builder().category(cg3).name("면바지").build(); tagRepository.save(t13);
-		Tag t14 = Tag.builder().category(cg3).name("슬랙스").build(); tagRepository.save(t14);
-		Tag t15 = Tag.builder().category(cg3).name("레깅스").build(); tagRepository.save(t15);
-		Tag t16 = Tag.builder().category(cg3).name("숏팬츠").build(); tagRepository.save(t16);
-		Tag t17 = Tag.builder().category(cg4).name("운동화/단화").build(); tagRepository.save(t17);
-		Tag t18 = Tag.builder().category(cg4).name("구두/워커").build(); tagRepository.save(t18);
-		Tag t19 = Tag.builder().category(cg4).name("샌들/슬리퍼/장화").build(); tagRepository.save(t19);
+		Tag t1 = Tag.builder().category(cg1).name("가디건/조끼").build(); t1 = tagRepository.save(t1);
+		Tag t2 = Tag.builder().category(cg1).name("야상/점퍼").build(); t2 = tagRepository.save(t2);
+		Tag t3 = Tag.builder().category(cg1).name("자켓/코트").build(); t3 = tagRepository.save(t3);
+		Tag t4 = Tag.builder().category(cg1).name("패딩").build(); t4 = tagRepository.save(t4);
+		Tag t5 = Tag.builder().category(cg1).name("플리스").build(); t5 = tagRepository.save(t5);
+		Tag t6 = Tag.builder().category(cg2).name("긴팔티셔츠").build(); t6 = tagRepository.save(t6);
+		Tag t7 = Tag.builder().category(cg2).name("맨투맨").build(); t7 = tagRepository.save(t7);
+		Tag t8 = Tag.builder().category(cg2).name("후드").build(); t8 = tagRepository.save(t8);
+		Tag t9 = Tag.builder().category(cg2).name("반팔/민소매티셔츠").build(); t9 = tagRepository.save(t9);
+		Tag t10 = Tag.builder().category(cg2).name("니트").build(); t10 = tagRepository.save(t10);
+		Tag t11 = Tag.builder().category(cg3).name("청바지").build(); t11 = tagRepository.save(t11);
+		Tag t12 = Tag.builder().category(cg3).name("롱팬츠").build(); t12 = tagRepository.save(t12);
+		Tag t13 = Tag.builder().category(cg3).name("면바지").build(); t13 = tagRepository.save(t13);
+		Tag t14 = Tag.builder().category(cg3).name("슬랙스").build(); t14 = tagRepository.save(t14);
+		Tag t15 = Tag.builder().category(cg3).name("레깅스").build(); t15 = tagRepository.save(t15);
+		Tag t16 = Tag.builder().category(cg3).name("숏팬츠").build(); t16 = tagRepository.save(t16);
+		Tag t17 = Tag.builder().category(cg4).name("운동화/단화").build(); t17 = tagRepository.save(t17);
+		Tag t18 = Tag.builder().category(cg4).name("구두/워커").build(); t18 = tagRepository.save(t18);
+		Tag t19 = Tag.builder().category(cg4).name("샌들/슬리퍼/장화").build(); t19 = tagRepository.save(t19);
 
 // 상품
 		Item i1 = Item.builder()
-				.name("후드 레이어드 패딩점퍼").onsale(true).discount(1D).content("푹신해요").price(27500D)
+				.name("후드 레이어드 패딩점퍼").discount(1D).content("푹신해요").price(27500D)
 				.stock(3L).reviewcnt(3L).avgstar(4.6D).sell(5L).likecnt(3L).tag(t8)
 				.category(t8.getCategory()).build();
 		Item i2 = Item.builder()
-				.name("누빔 데일리 캐주얼 박시 패딩").onsale(true).discount(10D).content("따뜻해요").price(13000D)
+				.name("누빔 데일리 캐주얼 박시 패딩").discount(10D).content("따뜻해요").price(13000D)
 				.stock(5L).reviewcnt(3L).avgstar(4.3D).sell(9L).likecnt(2L).tag(t4)
 				.category(t4.getCategory()).build();
 		Item i3 = Item.builder()
-				.name("터닝 도톰 케이블 니트 집업 가디건").onsale(true).discount(10D).content("따뜻해요").price(33000D)
+				.name("터닝 도톰 케이블 니트 집업 가디건").discount(10D).content("따뜻해요").price(33000D)
 				.stock(23L).reviewcnt(3L).avgstar(3.5D).sell(3L).likecnt(1L).tag(t10)
 				.category(t10.getCategory()).build();
 		
-		itemRepository.save(i1); itemRepository.save(i2); itemRepository.save(i3);
+		i1 = itemRepository.save(i1); i2 = itemRepository.save(i2); i3 = itemRepository.save(i3);
 // 색상		
 		Color c1 = Color.builder().item(i1).color("red").build(); colorRepository.save(c1);
 		Color c2 = Color.builder().item(i1).color("blue").build(); colorRepository.save(c2);
