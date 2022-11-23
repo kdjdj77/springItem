@@ -15,6 +15,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,6 +33,8 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Entity(name = "db_user")
+@DynamicInsert
+@DynamicUpdate
 public class User extends BaseEntity {
 	
 	@Id
@@ -47,8 +53,8 @@ public class User extends BaseEntity {
 	private String email;
 	@Column(nullable = false)
 	private String address;
-	@Column(nullable = false)
-	private Boolean isusing; // true이면 회원, false이면 탈퇴한 회원
+	@ColumnDefault(value="true")
+	private Boolean isvalid; // true이면 회원, false이면 탈퇴한 회원
 	@Column(nullable = false)
 	private Long point;
 	

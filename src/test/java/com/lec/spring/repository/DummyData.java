@@ -64,15 +64,15 @@ public class DummyData {
 		User user1 = User.builder()
 				.username("USER1").password(passwordEncoder.encode("1234"))
 				.name("회원1").phonenum("01011111111").email("111@gmail.com")
-				.address("경기도 평택시").point(200L).isusing(true).build();		
+				.address("경기도 평택시").point(200L).build();		
 		User user2 = User.builder()
 				.username("USER2").password(passwordEncoder.encode("1234"))
 				.name("회원2").phonenum("01022222222").email("222@gmail.com")
-				.address("경기도 하남시").point(50L).isusing(true).build();
+				.address("경기도 하남시").point(50L).build();
 		User admin = User.builder()
 				.username("ADMIN").password(passwordEncoder.encode("1234"))
 				.name("관리자").phonenum("01076767676").email("asdf@gmail.com")
-				.address("서울특별시 강서구").point(400L).isusing(true).build();
+				.address("서울특별시 강서구").point(400L).build();
 		
 		user1.addAuthority(auth_member); user2.addAuthority(auth_member); admin.addAuthority(auth_admin);
 		user1 = userRepository.save(user1); user2 = userRepository.save(user2); 
@@ -80,8 +80,15 @@ public class DummyData {
 // 카테고리		
 		Category cg1 = Category.builder().name("아우터").build(); cg1 = categoryRepository.save(cg1);
 		Category cg2 = Category.builder().name("상의").build(); cg2 = categoryRepository.save(cg2);
-		Category cg3 = Category.builder().name("하의").build(); cg3 = categoryRepository.save(cg3);
+		Category cg5 = Category.builder().name("셔츠/블라우스").build(); cg5 = categoryRepository.save(cg5);
+		Category cg6 = Category.builder().name("트레이닝").build(); cg6 = categoryRepository.save(cg6);
+		Category cg7 = Category.builder().name("베이직").build(); cg7 = categoryRepository.save(cg7);
+		Category cg8 = Category.builder().name("원피스").build(); cg8 = categoryRepository.save(cg8);
+		Category cg9 = Category.builder().name("스커트").build(); cg9 = categoryRepository.save(cg9);
+		Category cg3 = Category.builder().name("팬츠").build(); cg3 = categoryRepository.save(cg3);
+		Category cg10 = Category.builder().name("가방").build(); cg10 = categoryRepository.save(cg10);
 		Category cg4 = Category.builder().name("신발").build(); cg4 = categoryRepository.save(cg4);
+		Category cg11 = Category.builder().name("악세사리").build(); cg11 = categoryRepository.save(cg11);
 // 태그
 		Tag t1 = Tag.builder().category(cg1).name("가디건/조끼").build(); t1 = tagRepository.save(t1);
 		Tag t2 = Tag.builder().category(cg1).name("야상/점퍼").build(); t2 = tagRepository.save(t2);
@@ -102,18 +109,28 @@ public class DummyData {
 		Tag t17 = Tag.builder().category(cg4).name("운동화/단화").build(); t17 = tagRepository.save(t17);
 		Tag t18 = Tag.builder().category(cg4).name("구두/워커").build(); t18 = tagRepository.save(t18);
 		Tag t19 = Tag.builder().category(cg4).name("샌들/슬리퍼/장화").build(); t19 = tagRepository.save(t19);
-
+		
+		Tag t20 = Tag.builder().category(cg5).name(cg5.getName()).build(); t20 = tagRepository.save(t20);
+		Tag t21 = Tag.builder().category(cg6).name(cg6.getName()).build(); t21 = tagRepository.save(t21);
+		Tag t22 = Tag.builder().category(cg7).name(cg7.getName()).build(); t22 = tagRepository.save(t22);
+		Tag t23 = Tag.builder().category(cg8).name(cg8.getName()).build(); t23 = tagRepository.save(t23);
+		Tag t24 = Tag.builder().category(cg9).name(cg9.getName()).build(); t24 = tagRepository.save(t24);
+		Tag t25 = Tag.builder().category(cg10).name("백팩/스쿨백").build(); t25 = tagRepository.save(t25);
+		Tag t26 = Tag.builder().category(cg10).name("크로스/토트백").build(); t26 = tagRepository.save(t26);
+		Tag t27 = Tag.builder().category(cg11).name("주얼리").build(); t27 = tagRepository.save(t27);
+		Tag t28 = Tag.builder().category(cg11).name("모자/벨트").build(); t28 = tagRepository.save(t28);
+		Tag t29 = Tag.builder().category(cg11).name("양말/스타킹").build(); t29 = tagRepository.save(t29);
 // 상품
 		Item i1 = Item.builder()
-				.name("후드 레이어드 패딩점퍼").onsale(true).discount(1D).content("푹신해요").price(27500D)
+				.name("후드 레이어드 패딩점퍼").discount(1D).content("푹신해요").price(27500D)
 				.stock(3L).reviewcnt(3L).avgstar(4.6D).sell(5L).likecnt(3L).tag(t8)
 				.category(t8.getCategory()).build();
 		Item i2 = Item.builder()
-				.name("누빔 데일리 캐주얼 박시 패딩").onsale(true).discount(10D).content("따뜻해요").price(13000D)
+				.name("누빔 데일리 캐주얼 박시 패딩").discount(10D).content("따뜻해요").price(13000D)
 				.stock(5L).reviewcnt(3L).avgstar(4.3D).sell(9L).likecnt(2L).tag(t4)
 				.category(t4.getCategory()).build();
 		Item i3 = Item.builder()
-				.name("터닝 도톰 케이블 니트 집업 가디건").onsale(true).discount(10D).content("따뜻해요").price(33000D)
+				.name("터닝 도톰 케이블 니트 집업 가디건").discount(10D).content("따뜻해요").price(33000D)
 				.stock(23L).reviewcnt(3L).avgstar(3.5D).sell(3L).likecnt(1L).tag(t10)
 				.category(t10.getCategory()).build();
 		

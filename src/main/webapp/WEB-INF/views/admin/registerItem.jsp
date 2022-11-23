@@ -34,25 +34,25 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
-    <div class="container mt-3">
+    <div class="container mt-3" style="width:60vw;">
         <h2>상품 등록</h2><hr>
         
-        <form name="frm" action="registerOk" method="post" enctype="Multipart/form-data">
+        <form name="frm" onsubmit="return submitForm();" action="registerOk" method="post" enctype="Multipart/form-data">
             <div class="mb-3">
                 <label for="name">상품명</label>
                 <input type="text" class="form-control" id="name" placeholder="상품명을 입력하세요" name="name" required>
             </div>
             
-            <div class="mb-3 mt-3" style="width:100%;">카테고리 
+            <div class="mb-3 mt-3">카테고리/태그
             	<select style="width:15rem; height:2rem;" name="category" class="mb-3" required>
             		<option value="">선택</option>
             		<c:forEach var="cat" items="${categoryList}">
             			<option value="${cat.id}">${cat.name}</option>
             		</c:forEach>
             	</select>
-           		<div id="tagradio" style="width:100%; display:flex; flex-wrap:wrap; justify-content:around;">
+           		<select id="tag" style="width:15rem; height:2rem;" name="tag" class="mb-3" required>
            		
-	            </div>
+           		</select>
             </div>
             
             <table style="width:100%;">
@@ -114,7 +114,7 @@
 			</div>
 			<!-- 이미지 -->
 
-            <button id="submitBtn" type="button" class="btn btn-success">등록</button>
+            <button class="btn btn-success">등록</button>
             <a class="btn btn-danger" href="${pageContext.request.contextPath }/home">취소</a>
         </form>
     </div>

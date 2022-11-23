@@ -45,4 +45,9 @@ public class Category {
     @ToString.Exclude
     @Builder.Default
     private List<Item> items = new ArrayList<>();
+	public List<Item> getItems() {
+		List<Item> result = new ArrayList<>();
+		for(Item c : this.items) if (c.getIsvalid()) result.add(c);
+		return result;
+	}
 }

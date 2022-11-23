@@ -67,30 +67,58 @@ public class ItemAdminService {
 		list.setStatus("OK");
 		return list;
 	}
-	public Item registerItem(String name, String category, String tag, Double discount, Double price, Long stock,
-			String content, List<MultipartFile> ifile, List<MultipartFile> cfile) {
-		Item item = Item.builder()
-				.name(name)
-				.category(categoryRepository.findById(Long.parseLong(category)).orElse(null))
-				.tag(tagRepository.findById(Long.parseLong(tag)).orElse(null)).onsale(true)
-				.discount(discount).price(price).stock(stock).content(content)
-				.build();
+	public Item registerItem(Item item, String category, String tag, 
+			List<MultipartFile> ifile, List<MultipartFile> cfile) {
+		item.setCategory(categoryRepository.findById(Long.parseLong(category)).orElse(null));
+		item.setTag(tagRepository.findById(Long.parseLong(tag)).orElse(null));
 		item = itemRepository.saveAndFlush(item);
 		addItemFiles(ifile, item.getId());
 		addContentFiles(cfile, item.getId());
 		return item;
 	}
 	public int registerColorAndSize(Item item, List<String> colors, List<String> sizes) {
+		if (colors != null)
 		for(String c : colors) {
 			if (c.trim().equals("")) continue;
 			Color co = Color.builder().color(c).item(item).build();
 			colorRepository.saveAndFlush(co);
 		}
+		if (sizes != null)
 		for(String s : sizes) {
 			if (s.trim().equals("")) continue;
 			Size si = Size.builder().name(s).item(item).build();
 			sizeRepository.saveAndFlush(si);
 		}
+		return 1;
+	}
+	public void deleteColorAndSize(List<String> delcolors, List<String> delsizes) {
+		if (delcolors != null)
+		for(String c : delcolors) {
+			Color co = colorRepository.findById(Long.parseLong(c)).orElse(null);
+			co.setIsvalid(false);
+			colorRepository.saveAndFlush(co);
+		}
+		if (delsizes != null)
+		for(String s : delsizes) {
+			Size si = sizeRepository.findById(Long.parseLong(s)).orElse(null);
+			si.setIsvalid(false);
+			sizeRepository.saveAndFlush(si);
+		}
+	}
+	public Item getItemById(String id) {
+		Long lid = Long.parseLong(id);
+		return itemRepository.findById(lid).orElse(null);
+	}
+	public int deletefile(Item item, List<String> delifiles, List<String> delcfiles) {
+		if (delifiles != null) for(String i : delifiles) {
+			deliFile(itemfileRepository.findById(Long.parseLong(i)).orElse(null));
+			itemfileRepository.deleteById(Long.parseLong(i));
+		}
+		if (delcfiles != null) for(String c : delcfiles) {
+			delcFile(contentfileRepository.findById(Long.parseLong(c)).orElse(null));
+			contentfileRepository.deleteById(Long.parseLong(c));
+		}
+		
 		return 1;
 	}
 	
@@ -179,5 +207,17 @@ public class ItemAdminService {
 			catch (IOException e) {System.out.println("파일존재안함: " + f.getAbsolutePath() + " [" + e.getMessage() + "]");}
 			if(imgData != null) fileDto.setImage(true);
 		}
+	}
+	private void deliFile(Itemfile file) {
+		if (file == null) return;
+		String saveDirectory = context.getRealPath(uploadDir);
+		File f = new File(saveDirectory, file.getFile());
+		if (f.exists()) f.delete();
+	}
+	private void delcFile(Contentfile file) {
+		if (file == null) return;
+		String saveDirectory = context.getRealPath(uploadDir);
+		File f = new File(saveDirectory, file.getFile());
+		if (f.exists()) f.delete();
 	}
 }
