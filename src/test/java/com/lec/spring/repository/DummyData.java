@@ -80,8 +80,8 @@ public class DummyData {
 // 카테고리		
 		Category cg1 = Category.builder().name("아우터").build(); cg1 = categoryRepository.save(cg1);
 		Category cg2 = Category.builder().name("상의").build(); cg2 = categoryRepository.save(cg2);
-		Category cg3 = Category.builder().name("신발").build(); cg3 = categoryRepository.save(cg3);
-		Category cg4 = Category.builder().name("하의").build(); cg4 = categoryRepository.save(cg4);
+		Category cg3 = Category.builder().name("하의").build(); cg3 = categoryRepository.save(cg3);
+		Category cg4 = Category.builder().name("신발").build(); cg4 = categoryRepository.save(cg4);
 // 태그
 		Tag t1 = Tag.builder().category(cg1).name("가디건/조끼").build(); t1 = tagRepository.save(t1);
 		Tag t2 = Tag.builder().category(cg1).name("야상/점퍼").build(); t2 = tagRepository.save(t2);
