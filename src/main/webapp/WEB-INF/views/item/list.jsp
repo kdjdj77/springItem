@@ -149,11 +149,11 @@
       </li>
     </ul>
     
-	  <%-- <c:forEach var="category" items="${categoryList }">
+	  <c:forEach var="category" items="${categoryList }">
 	  	<p>${category.name }</p>
 	  	
 	  	<p>${category.tags[0].name }</p>
-	  </c:forEach> --%>
+	  </c:forEach>
 	  
 </body>
 </html>

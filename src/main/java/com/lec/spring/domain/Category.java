@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -28,6 +29,7 @@ import lombok.ToString;
 @Builder
 @ToString(callSuper = true)
 @Entity(name = "db_category")
+@EqualsAndHashCode(exclude="items")
 @DynamicInsert
 @DynamicUpdate
 public class Category {
