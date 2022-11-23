@@ -148,13 +148,6 @@
         </ul>
       </li>
     </ul>
-    
-	  <c:forEach var="category" items="${categoryList }">
-	  	<p>${category.name }</p>
-	  	
-	  	<p>${category.tags[0].name }</p>
-	  </c:forEach>
-	  
 </body>
 </html>
  

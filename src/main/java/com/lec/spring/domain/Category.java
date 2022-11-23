@@ -29,7 +29,6 @@ import lombok.ToString;
 @Builder
 @ToString(callSuper = true)
 @Entity(name = "db_category")
-@EqualsAndHashCode(exclude="items")
 @DynamicInsert
 @DynamicUpdate
 public class Category {
