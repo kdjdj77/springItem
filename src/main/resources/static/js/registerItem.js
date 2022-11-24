@@ -67,9 +67,7 @@ function buildTagList(result) {
 	result.data.forEach(tag => {
 		let id = tag.id;
 		let name = tag.name;
-		const row = `
-			<option value="${id}">${name}</option>
-	        `;
+		const row = `<option value="${id}">${name}</option>`;
 		out.push(row);
 	});
 	$("#tag").html(out.join("\n"));

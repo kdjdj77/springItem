@@ -75,7 +75,7 @@ public class ItemAdminController {
 		if (search == null) search = "";
 		model.addAttribute("search", search);
 		itemadminService.getSearchItem(search, pageable, page, model);
-		return "admin/list";
+		return "admin/list";		
 	}
 	@GetMapping("/item/delete")
 	public String itemDelete(String id, Model model) {

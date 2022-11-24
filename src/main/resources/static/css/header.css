@@ -1,0 +1,58 @@
+@charset "UTF-8";
+.bs-example { margin: auto; width: auto; }
+li > a{ line-height:30px; }
+.dropdown:hover { background-color:hotpink; transition:0.3s; }
+.dropdown:hover a { color:white; }
+.dropdown:hover .dropdown-menu {
+	height:auto;
+	margin-top:-1px;
+    visibility:visible;
+    background-color:hotpink;
+    border:0px;
+    border-radius:0px;
+    transition:0.3s;
+}
+.dropdown-menu {
+	height:0px;
+	display:block;
+	visibility:hidden;
+}
+li > a {
+	padding:0.5rem;
+	text-decoration:none;
+	color:black;
+	font-weight:bold;
+}
+header > a {
+	padding:0.5rem;
+	text-decoration:none;
+	color:black;
+}
+
+header > span > a {
+	padding:0.5rem;
+	text-decoration:none;
+	color:black;
+}
+header > span > a:hover { color:black; }
+header > a:hover { color:hotpink; }
+
+dropdown-menu li:hover { text-decoration:underline; }
+.dropdown-menu > li > a:hover { text-decoration:underline; }
+header {
+	position:fixed;
+	top:0;
+	width:100%;
+	height:auto;
+	border-bottom:1px solid gray;
+	padding-bottom:2px;
+	padding-top:2px;
+}
+input:focus {outline: 2px solid #d50000;} /* outline 테두리 속성 수정 */
+input:focus {outline: none;} /* outline 테두리 없애기 */
+
+#listSearch:hover {
+	color:hotpink;
+}
+
+
