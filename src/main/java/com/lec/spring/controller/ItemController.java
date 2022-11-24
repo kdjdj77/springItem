@@ -17,7 +17,8 @@ public class ItemController {
 	
 	@GetMapping("/list")
 	public String categoryList(Model model) {
-		model.addAttribute("categoryList", itemService.categoryList());		
+		model.addAttribute("categoryList", itemService.categoryList());	
+		model.addAttribute("tagList", itemService.tagList());
 		return "/item/list";
 	}
 }

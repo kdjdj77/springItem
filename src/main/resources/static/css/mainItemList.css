@@ -1,53 +1,109 @@
 @charset "UTF-8";
 
-* {
-  padding: 0;
-  margin: 0;
-}
-
 li {
-  list-style: none;
+	list-style: none;
 }
 
 a {
-  text-decoration: none;
-  font-size: 14px;
+	text-decoration: none;
+	font-size: 14px;
 }
 
 .menu {
-  width: 1400px;
-  height: 300px;
-  overflow: hidden;
-  margin: 0 auto;
+	width: 1400px;
+	height: 300px;
+	overflow: hidden;
+	margin: 0 auto;
 }
 
-.menu > li {
-  width: 7%;
-  float: left;
-  line-height: 40px;
-  background-color: dodgerblue;
+.menu>li {
+	width: 7%;
+	float: left;
+	line-height: 40px;
+	background-color: dodgerblue;
 }
 
 .menu a {
-  color: #fff;
+	color: #fff;
 }
 
-.submenu > li {
-  background-color: mediumslateblue;
+.submenu>li {
+	background-color: mediumslateblue;
 }
 
 .submenu {
-  height: 0px;
-  overflow: hidden;
-  padding-left: 10px;
+	height: 0px;
+	overflow: hidden;
+	padding-left: 10px;
 }
 
-.menu > li:hover {
-  background-color: mediumslateblue;
+.menu>li:hover {
+	background-color: mediumslateblue;
 }
 
-.menu > li:hover .submenu {
-  height: auto;
-  width: 200px;
-  transition-duration: 1s;
+.menu>li:hover .submenu {
+	height: auto;
+	width: 200px;
+	transition-duration: 1s;
+}
+
+html, body {
+	position: relative;
+	height: 100%;
+}
+
+body {
+	background: #eee;
+	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	color: #000;
+	margin: 0;
+	padding: 0;
+}
+
+.swiper {
+	width: 100%;
+	height: 100%;
+}
+
+.swiper-slide {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+
+.swiper-slide img {
+	display: block;
+	width: 95%;
+}
+
+@media only screen and (min-width: 769px) {
+	.swiper-slide:first-child {
+		transition: transform 100ms;
+	}
+	.swiper-slide:first-child img {
+		transition: box-shadow 500ms;
+	}
+	.swiper-slide.swiper-slide-active:first-child {
+		transform: translateX(50%);
+		z-index: 2;
+	}
+	.swiper-slide.swiper-slide-active:first-child img {
+		box-shadow: 0px 32px 80px rgba(0, 0, 0, 0.35);
+	}
+	.swiper-slide:nth-child(2) {
+		transition: transform 100ms;
+	}
+	.swiper-slide.swiper-slide-next:nth-child(2) {
+		transform: translateX(55%);
+		z-index: 1;
+	}
+	.swiper[dir="rtl"] .swiper-slide.swiper-slide-active:first-child {
+		transform: translateX(-50%);
+	}
+	.swiper[dir="rtl"] .swiper-slide.swiper-slide-next:nth-child(2) {
+		transform: translateX(-55%);
+	}
 }
