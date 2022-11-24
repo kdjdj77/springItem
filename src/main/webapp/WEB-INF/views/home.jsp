@@ -37,6 +37,7 @@
  
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<jsp:include page="/WEB-INF/views/common/header2.jsp"/>
 
 	<div class="swiper mySwiper">
       <div class="swiper-wrapper">
@@ -111,14 +112,13 @@
 								<li class="list-group-item"><span>${i.discount }%</span> ${i.price*(100-i.discount)/100}원</li>
 								<li class="list-group-item"></li>
 							</ul>
-							<input type="hidden" name="carId" value="${i.id }">
+							<input type="hidden" name="itemId" value="${i.id }">
 						</div>
 					</div>
 				</form>
 			</div>
 		</c:forEach>
 	</div>
-
 </body>
 </html>
  
