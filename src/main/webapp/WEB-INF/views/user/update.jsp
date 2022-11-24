@@ -18,13 +18,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <title>회원정보</title>
+    <title>회원정보 수정</title>
 </head>
  
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 <div class="container" style="width:50%;">
+	<form action="updateOk" method="POST">
+	<input type="hidden" name="id" value="${userdetails.user.id}">
    <div class="row">
       <div class="col-md-12">
          <div id="content" class="content content-full-width">
@@ -38,9 +40,7 @@
                   <div class="profile-header-content">
                      <!-- BEGIN profile-header-info -->
                      <div class="profile-header-info mb-5">
-                        <h4 class="m-t-10 m-b-5">회원정보 - ${userdetails.user.name}</h4>
-                        <a href="update" class="btn btn-xs btn-warning">수정</a>
-                        <a href="delete?id=${userdetails.user.id}" onclick="return confirm('정말로 탈퇴하시겠습니까?')" class="btn btn-xs btn-danger">탈퇴</a>
+                        <h4 class="m-t-10 m-b-5">수정 - ${userdetails.user.name}</h4>
                      </div>
                      <!-- END profile-header-info -->
                   </div>
@@ -62,22 +62,22 @@
                            <tbody>
                               <tr class="highlight">
                                  <td class="field">Name</td>
-                                 <td>${userdetails.user.name}</td>
+                                 <td><input type="text" name="name" value="${userdetails.user.name}"></td>
                               </tr>
                               <tr class="divider">
                                  <td colspan="2"></td>
                               </tr>
                               <tr>
                                  <td class="field">Phone</td>
-                                 <td><i class="fa fa-mobile fa-lg m-r-5"></i> +82) ${userdetails.user.phonenum}</td>
+                                 <td><i class="fa fa-mobile fa-lg m-r-5"></i> +82) <input type="text" name="phonenum" value="${userdetails.user.phonenum}"></td>
                               </tr>
                               <tr>
                                  <td class="field">Email</td>
-                                 <td>${userdetails.user.email}</td>
+                                 <td><input type="text" name="email" value="${userdetails.user.email}"></td>
                               </tr>
                               <tr class="highlight">
                                  <td class="field">Address</td>
-                                 <td>${userdetails.user.address}</td>
+                                 <td><input type="text" name="address" value="${userdetails.user.address}"></td>
                               </tr>
                               <tr class="divider">
                                  <td colspan="2"></td>
@@ -93,6 +93,13 @@
                               <tr class="divider">
                                  <td colspan="2"></td>
                               </tr>
+                              <tr class="highlight">
+                                 <td class="field">&nbsp;</td>
+                                 <td class="p-t-10 p-b-10">
+                                    <button type="submit" class="btn btn-primary width-150">Update</button>
+                                    <a href="${pageContext.request.contextPath}/user/userinfo" class="btn btn-outline-dark width-150 m-l-5">Cancel</a>
+                                 </td>
+                              </tr>
                            </tbody>
                         </table>
                      </div>
@@ -106,6 +113,7 @@
          </div>
       </div>
    </div>
+   </form>
 </div>
 </body>
 </html>
