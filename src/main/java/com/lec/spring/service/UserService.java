@@ -72,6 +72,23 @@ public class UserService {
 		
 		return 1;
 	}
+
+	public int updateUser(String id, String name, String phonenum, String email, String address) {
+		User user = userRepository.findById(Long.parseLong(id)).orElse(null);
+		user.setName(name);
+		user.setPhonenum(phonenum);
+		user.setEmail(email);
+		user.setAddress(address);
+		userRepository.saveAndFlush(user);
+		return 1;
+	}
+
+	public int deleteUser(String id) {
+		User user = userRepository.findById(Long.parseLong(id)).orElse(null);
+		user.setIsvalid(false);
+		userRepository.saveAndFlush(user);
+		return 1;
+	}
 	
 }
 

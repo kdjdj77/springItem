@@ -31,7 +31,7 @@ public class PrincipalDetailService implements UserDetailsService{
 		
 		// 만약 해당 username의 User 가 DB에 있다면
 		// UserDetails 를 생성하여 리턴
-		if(user != null) {
+		if(user != null && user.getIsvalid()) {
 			PrincipalDetails userDetails = new PrincipalDetails(user);
 			userDetails.setUserService(userService);
 			return userDetails;
