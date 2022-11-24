@@ -12,13 +12,4 @@ import com.lec.spring.service.ItemService;
 @RequestMapping("/item")
 public class ItemController {
 	
-	@Autowired
-	private ItemService itemService;
-	
-	@GetMapping("/list")
-	public String categoryList(Model model) {
-		model.addAttribute("categoryList", itemService.categoryList());	
-		model.addAttribute("tagList", itemService.tagList());
-		return "/item/list";
-	}
 }
