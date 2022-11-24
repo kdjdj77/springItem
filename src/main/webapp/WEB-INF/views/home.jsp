@@ -107,9 +107,8 @@
 								<h5 class="card-title">${i.name }</h5>
 							</div>
 							<ul class="list-group list-group-flush">
-								<li class="list-group-item">${i.content }</li>
 								<li class="list-group-item">${i.discount }%</li>
-								<li class="list-group-item">${i.price }원</li>
+								<li class="list-group-item">${i.price*(100-i.discount)/100}원</li>
 							</ul>
 							<input type="hidden" name="carId" value="${i.id }">
 						</div>
