@@ -36,6 +36,7 @@
 </head>
  
 <body>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="swiper mySwiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
@@ -91,25 +92,32 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 	<script src="/js/mainItemList.js"></script>
-	
-	<c:forEach var="category" items="${categoryList }">
-		<p>${category.name }</p>
-		
-	</c:forEach>
-	
-	<c:forEach var="tag" items="${tagList }">
-			<p>${tag.name }</p>
-	</c:forEach>
-	<hr>
-	<c:forEach var="tags" items="${tagList }">
-	
-		<img
-            src="${pageContext.request.contextPath }/upload/${tags.items[0].itemfiles[0].file }"
-            alt="..."
-          />
-		<p>${tags.items[0].name }</p>
-		<p>${tags.items[0].price }</p>
-	</c:forEach>
+
+	<div style="width:1500px; height:auto; border:1px solid black; display:flex; margin: 0 auto;">
+		<c:forEach var="i" items="${itemList}">
+			<div class="container" style="width: 280px; height: 353px;">
+				<form action="reserv" method="POST">
+					<div class="row">
+						<div class="card" style="border: 1px solid blue;">
+							<img
+								src="${pageContext.request.contextPath }/upload/${i.itemfiles[0].file}"
+								class="card-img-top"
+								style="width: 253px; height: 253px; object-fit: fill; border: 1px solid red;">
+							<div class="card-body">
+								<h5 class="card-title">${i.name }</h5>
+							</div>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">${i.content }</li>
+								<li class="list-group-item">${i.discount }%</li>
+								<li class="list-group-item">${i.price }원</li>
+							</ul>
+							<input type="hidden" name="carId" value="${i.id }">
+						</div>
+					</div>
+				</form>
+			</div>
+		</c:forEach>
+	</div>
 
 </body>
 </html>
