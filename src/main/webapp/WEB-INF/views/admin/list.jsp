@@ -29,7 +29,7 @@
         	<span class="float-end fs-4">
         		<form action="list" method="GET">
 		        	<input type="text" id="search" name="search" value="${search}">
-		        	<button id="searchBtn" class="btn btn-outline-dark mb-2">검색</button>
+		        	<button id="searchBtn" class="btn btn-outline-dark mb-2">관리자 검색</button>
         		</form>
         	</span>
         </h2><hr>

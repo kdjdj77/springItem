@@ -95,17 +95,20 @@ public class DummyData {
 		Tag t3 = Tag.builder().category(cg1).name("자켓/코트").build(); t3 = tagRepository.save(t3);
 		Tag t4 = Tag.builder().category(cg1).name("패딩").build(); t4 = tagRepository.save(t4);
 		Tag t5 = Tag.builder().category(cg1).name("플리스").build(); t5 = tagRepository.save(t5);
+		
 		Tag t6 = Tag.builder().category(cg2).name("긴팔티셔츠").build(); t6 = tagRepository.save(t6);
 		Tag t7 = Tag.builder().category(cg2).name("맨투맨").build(); t7 = tagRepository.save(t7);
 		Tag t8 = Tag.builder().category(cg2).name("후드").build(); t8 = tagRepository.save(t8);
 		Tag t9 = Tag.builder().category(cg2).name("반팔/민소매티셔츠").build(); t9 = tagRepository.save(t9);
 		Tag t10 = Tag.builder().category(cg2).name("니트").build(); t10 = tagRepository.save(t10);
+		
 		Tag t11 = Tag.builder().category(cg3).name("청바지").build(); t11 = tagRepository.save(t11);
 		Tag t12 = Tag.builder().category(cg3).name("롱팬츠").build(); t12 = tagRepository.save(t12);
 		Tag t13 = Tag.builder().category(cg3).name("면바지").build(); t13 = tagRepository.save(t13);
 		Tag t14 = Tag.builder().category(cg3).name("슬랙스").build(); t14 = tagRepository.save(t14);
 		Tag t15 = Tag.builder().category(cg3).name("레깅스").build(); t15 = tagRepository.save(t15);
 		Tag t16 = Tag.builder().category(cg3).name("숏팬츠").build(); t16 = tagRepository.save(t16);
+		
 		Tag t17 = Tag.builder().category(cg4).name("운동화/단화").build(); t17 = tagRepository.save(t17);
 		Tag t18 = Tag.builder().category(cg4).name("구두/워커").build(); t18 = tagRepository.save(t18);
 		Tag t19 = Tag.builder().category(cg4).name("샌들/슬리퍼/장화").build(); t19 = tagRepository.save(t19);
@@ -115,8 +118,10 @@ public class DummyData {
 		Tag t22 = Tag.builder().category(cg7).name(cg7.getName()).build(); t22 = tagRepository.save(t22);
 		Tag t23 = Tag.builder().category(cg8).name(cg8.getName()).build(); t23 = tagRepository.save(t23);
 		Tag t24 = Tag.builder().category(cg9).name(cg9.getName()).build(); t24 = tagRepository.save(t24);
+		
 		Tag t25 = Tag.builder().category(cg10).name("백팩/스쿨백").build(); t25 = tagRepository.save(t25);
 		Tag t26 = Tag.builder().category(cg10).name("크로스/토트백").build(); t26 = tagRepository.save(t26);
+		
 		Tag t27 = Tag.builder().category(cg11).name("주얼리").build(); t27 = tagRepository.save(t27);
 		Tag t28 = Tag.builder().category(cg11).name("모자/벨트").build(); t28 = tagRepository.save(t28);
 		Tag t29 = Tag.builder().category(cg11).name("양말/스타킹").build(); t29 = tagRepository.save(t29);
@@ -228,5 +233,158 @@ public class DummyData {
 		Buy b4 = Buy.builder().user(user2).item(i1).count(2L).build(); buyRepository.save(b4);
 		Buy b5 = Buy.builder().user(user2).item(i2).count(3L).build(); buyRepository.save(b5);
 		Buy b6 = Buy.builder().user(user2).item(i3).count(5L).build(); buyRepository.save(b6);
+		
+// 상품 (추가)
+		Item i4 = Item.builder()
+				.name("키아나 심플 카라 기모 맨투맨").discount(11D).content("상품소개").price(27200D)
+				.stock(30L).tag(t7).category(t7.getCategory()).build();
+		Item i5 = Item.builder()
+				.name("주디 기모 반집업 카라넥 크롭 맨투맨").discount(10D).content("상품소개").price(13100D)
+				.stock(35L).tag(t7).category(t7.getCategory()).build();
+		Item i6 = Item.builder()
+				.name("캔디 체크 플리스 맨투맨").discount(15D).content("상품소개").price(33500D)
+				.stock(23L).tag(t7).category(t7.getCategory()).build();
+		Item i7 = Item.builder()
+				.name("자수 기모 박시핏 맨투맨").discount(13D).content("상품소개").price(27600D)
+				.stock(38L).tag(t7).category(t7.getCategory()).build();
+		Item i8 = Item.builder()
+				.name("시그널 반집업 세미크롭 맨투맨").discount(20D).content("상품소개").price(13800D)
+				.stock(24L).tag(t7).category(t7.getCategory()).build();
+		Item i9 = Item.builder()
+				.name("매니큐어 레터링 양기모 맨투맨").discount(13D).content("상품소개").price(43000D)
+				.stock(27L).tag(t7).category(t7.getCategory()).build();
+		Item i10 = Item.builder()
+				.name("하티 레터링 기모 반집업").discount(5D).content("상품소개").price(37500D)
+				.stock(15L).tag(t7).category(t7.getCategory()).build();
+		Item i11 = Item.builder()
+				.name("산타모니카 기모 레터링 맨투맨").discount(10D).content("상품소개").price(23000D)
+				.stock(34L).tag(t7).category(t7.getCategory()).build();
+		Item i12 = Item.builder()
+				.name("레이지 레터링 기모 맨투맨").discount(15D).content("상품소개").price(13000D)
+				.stock(27L).tag(t7).category(t7.getCategory()).build();
+		Item i13 = Item.builder()
+				.name("(기모)헌팅턴 레터링 맨투맨").discount(12D).content("상품소개").price(27900D)
+				.stock(16L).tag(t7).category(t7.getCategory()).build();
+		Item i14 = Item.builder()
+				.name("프랑스 레터링 양기모 맨투맨").discount(7D).content("상품소개").price(16000D)
+				.stock(19L).tag(t7).category(t7.getCategory()).build();
+		Item i15 = Item.builder()
+				.name("빌리지 레터링 프린팅 맨투맨").discount(10D).content("상품소개").price(18000D)
+				.stock(24L).tag(t7).category(t7.getCategory()).build();
+		Item i16 = Item.builder()
+				.name("가브리엘 레터링 박시핏 맨투맨").discount(15D).content("상품소개").price(12500D)
+				.stock(20L).tag(t7).category(t7.getCategory()).build();
+		Item i17 = Item.builder()
+				.name("헤이브 크롭 플리스 맨투맨").discount(20D).content("상품소개").price(13700D)
+				.stock(36L).tag(t7).category(t7.getCategory()).build();
+		Item i18 = Item.builder()
+				.name("(양기모)캐나다 데일리 세미크롭 맨투맨").discount(10D).content("상품소개").price(33800D)
+				.stock(18L).tag(t7).category(t7.getCategory()).build();
+		Item i19 = Item.builder()
+				.name("(9컬러)나인 오버핏 베이직 무지 맨투맨").discount(16D).content("상품소개").price(36800D)
+				.stock(21L).tag(t7).category(t7.getCategory()).build();
+		Item i20 = Item.builder()
+				.name("(기모추가)피어스 캐주얼 심플 레터링 맨투맨").discount(5D).content("상품소개").price(23800D)
+				.stock(22L).tag(t7).category(t7.getCategory()).build();
+		Item i21 = Item.builder()
+				.name("코넬 배색 기모 맨투맨").discount(10D).content("상품소개").price(13800D)
+				.stock(15L).tag(t7).category(t7.getCategory()).build();
+		
+		i4 = itemRepository.save(i4); 	i5 = itemRepository.save(i5); 	i6 = itemRepository.save(i6);
+		i7 = itemRepository.save(i7); 	i8 = itemRepository.save(i8); 	i9 = itemRepository.save(i9);
+		i10 = itemRepository.save(i10); i11 = itemRepository.save(i11); i12 = itemRepository.save(i12);
+		i13 = itemRepository.save(i13); i14 = itemRepository.save(i14); i15 = itemRepository.save(i15);
+		i16 = itemRepository.save(i16); i17 = itemRepository.save(i17); i18 = itemRepository.save(i18);
+		i19 = itemRepository.save(i19); i20 = itemRepository.save(i20); i21 = itemRepository.save(i21);
+		
+		Color c10 = Color.builder().item(i4).color("red").build(); colorRepository.save(c10);
+		Color c11 = Color.builder().item(i5).color("blue").build(); colorRepository.save(c11);
+		Color c12 = Color.builder().item(i6).color("purple").build(); colorRepository.save(c12);
+		Color c13 = Color.builder().item(i7).color("green").build(); colorRepository.save(c13);
+		Color c14 = Color.builder().item(i8).color("black").build(); colorRepository.save(c14);
+		Color c15 = Color.builder().item(i9).color("white").build(); colorRepository.save(c15);
+		Color c16 = Color.builder().item(i10).color("sky").build(); colorRepository.save(c16);
+		Color c17 = Color.builder().item(i11).color("gray").build(); colorRepository.save(c17);
+		Color c18 = Color.builder().item(i12).color("pink").build(); colorRepository.save(c18);
+		Color c19 = Color.builder().item(i13).color("red").build(); colorRepository.save(c19);
+		Color c20 = Color.builder().item(i14).color("blue").build(); colorRepository.save(c20);
+		Color c21 = Color.builder().item(i15).color("purple").build(); colorRepository.save(c21);
+		Color c22 = Color.builder().item(i16).color("green").build(); colorRepository.save(c22);
+		Color c23 = Color.builder().item(i17).color("black").build(); colorRepository.save(c23);
+		Color c24 = Color.builder().item(i18).color("white").build(); colorRepository.save(c24);
+		Color c25 = Color.builder().item(i19).color("green").build(); colorRepository.save(c25);
+		Color c26 = Color.builder().item(i20).color("black").build(); colorRepository.save(c26);
+		Color c27 = Color.builder().item(i21).color("white").build(); colorRepository.save(c27);
+	
+		Size s10 = Size.builder().item(i4).name("ONE SIZE").build(); sizeRepository.save(s10);
+		Size s11 = Size.builder().item(i5).name("ONE SIZE").build(); sizeRepository.save(s11);
+		Size s12 = Size.builder().item(i6).name("ONE SIZE").build(); sizeRepository.save(s12);
+		Size s13 = Size.builder().item(i7).name("ONE SIZE").build(); sizeRepository.save(s13);
+		Size s14 = Size.builder().item(i8).name("ONE SIZE").build(); sizeRepository.save(s14);
+		Size s15 = Size.builder().item(i9).name("ONE SIZE").build(); sizeRepository.save(s15);
+		Size s16 = Size.builder().item(i10).name("ONE SIZE").build(); sizeRepository.save(s16);
+		Size s17 = Size.builder().item(i11).name("ONE SIZE").build(); sizeRepository.save(s17);
+		Size s18 = Size.builder().item(i12).name("ONE SIZE").build(); sizeRepository.save(s18);
+		Size s19 = Size.builder().item(i13).name("ONE SIZE").build(); sizeRepository.save(s19);
+		Size s20 = Size.builder().item(i14).name("ONE SIZE").build(); sizeRepository.save(s20);
+		Size s21 = Size.builder().item(i15).name("ONE SIZE").build(); sizeRepository.save(s21);
+		Size s22 = Size.builder().item(i16).name("ONE SIZE").build(); sizeRepository.save(s22);
+		Size s23 = Size.builder().item(i17).name("ONE SIZE").build(); sizeRepository.save(s23);
+		Size s24 = Size.builder().item(i18).name("ONE SIZE").build(); sizeRepository.save(s24);
+		Size s25 = Size.builder().item(i19).name("ONE SIZE").build(); sizeRepository.save(s25);
+		Size s26 = Size.builder().item(i20).name("ONE SIZE").build(); sizeRepository.save(s26);
+		Size s27 = Size.builder().item(i21).name("ONE SIZE").build(); sizeRepository.save(s27);
+
+		Itemfile if10 = Itemfile.builder().file("item10.jpg").source("item10.jpg").item(i4).build();
+		Itemfile if11 = Itemfile.builder().file("item11.jpg").source("item11.jpg").item(i5).build();
+		Itemfile if12 = Itemfile.builder().file("item12.jpg").source("item12.jpg").item(i6).build();
+		Itemfile if13 = Itemfile.builder().file("item13.jpg").source("item13.jpg").item(i7).build();
+		Itemfile if14 = Itemfile.builder().file("item14.jpg").source("item14.jpg").item(i8).build();
+		Itemfile if15 = Itemfile.builder().file("item15.jpg").source("item15.jpg").item(i9).build();
+		Itemfile if16 = Itemfile.builder().file("item16.jpg").source("item16.jpg").item(i10).build();
+		Itemfile if17 = Itemfile.builder().file("item17.jpg").source("item17.jpg").item(i11).build();
+		Itemfile if18 = Itemfile.builder().file("item18.jpg").source("item18.jpg").item(i12).build();
+		Itemfile if19 = Itemfile.builder().file("item19.jpg").source("item19.jpg").item(i13).build();
+		Itemfile if20 = Itemfile.builder().file("item20.jpg").source("item20.jpg").item(i14).build();
+		Itemfile if21 = Itemfile.builder().file("item21.jpg").source("item21.jpg").item(i15).build();
+		Itemfile if22 = Itemfile.builder().file("item22.jpg").source("item22.jpg").item(i16).build();
+		Itemfile if23 = Itemfile.builder().file("item23.jpg").source("item23.jpg").item(i17).build();
+		Itemfile if24 = Itemfile.builder().file("item24.jpg").source("item24.jpg").item(i18).build();
+		Itemfile if25 = Itemfile.builder().file("item25.jpg").source("item25.jpg").item(i19).build();
+		Itemfile if26 = Itemfile.builder().file("item26.jpg").source("item26.jpg").item(i20).build();
+		Itemfile if27 = Itemfile.builder().file("item27.jpg").source("item27.jpg").item(i21).build();
+		
+		itemfileRepository.save(if10); itemfileRepository.save(if11); itemfileRepository.save(if12);
+		itemfileRepository.save(if13); itemfileRepository.save(if14); itemfileRepository.save(if15);
+		itemfileRepository.save(if16); itemfileRepository.save(if17); itemfileRepository.save(if18);
+		itemfileRepository.save(if19); itemfileRepository.save(if20); itemfileRepository.save(if21);
+		itemfileRepository.save(if22); itemfileRepository.save(if23); itemfileRepository.save(if24);
+		itemfileRepository.save(if25); itemfileRepository.save(if26); itemfileRepository.save(if27);
+	
+		Contentfile cf10 = Contentfile.builder().file("contentitem10.jpg").source("contentitem10.jpg").item(i4).build();
+		Contentfile cf11 = Contentfile.builder().file("contentitem11.jpg").source("contentitem11.jpg").item(i5).build();
+		Contentfile cf12 = Contentfile.builder().file("contentitem12.jpg").source("contentitem12.jpg").item(i6).build();
+		Contentfile cf13 = Contentfile.builder().file("contentitem13.jpg").source("contentitem13.jpg").item(i7).build();
+		Contentfile cf14 = Contentfile.builder().file("contentitem14.jpg").source("contentitem14.jpg").item(i8).build();
+		Contentfile cf15 = Contentfile.builder().file("contentitem15.jpg").source("contentitem15.jpg").item(i9).build();
+		Contentfile cf16 = Contentfile.builder().file("contentitem16.jpg").source("contentitem16.jpg").item(i10).build();
+		Contentfile cf17 = Contentfile.builder().file("contentitem17.jpg").source("contentitem17.jpg").item(i11).build();
+		Contentfile cf18 = Contentfile.builder().file("contentitem18.jpg").source("contentitem18.jpg").item(i12).build();
+		Contentfile cf19 = Contentfile.builder().file("contentitem19.jpg").source("contentitem19.jpg").item(i13).build();
+		Contentfile cf20 = Contentfile.builder().file("contentitem20.jpg").source("contentitem20.jpg").item(i14).build();
+		Contentfile cf21 = Contentfile.builder().file("contentitem21.jpg").source("contentitem21.jpg").item(i15).build();
+		Contentfile cf22 = Contentfile.builder().file("contentitem22.jpg").source("contentitem22.jpg").item(i16).build();
+		Contentfile cf23 = Contentfile.builder().file("contentitem23.jpg").source("contentitem23.jpg").item(i17).build();
+		Contentfile cf24 = Contentfile.builder().file("contentitem24.jpg").source("contentitem24.jpg").item(i18).build();
+		Contentfile cf25 = Contentfile.builder().file("contentitem25.jpg").source("contentitem25.jpg").item(i19).build();
+		Contentfile cf26 = Contentfile.builder().file("contentitem26.jpg").source("contentitem26.jpg").item(i20).build();
+		Contentfile cf27 = Contentfile.builder().file("contentitem27.jpg").source("contentitem27.jpg").item(i21).build();
+		
+		contentfileRepository.save(cf10); contentfileRepository.save(cf11); contentfileRepository.save(cf12); 
+		contentfileRepository.save(cf13); contentfileRepository.save(cf14); contentfileRepository.save(cf15);
+		contentfileRepository.save(cf16); contentfileRepository.save(cf17); contentfileRepository.save(cf18);
+		contentfileRepository.save(cf19); contentfileRepository.save(cf20); contentfileRepository.save(cf21); 
+		contentfileRepository.save(cf22); contentfileRepository.save(cf23); contentfileRepository.save(cf24);
+		contentfileRepository.save(cf25); contentfileRepository.save(cf26); contentfileRepository.save(cf27);
 	}
 }
