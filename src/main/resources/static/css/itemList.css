@@ -1,52 +1,5 @@
 @charset "UTF-8";
 
-li {
-	list-style: none;
-}
-
-a {
-	text-decoration: none;
-	font-size: 14px;
-}
-
-.menu {
-	width: 1400px;
-	height: 300px;
-	overflow: hidden;
-	margin: 0 auto;
-}
-
-.menu>li {
-	width: 7%;
-	float: left;
-	line-height: 40px;
-	background-color: dodgerblue;
-}
-
-.menu a {
-	color: #fff;
-}
-
-.submenu>li {
-	background-color: mediumslateblue;
-}
-
-.submenu {
-	height: 0px;
-	overflow: hidden;
-	padding-left: 10px;
-}
-
-.menu>li:hover {
-	background-color: mediumslateblue;
-}
-
-.menu>li:hover .submenu {
-	height: auto;
-	width: 200px;
-	transition-duration: 1s;
-}
-
 html, body {
 	position: relative;
 	height: 100%;
