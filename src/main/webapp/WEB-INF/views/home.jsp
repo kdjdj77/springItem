@@ -37,6 +37,7 @@
  
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+
 	<div class="swiper mySwiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
