@@ -35,7 +35,7 @@
     <title>목록</title>
 </head>
  
-<body>
+<body oncontextmenu='return false' onselectstart='return false' ondragstart='return false'>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<jsp:include page="/WEB-INF/views/common/header2.jsp"/>
 
@@ -86,9 +86,8 @@
           />
         </div>
       </div>
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-scrollbar"></div>
+      <div class="swiper-button-next me-5"></div>
+      <div class="swiper-button-prev ms-5"></div>
       <div class="swiper-pagination"></div>
     </div>
 
@@ -109,7 +108,7 @@
 								<p class="card-title">${i.name }</p>
 							</div>
 							<ul class="list-group list-group-flush" id="discolor">
-								<li class="list-group-item"><span>${i.discount }%</span> ${i.price*(100-i.discount)/100}원</li>
+								<li class="list-group-item"><span style="font-size:0.9rem; margin-right:1rem;">${i.discount }%</span> ${i.price*(100-i.discount)/100}원</li>
 								<li class="list-group-item"></li>
 							</ul>
 							<input type="hidden" name="itemId" value="${i.id }">
