@@ -93,23 +93,23 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 	<script src="/js/mainItemList.js"></script>
-
-	<div style="width:1500px; height:auto; border:1px solid black; display:flex; margin: 0 auto;">
+	<br>
+	<div class="sub_wrap">
 		<c:forEach var="i" items="${itemList}">
-			<div class="container" style="width: 280px; height: 353px;">
+			<div class="container" id="container_wrap">
 				<form action="reserv" method="POST">
 					<div class="row">
-						<div class="card" style="border: 1px solid blue;">
+						<div id="card_box">
 							<img
 								src="${pageContext.request.contextPath }/upload/${i.itemfiles[0].file}"
 								class="card-img-top"
-								style="width: 253px; height: 253px; object-fit: fill; border: 1px solid red;">
+								>
 							<div class="card-body">
-								<h5 class="card-title">${i.name }</h5>
+								<p class="card-title">${i.name }</p>
 							</div>
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item">${i.discount }%</li>
-								<li class="list-group-item">${i.price*(100-i.discount)/100}원</li>
+							<ul class="list-group list-group-flush" id="discolor">
+								<li class="list-group-item"><span>${i.discount }%</span> ${i.price*(100-i.discount)/100}원</li>
+								<li class="list-group-item"></li>
 							</ul>
 							<input type="hidden" name="carId" value="${i.id }">
 						</div>
