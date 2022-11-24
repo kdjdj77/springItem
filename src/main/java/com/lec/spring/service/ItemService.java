@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lec.spring.domain.Category;
+import com.lec.spring.domain.Item;
 import com.lec.spring.domain.Tag;
 import com.lec.spring.repository.CategoryRepository;
 import com.lec.spring.repository.ItemRepository;
@@ -34,5 +35,10 @@ public class ItemService {
 	@Transactional
 	public List<Tag> tagList() {
 		return tagRepository.findAll();
+	}
+	
+	@Transactional
+	public List<Item> itemList() {
+		return itemRepository.findAll();
 	}
 }

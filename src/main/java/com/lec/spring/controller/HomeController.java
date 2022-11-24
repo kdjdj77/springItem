@@ -19,8 +19,7 @@ public class HomeController {
 	
 	@RequestMapping("/home")
 	public void home(Model model) {
-		model.addAttribute("categoryList", itemService.categoryList());	
-		model.addAttribute("tagList", itemService.tagList());
+		model.addAttribute("itemList", itemService.itemList());
 	}
 	
 	// 현재 로그인한(인증된) 정보 Authentication 보기
