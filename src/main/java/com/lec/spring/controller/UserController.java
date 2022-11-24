@@ -90,6 +90,11 @@ public class UserController {
 	public void initBinder(WebDataBinder binder) {
 		binder.setValidator(new UserValidator());
 	}
+	
+	@GetMapping("/userinfo")
+	public String userinfo(Model model) {
+		return "user/userinfo";
+	}
 }
 
 
