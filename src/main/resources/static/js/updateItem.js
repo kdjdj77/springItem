@@ -24,7 +24,7 @@ $(function() {
 		$("#files").append(`
 			<div class="input-group mb-2">
 			<input class="form-control col-xs-3" type="file" name="ifile"/>
-			<button type="button" class="btn btn-outline-danger" onclick="$(this).parent().remove()">삭제</button>
+			<button type="button" class="btn btn-outline-danger" onclick="$(this).parent().remove()">취소</button>
 			</div>
 		`);
 	});
@@ -32,7 +32,7 @@ $(function() {
 		$("#files2").append(`
 			<div class="input-group mb-2">
 			<input class="form-control col-xs-3" type="file" name="cfile"/>
-			<button type="button" class="btn btn-outline-danger" onclick="$(this).parent().remove()">삭제</button>
+			<button type="button" class="btn btn-outline-danger" onclick="$(this).parent().remove()">취소</button>
 			</div>
 		`);
 	});
@@ -67,9 +67,7 @@ function buildTagList(result) {
 	result.data.forEach(tag => {
 		let id = tag.id;
 		let name = tag.name;
-		const row = `
-			<option value="${id}">${name}</option>
-	        `;
+		const row = `<option value="${id}">${name}</option>`;
 		out.push(row);
 	});
 	$("#tag").html(out.join("\n"));

@@ -3,6 +3,7 @@ package com.lec.spring.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -65,5 +66,22 @@ public class ItemAdminController {
 		model.addAttribute("result", result);
 		model.addAttribute("id", itemParam.getId());
 		return "admin/registerOk";
+	}
+	@GetMapping("/item/list")
+	public String itemList(String search, Pageable pageable, 
+			Integer page, Model model) {
+		if(page == null) page = 1;
+		if(page < 1) page = 1;
+		if (search == null) search = "";
+		model.addAttribute("search", search);
+		itemadminService.getSearchItem(search, pageable, page, model);
+		return "admin/list";		
+	}
+	@GetMapping("/item/delete")
+	public String itemDelete(String id, Model model) {
+		int result = 0;
+		result = itemadminService.deleteItemById(id);
+		model.addAttribute("result", result);
+		return "admin/deleteOk";
 	}
 }
