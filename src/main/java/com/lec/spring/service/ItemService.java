@@ -25,8 +25,6 @@ public class ItemService {
 	
 	@Transactional
 	public List<Category> categoryList() {
-		List<Category> category = categoryRepository.findAll();
-		
-		return category;
+		return categoryRepository.findAll();
 	}
 }

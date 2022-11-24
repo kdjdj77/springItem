@@ -1,8 +1,9 @@
-package com.lec.spring.domain;
+package com.lec.spring.domain.ajax;
 
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.lec.spring.domain.Review;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
