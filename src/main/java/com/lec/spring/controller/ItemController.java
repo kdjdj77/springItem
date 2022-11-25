@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lec.spring.domain.Item;
+import com.lec.spring.repository.ColorRepository;
 import com.lec.spring.repository.ContentfileRepository;
 import com.lec.spring.repository.ItemRepository;
+import com.lec.spring.repository.SizeRepository;
 
 @Controller
 @RequestMapping("/item")
@@ -18,6 +20,10 @@ public class ItemController {
 	private ItemRepository itemRepository;
 	@Autowired
 	private ContentfileRepository contentfileRepository;
+	@Autowired
+	private SizeRepository sizeRepository;
+	@Autowired
+	private ColorRepository colorRepository;
 	
 	@GetMapping("/detail")
 	public String itemDetail(Long id, Model model, Item item) {
@@ -28,6 +34,8 @@ public class ItemController {
 		model.addAttribute("id", id);
 		model.addAttribute("itemList", itemRepository.findByIsvalidAndId(true, id));
 		model.addAttribute("contentFileList", contentfileRepository.findByItem(itemId));
+		model.addAttribute("sizeList", sizeRepository.findByItem(itemId));
+		model.addAttribute("colorList", colorRepository.findByItem(itemId));
 		
 		return "item/detail";
 	}

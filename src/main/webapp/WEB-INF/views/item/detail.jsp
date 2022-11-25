@@ -21,126 +21,104 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<jsp:include page="/WEB-INF/views/common/header2.jsp" />
-
-	<c:forEach var="item" items="${itemList }">
-		이름 <p>${item.name }</p>
-		내용 <p>${item.content }</p>
-		할인율 <p>${item.discount }</p>
-		할인된가격 <p>${item.price*(100-i.discount)/100}</p>
-		원가 <p>${item.price}</p>
-		색깔 <p>${item.colors[0].color }</p>
-		<!-- 색깔 갯수 for 돌려야함 -->
-		리뷰갯수 <p>${item.reviewcnt }</p>
-		사이즈 <p>${item.sizes[0].name }</p>
-		<!-- 사이즈 갯수 for 돌려야함 -->
-
-	</c:forEach>
-<div id="wrap">
-	<div id="wrap_left">	
-		<div id="demo" class="carousel slide w-30" data-bs-ride="carousel">
-			<div class="carousel-inner w-30">
-				<c:forEach var="contentfile" items="${contentFileList }">
-				<div class="carousel-item active">
-						<img id="big_imgSize" src="${pageContext.request.contextPath }/upload/${contentfile.file}" alt=".." class="d-block">
+	<div id="wrap">
+		<div id="wrap_left">
+			<div id="demo" class="carousel slide w-30" data-bs-ride="carousel">
+				<div class="carousel-inner w-30">
+					<c:forEach var="contentfile" items="${contentFileList }">
+						<div class="carousel-item active">
+							<img id="big_imgSize" src="${pageContext.request.contextPath }/upload/${contentfile.file}" alt=".." class="d-block">
+						</div>
+					</c:forEach>
 				</div>
-				</c:forEach>	
+				<button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon"></span>
+				</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+					<span class="carousel-control-next-icon"></span>
+				</button>
 			</div>
-			<button class="carousel-control-prev" type="button"
-				data-bs-target="#demo" data-bs-slide="prev">
-				<span class="carousel-control-prev-icon"></span>
-			</button>
-			<button class="carousel-control-next" type="button"
-				data-bs-target="#demo" data-bs-slide="next">
-				<span class="carousel-control-next-icon"></span>
-			</button>
-		</div>
-		
-		<div>
-			<c:forEach var="contentfile" items="${contentFileList }">
+
 			<div>
-				<img id="small_imgSize"src="${pageContext.request.contextPath }/upload/${contentfile.file}"
-						alt="Chicago" class="d-block">
+				<c:forEach var="contentfile" items="${contentFileList }">
+					<div>
+						<img id="small_imgSize" src="${pageContext.request.contextPath }/upload/${contentfile.file}" alt="Chicago" class="d-block">
+					</div>
+				</c:forEach>
 			</div>
-			</c:forEach>
+		</div>
+
+		<!-- 정보페이지 -->
+		<div class="container" style="width: 800px; height: hidden; margin-right: 0;">
+			<div class="row align-items-md-stretch">
+				<div class="col-lg-12">
+					<div class="h-100 p-5 rounded-3">
+						<div class="box-2">
+							<div class="box-inner-2">
+								<div>
+									<h2 class="fw-bold">${itemList[0].name }</h2>
+								</div>
+								<br>
+								<form name="getReserve" action="reservOk" method="post">
+									<span style="text-decoration: line-through;">${itemList[0].price }원</span><br>
+									<span style="font-size: 1.5rem; margin-right: 1rem; color: hotpink;">${itemList[0].discount }<span style="font-size: 1rem;">%</span></span> 
+									<span style="font-size: 1.5rem; font-weight: bold; font-weight: bold;">${itemList[0].price*(100-itemList[0].discount)/100}<span style="font-size: 1rem; font-weight: bold;">원</span></span>
+									<hr>
+									<fieldset class="form-group">
+										<div class="row">
+											<p class="col-form-label col-sm-2 pt-0">색상</p>
+											<div class="col-sm-10">
+												<c:forEach var="color" items="${colorList }">
+													<div class="form-check">
+														<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1"> 
+														<label class="form-check-label" for="gridRadios1"> ${color.color } </label>
+													</div>
+												</c:forEach>
+											</div>
+										</div>
+									</fieldset>
+									<hr>
+									<fieldset class="form-group">
+										<div class="row">
+											<p class="col-form-label col-sm-2 pt-0">사이즈</p>
+											<div class="col-sm-10">
+												<c:forEach var="size" items="${sizeList }">
+													<div class="form-check">
+														<input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios2" value="option2"> 
+														<label class="form-check-label" for="gridRadios2"> ${size.name } </label>
+													</div>
+												</c:forEach>
+											</div>
+										</div>
+									</fieldset>
+									<hr><br>
+									<p style="border: 1px solid black;"></p>
+									<div style="display: flex; justify-content: space-between;">
+										<h4>총 결제금액</h4>
+										<p>0원</p>
+									</div>
+									<div style="width: 100%; height: 80px; display: flex; justify-content: space-between; margin: 30px 0;">
+										<a href="#" style="width: 320px; height: 80px; border-radius: 10px; line-height: 80px; text-align: center; color: white; background-color: rgb(55, 55, 55); text-decoration: none; font-size: 1.5rem;">장바구니</a>
+										<a href="#" style="width: 320px; height: 80px; border-radius: 10px; line-height: 80px; text-align: center; color: white; background-color: rgb(255, 111, 177); text-decoration: none; font-size: 1.5rem;">구매하기</a>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-
-<!-- 정보페이지 -->	
-<div class="container" style="width: 800px; height: hidden; margin-right: 0;">
-    <div class="row align-items-md-stretch">
-      <div class="col-lg-12">
-        <div class="h-100 p-5 rounded-3">
-          <div class="box-2">
-            <div class="box-inner-2">
-                <div>
-                    <h2 class="fw-bold">${itemList[0].name }</h2>
-                </div>
-                <br>
-                <form name="getReserve" action="reservOk" method="post">
-                	<span style="text-decoration : line-through;">${itemList[0].price }원</span><br>
-                	<span style="font-size:1.5rem; margin-right:1rem; color: hotpink;">${itemList[0].discount }<span style="font-size: 1rem;">%</span></span> 
-                	<span style="font-size:1.5rem; font-weight: bold; font-weight: bold;">${itemList[0].price*(100-itemList[0].discount)/100}<span style="font-size: 1rem; font-weight: bold;">원</span></span>
-                	<hr>
-                	<fieldset class="form-group">
-				    <div class="row">
-				      <p class="col-form-label col-sm-2 pt-0">색상</p>
-				      <div class="col-sm-10">
-				        <div class="form-check">
-				          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-				          <label class="form-check-label" for="gridRadios1">
-				            blue
-				          </label>
-				        </div>
-				        <div class="form-check">
-				          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-				          <label class="form-check-label" for="gridRadios2">
-				            red
-				          </label>
-				        </div>
-				      </div>
-				    </div>
-				  </fieldset>
-				  <hr>
-				  <fieldset class="form-group">
-				    <div class="row">
-				      <p class="col-form-label col-sm-2 pt-0">사이즈</p>
-				      <div class="col-sm-10">
-				        <div class="form-check">
-				          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-				          <label class="form-check-label" for="gridRadios1">
-				            M
-				          </label>
-				        </div>
-				        <div class="form-check">
-				          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-				          <label class="form-check-label" for="gridRadios2">
-				            L
-				          </label>
-				        </div>
-				      </div>
-				    </div>
-				  </fieldset>
-                  <hr>
-                  <br>
-                  <p style="border:1px solid black;"></p>
-                  <h4>총 결제금액</h4> <p>0원</p>
-                  
-                  <div>
-                  <div>장바구니</div>
-                  
-                  <div>구매하기</div>
-                  </div>  
-                </form>
-               </div>
-            </div>
-        </div>
-        </div>
-      </div>
-  </div>
-</div>		
-	<br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><hr>
+	<div style="width: 1000px; height: hidden; margin: 0 auto;">
+		<img src="${pageContext.request.contextPath }/upload/test1.jpg" alt="..">
+		<img style="margin: 30px 0;" src="${pageContext.request.contextPath }/upload/test2.jpg" alt="..">
+		<img style="margin: 30px 0;" src="${pageContext.request.contextPath }/upload/test3.jpg" alt="..">
+		<img style="margin: 30px 0;" src="${pageContext.request.contextPath }/upload/test4.jpg" alt="..">
+		<img style="margin: 30px 0;" src="${pageContext.request.contextPath }/upload/test5.jpg" alt="..">
+		<img style="margin: 30px 0;" src="${pageContext.request.contextPath }/upload/test6.jpg" alt="..">
+	</div>
 	
-
-
+	<br><br><br><br><br>	
 </body>
 </html>
