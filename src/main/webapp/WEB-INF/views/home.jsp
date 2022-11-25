@@ -100,10 +100,9 @@
 				<form action="reserv" method="POST">
 					<div class="row">
 						<div id="card_box">
-							<img
-								src="${pageContext.request.contextPath }/upload/${i.itemfiles[0].file}"
-								class="card-img-top"
-								>
+							<a href="item/detail?id=${i.id }">
+								<img src="${pageContext.request.contextPath }/upload/${i.itemfiles[0].file}" class="card-img-top">
+							</a>
 							<div class="card-body">
 								<p class="card-title">${i.name }</p>
 							</div>

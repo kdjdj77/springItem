@@ -5,7 +5,12 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.lec.spring.domain.Category;
 import com.lec.spring.domain.Item;
@@ -39,6 +44,6 @@ public class ItemService {
 	
 	@Transactional
 	public List<Item> itemList() {
-		return itemRepository.findAll();
+		return itemRepository.findTop30ByIsvalidOrderByIdDesc(true);
 	}
 }
