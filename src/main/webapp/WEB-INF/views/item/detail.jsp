@@ -59,7 +59,7 @@
 									<h2 class="fw-bold">${itemList[0].name }</h2>
 								</div>
 								<br>
-								<form name="getReserve" action="reservOk" method="post">
+								<form name="cart" action="cartOk" method="POST">
 									<span style="text-decoration: line-through;">${itemList[0].price }원</span><br>
 									<span style="font-size: 1.5rem; margin-right: 1rem; color: hotpink;">${itemList[0].discount }<span style="font-size: 1rem;">%</span></span> 
 									<span style="font-size: 1.5rem; font-weight: bold; font-weight: bold;">${itemList[0].price*(100-itemList[0].discount)/100}<span style="font-size: 1rem; font-weight: bold;">원</span></span>
@@ -98,8 +98,9 @@
 										<p>0원</p>
 									</div>
 									<div style="width: 100%; height: 80px; display: flex; justify-content: space-between; margin: 30px 0;">
-										<a href="#" style="width: 320px; height: 80px; border-radius: 10px; line-height: 80px; text-align: center; color: white; background-color: rgb(55, 55, 55); text-decoration: none; font-size: 1.5rem;">장바구니</a>
-										<a href="#" style="width: 320px; height: 80px; border-radius: 10px; line-height: 80px; text-align: center; color: white; background-color: rgb(255, 111, 177); text-decoration: none; font-size: 1.5rem;">구매하기</a>
+										 <input type="hidden" name="id" value="${itemList[0].id }">
+										<button type="submit" style="width: 320px; height: 80px; border-radius: 10px; line-height: 80px; text-align: center; color: white; background-color: rgb(55, 55, 55); outline : 0; border : 0; font-size: 1.5rem;">장바구니</button>
+										<button type="submit" style="width: 320px; height: 80px; border-radius: 10px; line-height: 80px; text-align: center; color: white; background-color: rgb(255, 111, 177); outline : 0; border : 0; font-size: 1.5rem;">구매하기</button>
 									</div>
 								</form>
 							</div>
