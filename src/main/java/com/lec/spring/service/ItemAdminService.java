@@ -32,6 +32,7 @@ import com.lec.spring.domain.Item;
 import com.lec.spring.domain.Itemfile;
 import com.lec.spring.domain.Size;
 import com.lec.spring.domain.Tag;
+import com.lec.spring.domain.User;
 import com.lec.spring.domain.ajax.TagQryList;
 import com.lec.spring.repository.CategoryRepository;
 import com.lec.spring.repository.ColorRepository;
@@ -40,6 +41,7 @@ import com.lec.spring.repository.ItemRepository;
 import com.lec.spring.repository.ItemfileRepository;
 import com.lec.spring.repository.SizeRepository;
 import com.lec.spring.repository.TagRepository;
+import com.lec.spring.repository.UserRepository;
 import com.lec.spring.util.C;
 import com.lec.spring.util.U;
 
@@ -85,11 +87,26 @@ public class ItemAdminService {
 		addContentFiles(cfile, item.getId());
 		return item;
 	}
+	public Item updateItem(String id, Item item, String category, String tag, 
+			List<MultipartFile> ifile, List<MultipartFile> cfile) {
+		Item i = itemRepository.findById(Long.parseLong(id)).orElse(null); 
+		i.setCategory(categoryRepository.findById(Long.parseLong(category)).orElse(null));
+		i.setTag(tagRepository.findById(Long.parseLong(tag)).orElse(null));
+		i.setDiscount(item.getDiscount());
+		i.setName(item.getName());
+		i.setStock(item.getStock());
+		i.setPrice(item.getPrice());
+		i.setContent(item.getContent());
+		itemRepository.saveAndFlush(i);
+		addItemFiles(ifile, i.getId());
+		addContentFiles(cfile, i.getId());
+		return i;
+	}
 	public int registerColorAndSize(Item item, List<String> colors, List<String> sizes) {
 		if (colors != null)
 		for(String c : colors) {
 			if (c.trim().equals("")) continue;
-			Color co = Color.builder().color(c).item(item).build();
+			Color co = Color.builder().name(c).item(item).build();
 			colorRepository.saveAndFlush(co);
 		}
 		if (sizes != null)

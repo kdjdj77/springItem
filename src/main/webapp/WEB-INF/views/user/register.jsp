@@ -12,7 +12,7 @@
 </head>
 
 <body style="margin-bottom: 200px">
-    <div class="container mt-3">
+    <div class="container mt-3" style="width:40%;">
 
         <div class="row mt-5">
             <div class="col-12 text-center">
@@ -45,9 +45,7 @@
                 <button type="submit" class="w-100 btn btn-lg btn-primary mt-3">등록</button>
             </form>
         </div>
-
     </div>
-    
 </body>
 </html>
 

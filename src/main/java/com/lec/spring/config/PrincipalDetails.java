@@ -109,7 +109,7 @@ public class PrincipalDetails implements UserDetails{
 	// 활성화 되었나? (휴면계정 같은거)
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return user.getIsvalid();
 	}
 	
 }

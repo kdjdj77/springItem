@@ -25,16 +25,7 @@ public class ItemController {
 	public String itemDetail(String id, Model model) {
 		
 		Long lId = Long.parseLong(id);
-		
-//		Item itemId = itemService.findByItemid(lId);
-//		System.out.println("itemId : "+itemId);
-		
-		model.addAttribute("id", id);
 		model.addAttribute("item", itemService.findByisvalidItem(lId));
-//		model.addAttribute("contentFileList", itemService.getItemContentfile(itemId));
-//		model.addAttribute("sizeList", itemService.getItemSize(itemId));
-//		model.addAttribute("colorList", itemService.getItemColor(itemId));
-		
 		return "item/detail";
 	}
 	

@@ -47,7 +47,7 @@ public class Item {
 	@Column(nullable = false)
 	private String content;
 	@Column(nullable = false)
-	private Double price;
+	private Long price;
 	@Column(nullable = false)
 	private Long stock;
 	@ColumnDefault(value = "0")

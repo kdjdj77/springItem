@@ -38,13 +38,19 @@
 					<span class="carousel-control-next-icon"></span>
 				</button>
 			</div>
-
 			<div>
 				<c:forEach var="itemfiles" items="${item.itemfiles }">
 					<div>
 						<img id="small_imgSize" src="${pageContext.request.contextPath }/upload/${itemfiles.file}" alt="Chicago" class="d-block">
 					</div>
 				</c:forEach>
+				<c:if test="${item.itemfiles.size() < 5}">
+					<c:forEach var="i" begin="1" end="${5 - item.itemfiles.size()}">
+						<div>
+							<div id="small_imgSize" class="d-block"></div>
+						</div>
+					</c:forEach>
+				</c:if>
 			</div>
 		</div>
 
@@ -70,8 +76,8 @@
 											<div class="col-sm-10">
 												<c:forEach var="color" items="${item.colors }">
 													<div class="form-check">
-														<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="${color.id }"> 
-														<label class="form-check-label" for="gridRadios1"> ${color.color } </label>
+														<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1_${color.id }" value="${color.id }"> 
+														<label class="form-check-label" for="gridRadios1_${color.id }"> ${color.name } </label>
 													</div>
 												</c:forEach>
 											</div>
@@ -84,8 +90,8 @@
 											<div class="col-sm-10">
 												<c:forEach var="size" items="${item.sizes }">
 													<div class="form-check">
-														<input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios2" value="${size.id }"> 
-														<label class="form-check-label" for="gridRadios2"> ${size.name } </label>
+														<input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios2_${size.id }" value="${size.id }"> 
+														<label class="form-check-label" for="gridRadios2_${size.id }"> ${size.name } </label>
 													</div>
 												</c:forEach>
 											</div>
@@ -94,6 +100,9 @@
 									<hr><br>
 									<p style="border: 1px solid black;"></p>
 									<div style="display: flex; justify-content: space-between;">
+										<div id="append">
+										
+										</div>
 										<h4>총 결제금액</h4>
 										<p>0원</p>
 									</div>
@@ -122,4 +131,25 @@
 	
 	<br><br><br><br><br>	
 </body>
+<script>
+$(function() {
+	$("input[name='gridRadios']").change(function(){
+		$("input[name='gridRadios2']").prop("checked", false);
+	});
+	$("input[name='gridRadios2']").change(function() {
+		let color = $($("input[name='gridRadios']")).attr("id");
+		let anText = $("label[for='"+color+"']").text();
+
+		let size = $(this).attr("id");
+		let anText2 = $("label[for='"+size+"']").text();
+
+		$("#append").append(`결제금액
+				<div>${item.price}</div>
+				<div>` + anText + `</div>
+				<div>` + anText2 + `</div>
+				<button>-</button><input style="width:2rem" name="count" type="text" value="1"><button>+</button>
+				`);
+	});
+});
+</script>
 </html>
