@@ -12,10 +12,8 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
 	Page<Item> findByIsvalidAndNameContaining(boolean b, String search, PageRequest of);
 	
-//	Page<Item> findByIsvalidAndNameContaining(boolean b, PageRequest of);
-	
 	List<Item> findTop30ByIsvalidOrderByIdDesc(boolean b);
 	
-	List<Item> findByIsvalidAndId(boolean b, Long id);
+	Item findByIsvalidAndId(boolean b, Long id);
 	
 }

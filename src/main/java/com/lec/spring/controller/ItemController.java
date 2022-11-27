@@ -22,16 +22,18 @@ public class ItemController {
 	private ItemService itemService;
 	
 	@GetMapping("/detail")
-	public String itemDetail(Long id, Model model, Item item) {
+	public String itemDetail(String id, Model model) {
 		
-		Item itemId = itemService.findByItemid(id);
-		System.out.println("itemId : "+itemId);
+		Long lId = Long.parseLong(id);
+		
+//		Item itemId = itemService.findByItemid(lId);
+//		System.out.println("itemId : "+itemId);
 		
 		model.addAttribute("id", id);
-		model.addAttribute("itemList", itemService.findByisvalidItem(id));
-		model.addAttribute("contentFileList", itemService.getItemContentfile(itemId));
-		model.addAttribute("sizeList", itemService.getItemSize(itemId));
-		model.addAttribute("colorList", itemService.getItemColor(itemId));
+		model.addAttribute("item", itemService.findByisvalidItem(lId));
+//		model.addAttribute("contentFileList", itemService.getItemContentfile(itemId));
+//		model.addAttribute("sizeList", itemService.getItemSize(itemId));
+//		model.addAttribute("colorList", itemService.getItemColor(itemId));
 		
 		return "item/detail";
 	}
@@ -39,10 +41,10 @@ public class ItemController {
 	@PostMapping("/cartOk")
 	public String itemCartOk(Long id, String color, String size, Model model) {
 		Item itemId = itemService.findByItemid(id);
-		
+		System.out.println("itemId = "+itemId);
+		System.out.println("color = "+color);
+		System.out.println("size = "+size);
 		itemService.registerCart(itemId);
-		model.addAttribute("color", color);
-		model.addAttribute("size", size);
 		return "redirect:/item/cart" ;
 	}
 	

@@ -61,7 +61,7 @@ public class ItemService {
 	}
 	
 	@Transactional
-	public List<Item> findByisvalidItem(Long id){
+	public Item findByisvalidItem(Long id){
 		return itemRepository.findByIsvalidAndId(true, id);
 	}
 	

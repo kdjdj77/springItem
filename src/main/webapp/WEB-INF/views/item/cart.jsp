@@ -27,9 +27,7 @@
 		<p>${cart.count }</p>
 		<p>${username }</p>
 		<p>${name }</p>
+		<p>${cart.item.name }</p>
 	</c:forEach>
-	<p>${color }</p>
-	<p>${size }</p>
-	색깔, 가격, 사이즈 등.. 가져오기?
 </body>
 </html>
