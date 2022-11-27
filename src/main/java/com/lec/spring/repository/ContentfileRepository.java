@@ -8,5 +8,5 @@ import com.lec.spring.domain.Contentfile;
 import com.lec.spring.domain.Item;
 
 public interface ContentfileRepository extends JpaRepository<Contentfile, Long> {
-
+	List<Contentfile> findByItem(Item item);
 }

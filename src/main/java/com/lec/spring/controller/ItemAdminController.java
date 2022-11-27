@@ -62,10 +62,10 @@ public class ItemAdminController {
 			@RequestParam(required=false) List<String> delsizes,
 			Item itemParam, String id, String category, String tag, Model model) {
 		int result = 0;
-		itemParam.setId(Long.parseLong(id));		
+		itemParam.setId(Long.parseLong(id));
 		itemadminService.deleteColorAndSize(delcolors, delsizes);
 		itemadminService.deletefile(itemParam, delifile, delcfile);
-		itemadminService.registerItem(itemParam, category, tag, ifile, cfile);
+		itemadminService.updateItem(id, itemParam, category, tag, ifile, cfile);
 		result = itemadminService.registerColorAndSize(itemParam, rcolors, rsizes);
 		model.addAttribute("result", result);
 		model.addAttribute("id", itemParam.getId());

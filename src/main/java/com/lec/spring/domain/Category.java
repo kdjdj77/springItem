@@ -30,7 +30,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @Entity(name = "db_category")
 @DynamicInsert
-@DynamicUpdate
+@DynamicUpdate 
 public class Category {
 	
 	@Id
@@ -50,6 +50,7 @@ public class Category {
 	@OneToMany(mappedBy ="category" , cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
+    @EqualsAndHashCode.Exclude // ItemController 에서 getMapping detail 쪽 출력해볼 때 스택오버플로우 발생
     private List<Item> items = new ArrayList<>();
 	public List<Item> getItems() {
 		List<Item> result = new ArrayList<>();

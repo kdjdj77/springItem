@@ -93,7 +93,7 @@
 							<div class="mb-3 mt-3" style="padding-right:10%;">
 								<c:forEach var="fileDto" items="${item.colors}">
 									<div class="input-group mb-2">
-										<input class="itemcolor form-control col-xs-3" type="text" readonly value="${fileDto.color}">
+										<input class="itemcolor form-control col-xs-3" type="text" readonly value="${fileDto.name}">
 										<button type="button"  class="btn btn-outline-danger" onclick="deleteColors(${fileDto.id}); $(this).parent().remove(); ">삭제</button> 
 									</div>
 								</c:forEach>

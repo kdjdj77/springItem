@@ -12,7 +12,7 @@
 	<c:otherwise>
 		<script>
 			alert("등록 성공");
-			location.href = "update?id=${id}";
+			location.href = "${pageContext.request.contextPath}/item/detail?id=${id}";
 		</script>
 	</c:otherwise>
 </c:choose>
