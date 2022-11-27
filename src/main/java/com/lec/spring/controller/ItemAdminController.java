@@ -27,6 +27,8 @@ public class ItemAdminController {
 		model.addAttribute("categoryList", itemadminService.getCategoryList());
 		return "admin/registerItem";
 	}
+	@GetMapping("/item/registerOk")
+	public String itemRegisterGet() { return "redirect:register"; }
 	@PostMapping("/item/registerOk")
 	public String itemRegisterOk(
 			@RequestParam(required=false) List<MultipartFile> ifile, 
@@ -46,6 +48,8 @@ public class ItemAdminController {
 		model.addAttribute("categoryList", itemadminService.getCategoryList());
 		return "admin/updateItem";
 	}
+	@GetMapping("/item/updateOk")
+	public String itemUpdateGet() { return "redirect:update"; }
 	@PostMapping("/item/updateOk")
 	public String itemUpdateOk(
 			@RequestParam(required=false) List<MultipartFile> ifile, 
