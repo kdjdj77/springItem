@@ -7,6 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +25,8 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Entity(name = "db_cart")
+@DynamicInsert
+@DynamicUpdate
 public class Cart extends BaseEntity{
 	
 	@Id
@@ -35,6 +41,14 @@ public class Cart extends BaseEntity{
 	@ToString.Exclude
 	private User user;
 	
-	@Column(nullable = false)
+	@ManyToOne
+	@ToString.Exclude
+	private Color color;
+	
+	@ManyToOne
+	@ToString.Exclude
+	private Size size;
+	
+	@ColumnDefault(value="1")
 	private Long count;
 }

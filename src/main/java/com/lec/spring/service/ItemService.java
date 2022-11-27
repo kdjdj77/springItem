@@ -86,13 +86,14 @@ public class ItemService {
 	}
 	
 	@Transactional
-	public void registerCart(Item id) {
+	public void registerCart(Long color_id, Long size_id, Item id) {
 		User user = U.getLoggedUser();
 		Cart cart = new Cart();
 		
 		cart.setItem(id);
 		cart.setUser(user);
-		cart.setCount(1L); // home에서 수량 값을 넘기도록 변경해야함
+		cart.setColor(colorRepository.findById(color_id).orElse(null));
+		cart.setSize(sizeRepository.findById(size_id).orElse(null));
 		cartRepository.saveAndFlush(cart);
 	}
 	

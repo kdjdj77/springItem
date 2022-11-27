@@ -70,7 +70,7 @@
 											<div class="col-sm-10">
 												<c:forEach var="color" items="${item.colors }">
 													<div class="form-check">
-														<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="${color.color }"> 
+														<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="${color.id }"> 
 														<label class="form-check-label" for="gridRadios1"> ${color.color } </label>
 													</div>
 												</c:forEach>
@@ -84,7 +84,7 @@
 											<div class="col-sm-10">
 												<c:forEach var="size" items="${item.sizes }">
 													<div class="form-check">
-														<input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios2" value="${size.name }"> 
+														<input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios2" value="${size.id }"> 
 														<label class="form-check-label" for="gridRadios2"> ${size.name } </label>
 													</div>
 												</c:forEach>

@@ -39,12 +39,10 @@ public class ItemController {
 	}
 	
 	@PostMapping("/cartOk")
-	public String itemCartOk(Long id, String color, String size, Model model) {
+	public String itemCartOk(Long id, String color, String size,
+			Long gridRadios, Long gridRadios2,  Model model) {
 		Item itemId = itemService.findByItemid(id);
-		System.out.println("itemId = "+itemId);
-		System.out.println("color = "+color);
-		System.out.println("size = "+size);
-		itemService.registerCart(itemId);
+		itemService.registerCart(gridRadios, gridRadios2, itemId);
 		return "redirect:/item/cart" ;
 	}
 	
