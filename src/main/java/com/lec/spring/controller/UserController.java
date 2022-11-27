@@ -23,13 +23,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.lec.spring.config.PrincipalDetailService;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.UserValidator;
+import com.lec.spring.repository.UserRepository;
+import com.lec.spring.service.ItemAdminService;
 import com.lec.spring.service.UserService;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 	@Autowired private UserService userService;
-	@Autowired PrincipalDetailService principalDetailService;
+	@Autowired private UserRepository userRepository;
+	@Autowired private PrincipalDetailService principalDetailService;
 
 	public UserController() {
 		System.out.println(getClass().getName() + "() 생성");
@@ -99,6 +102,8 @@ public class UserController {
 	public String userUpdate() {
 		return "user/update";
 	}
+	@GetMapping("/updateOk")
+	public String userUpdateGet() { return "redirect:update"; }
 	@PostMapping("/updateOk")
 	public String userUpdateOk(
 			String id, String name, String phonenum, 
@@ -131,6 +136,28 @@ public class UserController {
 		result = userService.deleteUser(id);
 		model.addAttribute("result", result);
 		return "user/deleteOk";
+	}
+	@GetMapping("/updatePassword")
+	public String updatePassword() {
+		return "user/updatePassword";
+	}
+	@GetMapping("/updatePasswordOk")
+	public String updatePasswordGet() { return "redirect:updatePassword"; }
+	@PostMapping("/updatePasswordOk")
+	public String updatePasswordOk(String id, String chkpassword,
+			String password, String re_password, Model model) {
+		int result = 0;
+		if (!isValidPassword(id, chkpassword)) {
+			model.addAttribute("result", result);
+			return "user/updatePasswordOk";
+		}
+		result = userService.updatePassword(id, password, re_password);
+		model.addAttribute("result", result);
+		return "user/updatePasswordOk";
+	}
+	protected boolean isValidPassword(String id, String chkpassword) {
+		User user = userRepository.findById(Long.parseLong(id)).orElse(null);
+		return principalDetailService.checkMemberPassword(chkpassword, user.getUsername());
 	}
 }
 

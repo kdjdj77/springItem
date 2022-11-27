@@ -40,7 +40,9 @@
                   <div class="profile-header-content">
                      <!-- BEGIN profile-header-info -->
                      <div class="profile-header-info mb-5">
-                        <h4 class="m-t-10 m-b-5">수정 - ${userdetails.user.name}</h4>
+                        <h4 class="m-t-10 m-b-5">
+                        	수정 - ${userdetails.user.name}
+                        </h4>
                      </div>
                      <!-- END profile-header-info -->
                   </div>

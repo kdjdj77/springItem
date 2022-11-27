@@ -45,9 +45,7 @@
                 <button type="submit" class="w-100 btn btn-lg btn-primary mt-3">등록</button>
             </form>
         </div>
-
     </div>
-    
 </body>
 </html>
 

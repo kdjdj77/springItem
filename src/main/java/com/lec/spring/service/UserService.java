@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.lec.spring.config.PrincipalDetailService;
 import com.lec.spring.domain.Authority;
 import com.lec.spring.domain.User;
 import com.lec.spring.repository.AuthorityRepository;
@@ -89,7 +90,13 @@ public class UserService {
 		userRepository.saveAndFlush(user);
 		return 1;
 	}
-	
+	public int updatePassword(String id, String password, String re_password) {
+		if (!password.equals(re_password)) return 0;
+		User user = userRepository.findById(Long.parseLong(id)).orElse(null);
+		user.setPassword(passwordEncoder.encode(password));
+		userRepository.saveAndFlush(user);
+		return 1;
+	}
 }
 
 

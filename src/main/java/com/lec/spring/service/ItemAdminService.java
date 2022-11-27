@@ -32,6 +32,7 @@ import com.lec.spring.domain.Item;
 import com.lec.spring.domain.Itemfile;
 import com.lec.spring.domain.Size;
 import com.lec.spring.domain.Tag;
+import com.lec.spring.domain.User;
 import com.lec.spring.domain.ajax.TagQryList;
 import com.lec.spring.repository.CategoryRepository;
 import com.lec.spring.repository.ColorRepository;
@@ -40,6 +41,7 @@ import com.lec.spring.repository.ItemRepository;
 import com.lec.spring.repository.ItemfileRepository;
 import com.lec.spring.repository.SizeRepository;
 import com.lec.spring.repository.TagRepository;
+import com.lec.spring.repository.UserRepository;
 import com.lec.spring.util.C;
 import com.lec.spring.util.U;
 
