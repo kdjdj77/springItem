@@ -38,13 +38,19 @@
 					<span class="carousel-control-next-icon"></span>
 				</button>
 			</div>
-
 			<div>
 				<c:forEach var="itemfiles" items="${item.itemfiles }">
 					<div>
 						<img id="small_imgSize" src="${pageContext.request.contextPath }/upload/${itemfiles.file}" alt="Chicago" class="d-block">
 					</div>
 				</c:forEach>
+				<c:if test="${item.itemfiles.size() < 5}">
+					<c:forEach var="i" begin="1" end="${5 - item.itemfiles.size()}">
+						<div>
+							<div id="small_imgSize" class="d-block"></div>
+						</div>
+					</c:forEach>
+				</c:if>
 			</div>
 		</div>
 
@@ -71,7 +77,7 @@
 												<c:forEach var="color" items="${item.colors }">
 													<div class="form-check">
 														<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="${color.id }"> 
-														<label class="form-check-label" for="gridRadios1"> ${color.color } </label>
+														<label class="form-check-label" for="gridRadios1"> ${color.name } </label>
 													</div>
 												</c:forEach>
 											</div>

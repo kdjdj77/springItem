@@ -32,7 +32,7 @@ public class Color {
 	private Long id;
 	
 	@Column(nullable = false)
-	private String color;
+	private String name;
 	
 	@ColumnDefault(value="true")
 	private Boolean isvalid;

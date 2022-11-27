@@ -127,29 +127,29 @@ public class DummyData {
 		Tag t29 = Tag.builder().category(cg11).name("양말/스타킹").build(); t29 = tagRepository.save(t29);
 // 상품
 		Item i1 = Item.builder()
-				.name("후드 레이어드 패딩점퍼").discount(1D).content("푹신해요").price(27500D)
+				.name("후드 레이어드 패딩점퍼").discount(1D).content("푹신해요").price(27500L)
 				.stock(3L).reviewcnt(3L).avgstar(4.6D).sell(5L).likecnt(3L).tag(t8)
 				.category(t8.getCategory()).build();
 		Item i2 = Item.builder()
-				.name("누빔 데일리 캐주얼 박시 패딩").discount(10D).content("따뜻해요").price(13000D)
+				.name("누빔 데일리 캐주얼 박시 패딩").discount(10D).content("따뜻해요").price(13000L)
 				.stock(5L).reviewcnt(3L).avgstar(4.3D).sell(9L).likecnt(2L).tag(t4)
 				.category(t4.getCategory()).build();
 		Item i3 = Item.builder()
-				.name("터닝 도톰 케이블 니트 집업 가디건").discount(10D).content("따뜻해요").price(33000D)
+				.name("터닝 도톰 케이블 니트 집업 가디건").discount(10D).content("따뜻해요").price(33000L)
 				.stock(23L).reviewcnt(3L).avgstar(3.5D).sell(3L).likecnt(1L).tag(t10)
 				.category(t10.getCategory()).build();
 		
 		i1 = itemRepository.save(i1); i2 = itemRepository.save(i2); i3 = itemRepository.save(i3);
 // 색상		
-		Color c1 = Color.builder().item(i1).color("red").build(); colorRepository.save(c1);
-		Color c2 = Color.builder().item(i1).color("blue").build(); colorRepository.save(c2);
-		Color c3 = Color.builder().item(i1).color("purple").build(); colorRepository.save(c3);
-		Color c4 = Color.builder().item(i2).color("green").build(); colorRepository.save(c4);
-		Color c5 = Color.builder().item(i2).color("black").build(); colorRepository.save(c5);
-		Color c6 = Color.builder().item(i2).color("white").build(); colorRepository.save(c6);
-		Color c7 = Color.builder().item(i3).color("sky").build(); colorRepository.save(c7);
-		Color c8 = Color.builder().item(i3).color("gray").build(); colorRepository.save(c8);
-		Color c9 = Color.builder().item(i3).color("pink").build(); colorRepository.save(c9);
+		Color c1 = Color.builder().item(i1).name("red").build(); colorRepository.save(c1);
+		Color c2 = Color.builder().item(i1).name("blue").build(); colorRepository.save(c2);
+		Color c3 = Color.builder().item(i1).name("purple").build(); colorRepository.save(c3);
+		Color c4 = Color.builder().item(i2).name("green").build(); colorRepository.save(c4);
+		Color c5 = Color.builder().item(i2).name("black").build(); colorRepository.save(c5);
+		Color c6 = Color.builder().item(i2).name("white").build(); colorRepository.save(c6);
+		Color c7 = Color.builder().item(i3).name("sky").build(); colorRepository.save(c7);
+		Color c8 = Color.builder().item(i3).name("gray").build(); colorRepository.save(c8);
+		Color c9 = Color.builder().item(i3).name("pink").build(); colorRepository.save(c9);
 // 사이즈		
 		Size s1 = Size.builder().item(i1).name("M").build(); sizeRepository.save(s1);
 		Size s2 = Size.builder().item(i1).name("XL").build(); sizeRepository.save(s2);
@@ -236,58 +236,58 @@ public class DummyData {
 		
 // 상품 (추가)
 		Item i4 = Item.builder()
-				.name("키아나 심플 카라 기모 맨투맨").discount(11D).content("상품소개").price(27200D)
+				.name("키아나 심플 카라 기모 맨투맨").discount(11D).content("상품소개").price(27200L)
 				.stock(30L).tag(t7).category(t7.getCategory()).build();
 		Item i5 = Item.builder()
-				.name("주디 기모 반집업 카라넥 크롭 맨투맨").discount(10D).content("상품소개").price(13100D)
+				.name("주디 기모 반집업 카라넥 크롭 맨투맨").discount(10D).content("상품소개").price(13100L)
 				.stock(35L).tag(t7).category(t7.getCategory()).build();
 		Item i6 = Item.builder()
-				.name("캔디 체크 플리스 맨투맨").discount(15D).content("상품소개").price(33500D)
+				.name("캔디 체크 플리스 맨투맨").discount(15D).content("상품소개").price(33500L)
 				.stock(23L).tag(t7).category(t7.getCategory()).build();
 		Item i7 = Item.builder()
-				.name("자수 기모 박시핏 맨투맨").discount(13D).content("상품소개").price(27600D)
+				.name("자수 기모 박시핏 맨투맨").discount(13D).content("상품소개").price(27600L)
 				.stock(38L).tag(t7).category(t7.getCategory()).build();
 		Item i8 = Item.builder()
-				.name("시그널 반집업 세미크롭 맨투맨").discount(20D).content("상품소개").price(13800D)
+				.name("시그널 반집업 세미크롭 맨투맨").discount(20D).content("상품소개").price(13800L)
 				.stock(24L).tag(t7).category(t7.getCategory()).build();
 		Item i9 = Item.builder()
-				.name("매니큐어 레터링 양기모 맨투맨").discount(13D).content("상품소개").price(43000D)
+				.name("매니큐어 레터링 양기모 맨투맨").discount(13D).content("상품소개").price(43000L)
 				.stock(27L).tag(t7).category(t7.getCategory()).build();
 		Item i10 = Item.builder()
-				.name("하티 레터링 기모 반집업").discount(5D).content("상품소개").price(37500D)
+				.name("하티 레터링 기모 반집업").discount(5D).content("상품소개").price(37500L)
 				.stock(15L).tag(t7).category(t7.getCategory()).build();
 		Item i11 = Item.builder()
-				.name("산타모니카 기모 레터링 맨투맨").discount(10D).content("상품소개").price(23000D)
+				.name("산타모니카 기모 레터링 맨투맨").discount(10D).content("상품소개").price(23000L)
 				.stock(34L).tag(t7).category(t7.getCategory()).build();
 		Item i12 = Item.builder()
-				.name("레이지 레터링 기모 맨투맨").discount(15D).content("상품소개").price(13000D)
+				.name("레이지 레터링 기모 맨투맨").discount(15D).content("상품소개").price(13000L)
 				.stock(27L).tag(t7).category(t7.getCategory()).build();
 		Item i13 = Item.builder()
-				.name("(기모)헌팅턴 레터링 맨투맨").discount(12D).content("상품소개").price(27900D)
+				.name("(기모)헌팅턴 레터링 맨투맨").discount(12D).content("상품소개").price(27900L)
 				.stock(16L).tag(t7).category(t7.getCategory()).build();
 		Item i14 = Item.builder()
-				.name("프랑스 레터링 양기모 맨투맨").discount(7D).content("상품소개").price(16000D)
+				.name("프랑스 레터링 양기모 맨투맨").discount(7D).content("상품소개").price(16000L)
 				.stock(19L).tag(t7).category(t7.getCategory()).build();
 		Item i15 = Item.builder()
-				.name("빌리지 레터링 프린팅 맨투맨").discount(10D).content("상품소개").price(18000D)
+				.name("빌리지 레터링 프린팅 맨투맨").discount(10D).content("상품소개").price(18000L)
 				.stock(24L).tag(t7).category(t7.getCategory()).build();
 		Item i16 = Item.builder()
-				.name("가브리엘 레터링 박시핏 맨투맨").discount(15D).content("상품소개").price(12500D)
+				.name("가브리엘 레터링 박시핏 맨투맨").discount(15D).content("상품소개").price(12500L)
 				.stock(20L).tag(t7).category(t7.getCategory()).build();
 		Item i17 = Item.builder()
-				.name("헤이브 크롭 플리스 맨투맨").discount(20D).content("상품소개").price(13700D)
+				.name("헤이브 크롭 플리스 맨투맨").discount(20D).content("상품소개").price(13700L)
 				.stock(36L).tag(t7).category(t7.getCategory()).build();
 		Item i18 = Item.builder()
-				.name("(양기모)캐나다 데일리 세미크롭 맨투맨").discount(10D).content("상품소개").price(33800D)
+				.name("(양기모)캐나다 데일리 세미크롭 맨투맨").discount(10D).content("상품소개").price(33800L)
 				.stock(18L).tag(t7).category(t7.getCategory()).build();
 		Item i19 = Item.builder()
-				.name("(9컬러)나인 오버핏 베이직 무지 맨투맨").discount(16D).content("상품소개").price(36800D)
+				.name("(9컬러)나인 오버핏 베이직 무지 맨투맨").discount(16D).content("상품소개").price(36800L)
 				.stock(21L).tag(t7).category(t7.getCategory()).build();
 		Item i20 = Item.builder()
-				.name("(기모추가)피어스 캐주얼 심플 레터링 맨투맨").discount(5D).content("상품소개").price(23800D)
+				.name("(기모추가)피어스 캐주얼 심플 레터링 맨투맨").discount(5D).content("상품소개").price(23800L)
 				.stock(22L).tag(t7).category(t7.getCategory()).build();
 		Item i21 = Item.builder()
-				.name("코넬 배색 기모 맨투맨").discount(10D).content("상품소개").price(13800D)
+				.name("코넬 배색 기모 맨투맨").discount(10D).content("상품소개").price(13800L)
 				.stock(15L).tag(t7).category(t7.getCategory()).build();
 		
 		i4 = itemRepository.save(i4); 	i5 = itemRepository.save(i5); 	i6 = itemRepository.save(i6);
@@ -297,24 +297,24 @@ public class DummyData {
 		i16 = itemRepository.save(i16); i17 = itemRepository.save(i17); i18 = itemRepository.save(i18);
 		i19 = itemRepository.save(i19); i20 = itemRepository.save(i20); i21 = itemRepository.save(i21);
 		
-		Color c10 = Color.builder().item(i4).color("red").build(); colorRepository.save(c10);
-		Color c11 = Color.builder().item(i5).color("blue").build(); colorRepository.save(c11);
-		Color c12 = Color.builder().item(i6).color("purple").build(); colorRepository.save(c12);
-		Color c13 = Color.builder().item(i7).color("green").build(); colorRepository.save(c13);
-		Color c14 = Color.builder().item(i8).color("black").build(); colorRepository.save(c14);
-		Color c15 = Color.builder().item(i9).color("white").build(); colorRepository.save(c15);
-		Color c16 = Color.builder().item(i10).color("sky").build(); colorRepository.save(c16);
-		Color c17 = Color.builder().item(i11).color("gray").build(); colorRepository.save(c17);
-		Color c18 = Color.builder().item(i12).color("pink").build(); colorRepository.save(c18);
-		Color c19 = Color.builder().item(i13).color("red").build(); colorRepository.save(c19);
-		Color c20 = Color.builder().item(i14).color("blue").build(); colorRepository.save(c20);
-		Color c21 = Color.builder().item(i15).color("purple").build(); colorRepository.save(c21);
-		Color c22 = Color.builder().item(i16).color("green").build(); colorRepository.save(c22);
-		Color c23 = Color.builder().item(i17).color("black").build(); colorRepository.save(c23);
-		Color c24 = Color.builder().item(i18).color("white").build(); colorRepository.save(c24);
-		Color c25 = Color.builder().item(i19).color("green").build(); colorRepository.save(c25);
-		Color c26 = Color.builder().item(i20).color("black").build(); colorRepository.save(c26);
-		Color c27 = Color.builder().item(i21).color("white").build(); colorRepository.save(c27);
+		Color c10 = Color.builder().item(i4).name("red").build(); colorRepository.save(c10);
+		Color c11 = Color.builder().item(i5).name("blue").build(); colorRepository.save(c11);
+		Color c12 = Color.builder().item(i6).name("purple").build(); colorRepository.save(c12);
+		Color c13 = Color.builder().item(i7).name("green").build(); colorRepository.save(c13);
+		Color c14 = Color.builder().item(i8).name("black").build(); colorRepository.save(c14);
+		Color c15 = Color.builder().item(i9).name("white").build(); colorRepository.save(c15);
+		Color c16 = Color.builder().item(i10).name("sky").build(); colorRepository.save(c16);
+		Color c17 = Color.builder().item(i11).name("gray").build(); colorRepository.save(c17);
+		Color c18 = Color.builder().item(i12).name("pink").build(); colorRepository.save(c18);
+		Color c19 = Color.builder().item(i13).name("red").build(); colorRepository.save(c19);
+		Color c20 = Color.builder().item(i14).name("blue").build(); colorRepository.save(c20);
+		Color c21 = Color.builder().item(i15).name("purple").build(); colorRepository.save(c21);
+		Color c22 = Color.builder().item(i16).name("green").build(); colorRepository.save(c22);
+		Color c23 = Color.builder().item(i17).name("black").build(); colorRepository.save(c23);
+		Color c24 = Color.builder().item(i18).name("white").build(); colorRepository.save(c24);
+		Color c25 = Color.builder().item(i19).name("green").build(); colorRepository.save(c25);
+		Color c26 = Color.builder().item(i20).name("black").build(); colorRepository.save(c26);
+		Color c27 = Color.builder().item(i21).name("white").build(); colorRepository.save(c27);
 	
 		Size s10 = Size.builder().item(i4).name("ONE SIZE").build(); sizeRepository.save(s10);
 		Size s11 = Size.builder().item(i5).name("ONE SIZE").build(); sizeRepository.save(s11);

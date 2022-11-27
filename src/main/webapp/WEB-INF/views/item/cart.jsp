@@ -28,7 +28,7 @@
 		<p>${username }</p>
 		<p>${name }</p>
 		<p>${cart.item.name}</p>
-		<p>${cart.color.color}</p>
+		<p>${cart.color.name}</p>
 		<p>${cart.size.name}</p>
 	</c:forEach>
 </body>
