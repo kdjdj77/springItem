@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -43,6 +44,7 @@ public class Tag {
 	@OneToMany(mappedBy ="tag" , cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
+    @EqualsAndHashCode.Exclude
     private List<Item> items = new ArrayList<>();
 	public List<Item> getItems() {
 		List<Item> result = new ArrayList<>();

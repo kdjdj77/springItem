@@ -40,6 +40,14 @@ public class Buy extends BaseEntity{
 	@ToString.Exclude
 	private User user;
 	
+	@ManyToOne
+	@ToString.Exclude
+	private Color color;
+	
+	@ManyToOne
+	@ToString.Exclude
+	private Size size;
+	
 	@ColumnDefault(value = "true")
 	private Boolean isOrder; // true이면 주문, false이면 주문취소
 	

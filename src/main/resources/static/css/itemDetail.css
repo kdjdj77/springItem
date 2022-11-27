@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+#wrap{
+	width: 1500px; 
+	height: hidden; 
+	display: flex; 
+	justify-content: space-between; 
+	margin: 0 auto;
+}
+
+#wrap_left{
+	width: 650px; 
+	height: hidden; 
+}
+
+#wrap_left > div:first-child {
+	width: 650px; 
+	height: 650px;
+}
+
+#big_imgSize{
+	width: 650px; 
+	height: 650px;
+}
+
+#wrap_left > div:last-child {
+	display: flex;
+ 	width: 650px; 
+	height: hidden; 
+	flex-wrap : wrap; 
+	padding: 5px 0;
+	margin-top: 20px; 
+	justify-content : space-between; 
+}
+
+#small_imgSize{
+	width: 120px; 
+	height: 120px; 
+	border-radius : 10px;
+}

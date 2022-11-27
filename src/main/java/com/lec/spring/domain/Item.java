@@ -20,6 +20,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -69,6 +70,7 @@ public class Item {
 	@OneToMany(mappedBy ="item" , cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
+    @EqualsAndHashCode.Exclude
     private List<Color> colors = new ArrayList<>();
 	public List<Color> getColors() {
 		List<Color> result = new ArrayList<>();
@@ -79,6 +81,7 @@ public class Item {
 	@OneToMany(mappedBy ="item" , cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
+    @EqualsAndHashCode.Exclude
     private List<Size> sizes = new ArrayList<>();
 	public List<Size> getSizes() {
 		List<Size> result = new ArrayList<>();
