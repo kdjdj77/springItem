@@ -26,19 +26,18 @@ public class ItemController {
 		return "item/detail";
 	}
 	
-	@PostMapping("/cartOk")
-	public String itemCartOk(Long id, String color, String size,
-			Long gridRadios, Long gridRadios2,  Model model) {
-		Item itemId = itemService.findByItemid(id);
-		itemService.registerCart(gridRadios, gridRadios2, itemId);
-		return "redirect:/item/cart" ;
+	@GetMapping("/cart")
+	public String itemCartOk(Model model) {
+		model.addAttribute("cartList", itemService.cartList());
+		return "item/cart";
 	}
 	
-	@GetMapping("/cart")
-	public String itemCart(Model model) {
-		
+	@PostMapping("/cart")
+	public String itemCart(Long id, Long count,
+			Long gridRadios, Long gridRadios2,  Model model) {
+		Item item = itemService.findByItemid(id);
+		itemService.registerCart(gridRadios, gridRadios2, count, item);
 		model.addAttribute("cartList", itemService.cartList());
-		
 		return "item/cart";
 	}
 	
@@ -47,6 +46,24 @@ public class ItemController {
 		
 		return "item/list";
 	}
-	
+	@GetMapping("/optionchange")
+	public String GetOptionChange() {
+		return "redirect:cart";
+	}
+	@PostMapping("/optionchange")
+	public String optionChange(Long id, Long color, Long size) {
+		if (color != null && size != null)
+			itemService.changeOption(id, color, size);
+		return "redirect:cart";
+	}
+	@GetMapping("/delCart")
+	public String GetDelCart() {
+		return "redirect:cart";
+	}
+	@PostMapping("/delCart")
+	public String PostDelCart(Long id) {
+		itemService.deleteCart(id);
+		return "redirect:cart";
+	}
 	
 }

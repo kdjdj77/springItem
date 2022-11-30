@@ -15,6 +15,8 @@ import com.lec.spring.domain.Item;
 import com.lec.spring.domain.Size;
 import com.lec.spring.domain.Tag;
 import com.lec.spring.domain.User;
+import com.lec.spring.domain.ajax.ItemCountQryList;
+import com.lec.spring.domain.ajax.TagQryList;
 import com.lec.spring.repository.CartRepository;
 import com.lec.spring.repository.CategoryRepository;
 import com.lec.spring.repository.ColorRepository;
@@ -86,7 +88,7 @@ public class ItemService {
 	}
 	
 	@Transactional
-	public void registerCart(Long color_id, Long size_id, Item id) {
+	public void registerCart(Long color_id, Long size_id, Long count, Item id) {
 		User user = U.getLoggedUser();
 		Cart cart = new Cart();
 		
@@ -94,6 +96,7 @@ public class ItemService {
 		cart.setUser(user);
 		cart.setColor(colorRepository.findById(color_id).orElse(null));
 		cart.setSize(sizeRepository.findById(size_id).orElse(null));
+		cart.setCount(count);
 		cartRepository.saveAndFlush(cart);
 	}
 	
@@ -101,6 +104,35 @@ public class ItemService {
 		User user = U.getLoggedUser();
 		
 		return cartRepository.findByUser(user);
+	}
+
+	public void changeOption(Long id, Long color, Long size) {
+		Cart cart = cartRepository.findById(id).orElse(null);
+		cart.setColor(colorRepository.findById(color).orElse(null));
+		cart.setSize(sizeRepository.findById(size).orElse(null));
+		cartRepository.saveAndFlush(cart);
+	}
+
+	public void deleteCart(Long id) {
+		Cart c = cartRepository.findById(id).orElse(null);
+		cartRepository.delete(c);
+	}
+
+	public ItemCountQryList setCountDB(Long id, Long cnt) {
+		ItemCountQryList list = new ItemCountQryList();
+		Cart cart = cartRepository.findById(id).orElse(null);
+		cart.setCount(cnt);
+		cartRepository.saveAndFlush(cart);
+		List<Cart> clist = cartRepository.findByUser(U.getLoggedUser());
+		Long t = 0L;
+		for(Cart c : clist) {
+			t += Math.round(c.getCount() * (c.getItem().getPrice() * (100-c.getItem().getDiscount()) / 100));
+		}
+		list.setCount(1);
+		list.setData(cnt);
+		list.setTotalprice(t);
+		list.setStatus("OK");
+		return list;
 	}
 	
 }
