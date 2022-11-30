@@ -15,8 +15,9 @@ import com.lec.spring.domain.Item;
 import com.lec.spring.domain.Size;
 import com.lec.spring.domain.Tag;
 import com.lec.spring.domain.User;
-import com.lec.spring.domain.ajax.ItemCountQryList;
-import com.lec.spring.domain.ajax.TagQryList;
+import com.lec.spring.domain.ajax.QryItemCount;
+import com.lec.spring.domain.ajax.QryTagList;
+import com.lec.spring.domain.ajax.QryTotalPrice;
 import com.lec.spring.repository.CartRepository;
 import com.lec.spring.repository.CategoryRepository;
 import com.lec.spring.repository.ColorRepository;
@@ -118,19 +119,26 @@ public class ItemService {
 		cartRepository.delete(c);
 	}
 
-	public ItemCountQryList setCountDB(Long id, Long cnt) {
-		ItemCountQryList list = new ItemCountQryList();
+	public QryItemCount setCountDB(Long id, Long cnt) {
+		QryItemCount list = new QryItemCount();
 		Cart cart = cartRepository.findById(id).orElse(null);
 		cart.setCount(cnt);
 		cartRepository.saveAndFlush(cart);
-		List<Cart> clist = cartRepository.findByUser(U.getLoggedUser());
-		Long t = 0L;
-		for(Cart c : clist) {
-			t += Math.round(c.getCount() * (c.getItem().getPrice() * (100-c.getItem().getDiscount()) / 100));
-		}
 		list.setCount(1);
 		list.setData(cnt);
-		list.setTotalprice(t);
+		list.setStatus("OK");
+		return list;
+	}
+
+	public QryTotalPrice getTotalPrice() {
+		QryTotalPrice list = new QryTotalPrice();
+		List<Cart> carts = cartRepository.findByUser(U.getLoggedUser());
+		Long sum = 0L;
+		for(Cart c : carts) {
+			sum += c.getCount() * Math.round(c.getItem().getPrice() - c.getItem().getPrice() * c.getItem().getDiscount() / 100);
+		}
+		list.setCount(1);
+		list.setData(sum);
 		list.setStatus("OK");
 		return list;
 	}

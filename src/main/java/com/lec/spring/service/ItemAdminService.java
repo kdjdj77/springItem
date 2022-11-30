@@ -33,7 +33,7 @@ import com.lec.spring.domain.Itemfile;
 import com.lec.spring.domain.Size;
 import com.lec.spring.domain.Tag;
 import com.lec.spring.domain.User;
-import com.lec.spring.domain.ajax.TagQryList;
+import com.lec.spring.domain.ajax.QryTagList;
 import com.lec.spring.repository.CategoryRepository;
 import com.lec.spring.repository.ColorRepository;
 import com.lec.spring.repository.ContentfileRepository;
@@ -68,9 +68,9 @@ public class ItemAdminService {
 		Category cat = categoryRepository.findByName(name);
 		return tagRepository.findByCategory(cat);
 	}
-	public TagQryList search(String category) {
+	public QryTagList search(String category) {
 		Long cat_id = Long.parseLong(category);
-		TagQryList list = new TagQryList();
+		QryTagList list = new QryTagList();
 		Category cat = categoryRepository.findById(cat_id).orElse(null);
 		List<Tag> tags = tagRepository.findByCategory(cat);
 		list.setCount(tags.size());

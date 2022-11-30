@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lec.spring.domain.ajax.ItemCountQryList;
-import com.lec.spring.domain.ajax.TagQryList;
+import com.lec.spring.domain.ajax.QryItemCount;
+import com.lec.spring.domain.ajax.QryTagList;
+import com.lec.spring.domain.ajax.QryTotalPrice;
 import com.lec.spring.service.ItemAdminService;
 import com.lec.spring.service.ItemService;
 
@@ -21,13 +22,18 @@ public class ajaxController {
 	private ItemService itemService;
 	
 	@GetMapping("/admin/item/data/tags")
-	public TagQryList itemRegister(String category, Model model) {
-		TagQryList search = itemAdminService.search(category);
+	public QryTagList itemRegister(String category) {
+		QryTagList search = itemAdminService.search(category);
 		return search;
 	}
 	@GetMapping("/item/setcount")
-	public ItemCountQryList postSetCount(Long id, Long count, Model model) {
-		ItemCountQryList data = itemService.setCountDB(id, count);
+	public QryItemCount SetCount(Long id, Long count) {
+		QryItemCount data = itemService.setCountDB(id, count);
+		return data;
+	}
+	@GetMapping("/item/getprice")
+	public QryTotalPrice getPrice() {
+		QryTotalPrice data = itemService.getTotalPrice();
 		return data;
 	}
 }
