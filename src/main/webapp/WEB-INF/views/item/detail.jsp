@@ -65,7 +65,7 @@
 									<h2 class="fw-bold">${item.name }</h2>
 								</div>
 								<br>
-								<form name="cart" action="cartOk" method="POST">
+								<form name="cart" action="cart" method="POST">
 									<span style="text-decoration: line-through;">${item.price }원</span><br>
 									<span style="font-size: 1.5rem; margin-right: 1rem; color: hotpink;">${item.discount }<span style="font-size: 1rem;">%</span></span> 
 									<span style="font-size: 1.5rem; font-weight: bold; font-weight: bold;">${item.price*(100-item.discount)/100}<span style="font-size: 1rem; font-weight: bold;">원</span></span>
@@ -76,7 +76,7 @@
 											<div class="col-sm-10">
 												<c:forEach var="color" items="${item.colors }">
 													<div class="form-check">
-														<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1_${color.id }" value="${color.id }"> 
+														<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1_${color.id }" value="${color.id }" required> 
 														<label class="form-check-label" for="gridRadios1_${color.id }"> ${color.name } </label>
 													</div>
 												</c:forEach>
@@ -90,7 +90,7 @@
 											<div class="col-sm-10">
 												<c:forEach var="size" items="${item.sizes }">
 													<div class="form-check">
-														<input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios2_${size.id }" value="${size.id }"> 
+														<input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios2_${size.id }" value="${size.id }" required> 
 														<label class="form-check-label" for="gridRadios2_${size.id }"> ${size.name } </label>
 													</div>
 												</c:forEach>
@@ -98,16 +98,15 @@
 										</div>
 									</fieldset>
 									<hr><br>
+									<div id="append"></div>
+									<br>
 									<p style="border: 1px solid black;"></p>
 									<div style="display: flex; justify-content: space-between;">
-										<div id="append">
-										
-										</div>
 										<h4>총 결제금액</h4>
-										<p>0원</p>
+										<h4 style="color: hotpink;" id="priceAppend"></h4>
 									</div>
 									<div style="width: 100%; height: 80px; display: flex; justify-content: space-between; margin: 30px 0;">
-										 <input type="hidden" name="id" value="${item.id }">
+										<input type="hidden" name="id" value="${item.id }">
 										<button type="submit" style="width: 320px; height: 80px; border-radius: 10px; line-height: 80px; text-align: center; color: white; background-color: rgb(55, 55, 55); outline : 0; border : 0; font-size: 1.5rem;">장바구니</button>
 										<button type="submit" style="width: 320px; height: 80px; border-radius: 10px; line-height: 80px; text-align: center; color: white; background-color: rgb(255, 111, 177); outline : 0; border : 0; font-size: 1.5rem;">구매하기</button>
 									</div>
@@ -136,20 +135,44 @@ $(function() {
 	$("input[name='gridRadios']").change(function(){
 		$("input[name='gridRadios2']").prop("checked", false);
 	});
+	
 	$("input[name='gridRadios2']").change(function() {
 		let color = $($("input[name='gridRadios']")).attr("id");
 		let anText = $("label[for='"+color+"']").text();
 
 		let size = $(this).attr("id");
 		let anText2 = $("label[for='"+size+"']").text();
-
-		$("#append").append(`결제금액
-				<div>${item.price}</div>
-				<div>` + anText + `</div>
-				<div>` + anText2 + `</div>
-				<button>-</button><input style="width:2rem" name="count" type="text" value="1"><button>+</button>
+		let price = ${item.price*(100-item.discount)/100}.toFixed(0);
+		$("#append").html(`
+				<div style="width: 100%; display: flex; justify-content: space-around;">
+					<div style="font-size:1.2rem; font-weight:bold;">` + anText + `/` + anText2 + `</div>
+					<div>
+						<button type="button" onclick="minus();">-</button>
+						<input style="width:2rem" id="countbox" name="count" type="text" value="1">
+						<button type="button" onclick="plus();">+</button>
+					</div>
+					<div>${item.price*(100-item.discount)/100}원</div>
+				</div><br>
 				`);
+		
+		$("#priceAppend").html(
+				${item.price*(100-item.discount)/100}.toFixed(0) + "원"
+				);
 	});
 });
+let cnt = 1;
+
+function plus() {
+	cnt++; 
+	document.getElementById("countbox").value = cnt;
+	document.getElementById("priceAppend").innerHTML = ${item.price*(100-item.discount)/100} * cnt + "원";
+}
+function minus() {
+	if (cnt > 1) {
+		cnt--;
+		document.getElementById("countbox").value = cnt;
+		document.getElementById("priceAppend").innerHTML = ${item.price*(100-item.discount)/100} * cnt + "원";
+	}
+}
 </script>
 </html>
