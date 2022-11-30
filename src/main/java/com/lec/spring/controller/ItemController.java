@@ -7,11 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.lec.spring.domain.Category;
 import com.lec.spring.domain.Item;
-import com.lec.spring.repository.ColorRepository;
-import com.lec.spring.repository.ContentfileRepository;
-import com.lec.spring.repository.ItemRepository;
-import com.lec.spring.repository.SizeRepository;
 import com.lec.spring.service.ItemService;
 
 @Controller
@@ -43,6 +40,12 @@ public class ItemController {
 		model.addAttribute("cartList", itemService.cartList());
 		
 		return "item/cart";
+	}
+	
+	@GetMapping("/list")
+	public String categoryOfTag(Category cate, Model model) {
+		
+		return "item/list";
 	}
 	
 	

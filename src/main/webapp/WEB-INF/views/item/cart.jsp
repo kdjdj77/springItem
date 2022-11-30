@@ -31,5 +31,44 @@
 		<p>${cart.color.name}</p>
 		<p>${cart.size.name}</p>
 	</c:forEach>
+	
+	<table class="table table-hover" style="width: 1000px; margin: 0 auto; border : 1px solid red;">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col"></th>
+      <th scope="col">주문상품정보</th>
+      <th scope="col">수량</th>
+      <th scope="col">가격</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td></td>
+      <td>
+      	<div>${cartList[0].item.name}</div>
+      	<div>${cartList[0].color.name } / ${cartList[0].size.name }</div>
+      	<div><input type="submit" name="changeOption" value="옵션변경" onclick="change()"><div id="appends"></div></div>
+      </td>
+      <td><div>${cartList[0].count }</div></td>
+      <td><div></div></td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>@</td>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+  </tbody>
+</table>
 </body>
+<script>
+function change() {
+		$("#appends").append(`
+			<div>동작확인</div>
+		`);
+};
+</script>
 </html>

@@ -98,13 +98,12 @@
 										</div>
 									</fieldset>
 									<hr><br>
+									<div id="append"></div>
+									<br>
 									<p style="border: 1px solid black;"></p>
 									<div style="display: flex; justify-content: space-between;">
-										<div id="append">
-										
-										</div>
 										<h4>총 결제금액</h4>
-										<p>0원</p>
+										<h4 style="color: hotpink;" id="priceAppend"></h4>
 									</div>
 									<div style="width: 100%; height: 80px; display: flex; justify-content: space-between; margin: 30px 0;">
 										 <input type="hidden" name="id" value="${item.id }">
@@ -136,6 +135,7 @@ $(function() {
 	$("input[name='gridRadios']").change(function(){
 		$("input[name='gridRadios2']").prop("checked", false);
 	});
+	
 	$("input[name='gridRadios2']").change(function() {
 		let color = $($("input[name='gridRadios']")).attr("id");
 		let anText = $("label[for='"+color+"']").text();
@@ -143,11 +143,19 @@ $(function() {
 		let size = $(this).attr("id");
 		let anText2 = $("label[for='"+size+"']").text();
 
-		$("#append").append(`결제금액
-				<div>${item.price}</div>
-				<div>` + anText + `</div>
-				<div>` + anText2 + `</div>
-				<button>-</button><input style="width:2rem" name="count" type="text" value="1"><button>+</button>
+		$("#append").append(`
+				<div style="width: 100%; display: flex; justify-content: space-around;">
+					<div style="font-size:1.2rem; font-weight:bold;">` + anText + `/` + anText2 + `</div>
+					<div>
+						<input style="width:2rem" name="count" type="text" value="1">
+						<button onclick='count("plus")'>+</button><button onclick='count("minus")'>-</button>
+					</div>
+					<div>${item.price*(100-item.discount)/100}원</div>
+				</div><br>
+				`);
+		
+		$("#priceAppend").append(`
+				${item.price*(100-item.discount)/100}원
 				`);
 	});
 });
