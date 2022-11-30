@@ -14,8 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class ItemCountQryList extends QryResult{
+public class QryItemCount extends QryResult{
 	@JsonProperty("data") //Json으로 매핑될 property name
 	Long data; //목록데이터
-	Long totalprice;
 }
