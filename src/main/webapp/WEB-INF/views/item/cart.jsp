@@ -100,14 +100,29 @@
 </body>
 <script>
 setOrder();
-function setOrder(t) {
-	let price = t;
-	let delivery = 3000;
-	let orderprice = price + delivery;
-	
-	document.getElementById("orderprice").innerHTML = orderprice;
-	document.getElementById("totalprice").innerHTML = price;
-	document.getElementById("delivery").innerHTML = delivery;
+function setOrder() {
+	const data = {};
+	$.ajax({
+		url: "getprice",
+		type: "GET",
+		data: data,
+		cache: false,
+		success: function(data, status, xhr) {
+			if (status == "success") {
+				if (data.status != "OK") {
+					alert(data.status);
+					return;
+				}
+				let price = data.data;
+				let delivery = 3000;
+				let orderprice = price + delivery;
+				
+				document.getElementById("orderprice").innerHTML = orderprice;
+				document.getElementById("totalprice").innerHTML = price;
+				document.getElementById("delivery").innerHTML = delivery;
+			}
+		},
+	});
 }
 function minus(id) {
 	let cnt = Number($("#countinput" + id).val());
@@ -133,25 +148,25 @@ function change(id) {
 };
 function setCount(cnt, id) {
 	const data = {
-			"id":id,
-			"count":cnt,
-		};
-		$.ajax({
-			url: "setcount",
-			type: "GET",
-			data: data,
-			cache: false,
-			success: function(data, status, xhr) {
-				if (status == "success") {
-					if (data.status != "OK") {
-						alert(data.status);
-						return;
-					}
-					$("#countinput" + id).val(data.data);
-					setOrder(data.totalprice);
+		"id":id,
+		"count":cnt,
+	};
+	$.ajax({
+		url: "setcount",
+		type: "GET",
+		data: data,
+		cache: false,
+		success: function(data, status, xhr) {
+			if (status == "success") {
+				if (data.status != "OK") {
+					alert(data.status);
+					return;
 				}
-			},
-		});
+				$("#countinput" + id).val(data.data);
+				setOrder();
+			}
+		},
+	});
 }
 </script>
 </html>

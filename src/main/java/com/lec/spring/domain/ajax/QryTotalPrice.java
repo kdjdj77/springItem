@@ -4,6 +4,7 @@ package com.lec.spring.domain.ajax;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.lec.spring.domain.Cart;
 import com.lec.spring.domain.Tag;
 
 import lombok.Data;
@@ -13,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class TagQryList extends QryResult{
+public class QryTotalPrice extends QryResult{
 	@JsonProperty("data") //Json으로 매핑될 property name
-	List<Tag> list; //목록데이터
+	Long data; //목록데이터
 }
