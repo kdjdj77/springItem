@@ -1,5 +1,6 @@
 package com.lec.spring.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -7,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lec.spring.domain.Buy;
 import com.lec.spring.domain.Cart;
 import com.lec.spring.domain.Category;
 import com.lec.spring.domain.Color;
@@ -16,8 +18,8 @@ import com.lec.spring.domain.Size;
 import com.lec.spring.domain.Tag;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.ajax.QryItemCount;
-import com.lec.spring.domain.ajax.QryTagList;
 import com.lec.spring.domain.ajax.QryTotalPrice;
+import com.lec.spring.repository.BuyRepository;
 import com.lec.spring.repository.CartRepository;
 import com.lec.spring.repository.CategoryRepository;
 import com.lec.spring.repository.ColorRepository;
@@ -47,6 +49,8 @@ public class ItemService {
 	private ColorRepository colorRepository;
 	@Autowired
 	private CartRepository cartRepository;
+	@Autowired
+	private BuyRepository buyRepository;
 	
 	@Transactional
 	public List<Category> categoryList() {
@@ -141,6 +145,46 @@ public class ItemService {
 		list.setData(sum);
 		list.setStatus("OK");
 		return list;
+	}
+
+	public Category getCategoryById(Long id) {
+		Category c = categoryRepository.findById(id).get();
+		return c;
+	}
+
+	public Tag getTagById(Long id) {
+		Tag t = tagRepository.findById(id).get();
+		return t;
+	}
+	
+	public List<Buy> getCartPayment() {
+		User user = U.getLoggedUser();
+		List<Buy> b = new ArrayList<>();
+		List<Cart> list = cartRepository.findByUser(user);
+		System.out.println("list 에 담긴거 확인 " +list);
+		for(Cart cart : list) {
+			Buy buy = new Buy();
+			buy.setColor(cart.getColor());
+			buy.setCount(cart.getCount());
+			buy.setItem(cart.getItem());
+			buy.setSize(cart.getSize());
+			buy.setUser(user);
+			buyRepository.saveAndFlush(buy);
+			b.add(buy);			
+		}
+		return b;
+	}
+
+	public void deleteCartAll() {
+		cartRepository.deleteAll();	
+	}
+
+	public Buy getItemPayment(Long id) {
+		Item item = itemRepository.findById(id).orElse(null);
+		Buy buy = new Buy();
+		buy.setColor(item.getColors().get(0));
+		System.out.println("item.getColors().get(0) : "+item.getColors().get(0));
+		return buy;
 	}
 	
 }

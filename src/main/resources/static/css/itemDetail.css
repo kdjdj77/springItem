@@ -38,3 +38,38 @@
 	height: 120px; 
 	border-radius : 10px;
 }
+
+/* 이미지들 */
+
+.sub_wrap{
+	width:1500px; 
+	height:auto; 
+	display:flex; 
+	flex-wrap:wrap; 
+	margin: 0 auto;
+}
+
+#container_wrap{
+	width: 340px; 
+	height: 405px; margin-bottom: 30px;
+}
+
+#card_box{
+	margin-bottom: 20px;
+} 
+
+#card_box > img:first-child {
+	width: 253px; 
+	height: 253px; 
+	object-fit: fill;
+}
+
+#card_box p{
+	 white-space: nowrap; 
+	 overflow: hidden; 
+	 text-overflow: ellipsis;
+}
+
+#discolor > li:first-child > span{
+	color: hotpink;
+}

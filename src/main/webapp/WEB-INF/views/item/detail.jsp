@@ -108,7 +108,9 @@
 									<div style="width: 100%; height: 80px; display: flex; justify-content: space-between; margin: 30px 0;">
 										<input type="hidden" name="id" value="${item.id }">
 										<button type="submit" style="width: 320px; height: 80px; border-radius: 10px; line-height: 80px; text-align: center; color: white; background-color: rgb(55, 55, 55); outline : 0; border : 0; font-size: 1.5rem;">장바구니</button>
-										<button type="submit" style="width: 320px; height: 80px; border-radius: 10px; line-height: 80px; text-align: center; color: white; background-color: rgb(255, 111, 177); outline : 0; border : 0; font-size: 1.5rem;">구매하기</button>
+										<button type="button" 
+										style="width: 320px; height: 80px; border-radius: 10px; line-height: 80px; text-align: center; color: white; background-color: rgb(255, 111, 177); outline : 0; border : 0; font-size: 1.5rem;" 
+										onclick="payment(${item.id })">구매하기</button>
 									</div>
 								</form>
 							</div>
@@ -173,6 +175,13 @@ function minus() {
 		document.getElementById("countbox").value = cnt;
 		document.getElementById("priceAppend").innerHTML = ${item.price*(100-item.discount)/100} * cnt + "원";
 	}
+}
+
+function payment(id) {
+
+	alert('결제완료');
+	location.href = "buy?id="+id;	
+	
 }
 </script>
 </html>

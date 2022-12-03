@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lec.spring.domain.Category;
 import com.lec.spring.domain.Item;
+import com.lec.spring.domain.Tag;
 import com.lec.spring.service.ItemService;
 
 @Controller
@@ -42,10 +43,21 @@ public class ItemController {
 	}
 	
 	@GetMapping("/list")
-	public String categoryOfTag(Category cate, Model model) {
+	public String tagList(Long category,Long tag, Model model) {
+		if(category != null) {
+			Category c = itemService.getCategoryById(category);
+			model.addAttribute("category", c);		
+			return "item/list";
+		}
 		
+		if(tag != null) {
+			Tag t = itemService.getTagById(tag);
+			model.addAttribute("tag", t);
+			return "item/list";
+		}
 		return "item/list";
 	}
+	
 	@GetMapping("/optionchange")
 	public String GetOptionChange() {
 		return "redirect:cart";
@@ -64,6 +76,20 @@ public class ItemController {
 	public String PostDelCart(Long id) {
 		itemService.deleteCart(id);
 		return "redirect:cart";
+	}
+	
+	@GetMapping("/buy")
+	public String getPayment(Long id, Model model) {
+		
+		if(id == null) {
+			model.addAttribute("buyList",itemService.getCartPayment());
+			itemService.deleteCartAll();
+			return "item/buy";			
+		}
+		
+		model.addAttribute("buy", itemService.getItemPayment(id));
+		
+		return "item/buy";
 	}
 	
 }

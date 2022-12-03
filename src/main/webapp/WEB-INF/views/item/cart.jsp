@@ -30,7 +30,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<jsp:include page="/WEB-INF/views/common/header2.jsp" />	
 	<div style="width:1300px;"class="container mb-5 d-flex flex-wrap">
-		<table class="table table-hover" style="width: 800px; margin: 0 auto; border : 1px solid red;">
+		<table class="table table-hover" style="width: 800px; margin: 0 auto;">
 		  <thead>
 		    <tr>
 		      <th scope="col"></th>
@@ -91,10 +91,10 @@
 		  </tbody>
 		</table>
 		<div>
-			결제금액<span id="orderprice"></span><span>원</span><br>
+			결제금액<span id="orderprice" name="orderprice"></span><span>원</span><br>
 			총 상품금액<span id="totalprice"></span><span>원</span><br>
 			배송비<span id="delivery"></span><span>원</span><br>
-			<button class="btn btn-outline-dark">주문하기</button>
+			<button class="btn btn-outline-dark" onclick="payment()">주문하기</button>
 		</div>
 	</div>
 </body>
@@ -168,5 +168,13 @@ function setCount(cnt, id) {
 		},
 	});
 }
+
+function payment() {
+
+	alert('결제완료');
+	location.href = "buy";	
+	
+}
+
 </script>
 </html>
