@@ -94,7 +94,9 @@
 			결제금액<span id="orderprice" name="orderprice"></span><span>원</span><br>
 			총 상품금액<span id="totalprice"></span><span>원</span><br>
 			배송비<span id="delivery"></span><span>원</span><br>
-			<button class="btn btn-outline-dark" onclick="payment()">주문하기</button>
+			<form action="buy" method="post">
+				<button class="btn btn-outline-dark">주문하기</button>
+			</form>
 		</div>
 	</div>
 </body>
@@ -167,13 +169,6 @@ function setCount(cnt, id) {
 			}
 		},
 	});
-}
-
-function payment() {
-
-	alert('결제완료');
-	location.href = "buy";	
-	
 }
 
 </script>

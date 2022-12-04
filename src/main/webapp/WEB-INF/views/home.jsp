@@ -88,7 +88,6 @@
       </div>
       <div class="swiper-button-next me-5"></div>
       <div class="swiper-button-prev ms-5"></div>
-      <div class="swiper-pagination"></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>

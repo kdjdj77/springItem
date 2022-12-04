@@ -64,7 +64,7 @@ public class ItemService {
 	
 	@Transactional
 	public List<Item> itemList() {
-		return itemRepository.findTop30ByIsvalidOrderByIdDesc(true);
+		return itemRepository.findTop20ByIsvalidOrderByIdDesc(true);
 	}
 	
 	@Transactional
@@ -157,11 +157,9 @@ public class ItemService {
 		return t;
 	}
 	
-	public List<Buy> getCartPayment() {
+	public int getCartPayment() {
 		User user = U.getLoggedUser();
-		List<Buy> b = new ArrayList<>();
 		List<Cart> list = cartRepository.findByUser(user);
-		System.out.println("list 에 담긴거 확인 " +list);
 		for(Cart cart : list) {
 			Buy buy = new Buy();
 			buy.setColor(cart.getColor());
@@ -170,21 +168,43 @@ public class ItemService {
 			buy.setSize(cart.getSize());
 			buy.setUser(user);
 			buyRepository.saveAndFlush(buy);
-			b.add(buy);			
+			
+			Item item = cart.getItem();
+			item.setStock(item.getStock() - cart.getCount());
+			item.setSell(item.getSell() + cart.getCount());
+			itemRepository.saveAndFlush(item);
 		}
-		return b;
+		return 1;
 	}
 
 	public void deleteCartAll() {
 		cartRepository.deleteAll();	
 	}
 
-	public Buy getItemPayment(Long id) {
-		Item item = itemRepository.findById(id).orElse(null);
+	public int directCart(Long id, Long color, Long size, Long count) {
+		User user = U.getLoggedUser();
+		Item i = itemRepository.findById(id).orElse(null);
+		Color c = colorRepository.findById(color).orElse(null);
+		Size s = sizeRepository.findById(size).orElse(null);
+		
 		Buy buy = new Buy();
-		buy.setColor(item.getColors().get(0));
-		System.out.println("item.getColors().get(0) : "+item.getColors().get(0));
-		return buy;
+		buy.setUser(user);
+		buy.setItem(i);
+		buy.setColor(c);
+		buy.setSize(s);
+		buy.setCount(count);
+		buyRepository.saveAndFlush(buy);
+		
+		i.setStock(i.getStock() - count);
+		i.setSell(i.getSell() + count);
+		itemRepository.saveAndFlush(i);
+		
+		return 1;
+	}
+
+	public List<Buy> getBuyList() {
+		User user = U.getLoggedUser();
+		return buyRepository.findByUserOrderByIdDesc(user);
 	}
 	
 }

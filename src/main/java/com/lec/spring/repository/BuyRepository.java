@@ -8,5 +8,6 @@ import com.lec.spring.domain.Buy;
 import com.lec.spring.domain.User;
 
 public interface BuyRepository extends JpaRepository<Buy, Long> {
-	List<Buy> findByUser(User u);
+
+	List<Buy> findByUserOrderByIdDesc(User user);
 }
