@@ -41,6 +41,7 @@
         		<td class="border-end border-dark p-1 ps-3" style="width:10rem">태그</td>
         		<td class="border-end border-dark p-1 ps-3" style="width:7rem">가격</td>
         		<td class="border-end border-dark p-1 ps-3" style="width:6rem">재고</td>
+        		<td class="border-end border-dark p-1 ps-3" style="width:6rem">판매</td>
         		<td class="border-end border-dark p-1 ps-3" style="width:6rem">할인</td>
         		<td style="width:10rem" class="ps-3">총 개수 : ${cnt}개</td>
         	</tr>
@@ -52,6 +53,7 @@
 	        		<td class="border-end border-dark p-3">${item.tag.name}</td>
 	        		<td class="border-end border-dark p-3">${item.price}￦</td>
 	        		<td class="border-end border-dark p-3">${item.stock}개</td>
+	        		<td class="border-end border-dark p-3">${item.sell}개</td>
 	        		<td class="border-end border-dark p-3">${item.discount}%</td>
 	        		<td class="px-3">
 	        			<a href="update?id=${item.id}" class="btn btn-warning">수정</a>

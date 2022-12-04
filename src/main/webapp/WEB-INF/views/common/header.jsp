@@ -38,6 +38,7 @@
 		</div>
 		<a class="ps-3" href="#"><i class="fa-regular fa-heart"></i></a>
 		<a class="pe-3" href="${pageContext.request.contextPath}/item/cart"><i class="fa-solid fa-bag-shopping"></i></a>
+		<a class="pe-3" href="${pageContext.request.contextPath}/item/buy"><i class="fa-solid fa-ticket"></i></a>
 		<!-- 로그인 안했을때는 로그인 form 보여주기 -->
 		<sec:authorize access="isAnonymous()">
 		<a class="btn btn-outline-dark float-end mt-1 fw-bold mx-1" type="submit" href="${pageContext.request.contextPath}/user/register">SignUp</a>

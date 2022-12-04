@@ -7,9 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.lec.spring.domain.Cart;
 import com.lec.spring.domain.Category;
 import com.lec.spring.domain.Item;
+import com.lec.spring.domain.Tag;
+import com.lec.spring.domain.User;
 import com.lec.spring.service.ItemService;
+import com.lec.spring.util.U;
 
 @Controller
 @RequestMapping("/item")
@@ -33,19 +37,30 @@ public class ItemController {
 	}
 	
 	@PostMapping("/cart")
-	public String itemCart(Long id, Long count,
-			Long gridRadios, Long gridRadios2,  Model model) {
+	public String itemCart(Long id, Long cnt,
+			Long col, Long siz,  Model model) {
 		Item item = itemService.findByItemid(id);
-		itemService.registerCart(gridRadios, gridRadios2, count, item);
+		itemService.registerCart(col, siz, cnt, item);
 		model.addAttribute("cartList", itemService.cartList());
 		return "item/cart";
 	}
 	
 	@GetMapping("/list")
-	public String categoryOfTag(Category cate, Model model) {
+	public String tagList(Long category,Long tag, Model model) {
+		if(category != null) {
+			Category c = itemService.getCategoryById(category);
+			model.addAttribute("category", c);		
+			return "item/list";
+		}
 		
+		if(tag != null) {
+			Tag t = itemService.getTagById(tag);
+			model.addAttribute("tag", t);
+			return "item/list";
+		}
 		return "item/list";
 	}
+	
 	@GetMapping("/optionchange")
 	public String GetOptionChange() {
 		return "redirect:cart";
@@ -65,5 +80,28 @@ public class ItemController {
 		itemService.deleteCart(id);
 		return "redirect:cart";
 	}
-	
+	@GetMapping("/buy")
+	public String buyGet(Model model) {
+		model.addAttribute("buyList", itemService.getBuyList());
+		return "item/buy";
+	}
+	@PostMapping("/buy")
+	public String getPayment(Model model) {
+		int result = 0;
+		result = itemService.getCartPayment();
+		itemService.deleteCartAll();
+		model.addAttribute("result", result);
+		return "item/buyOk";
+	}
+	@GetMapping("/buydirect")
+	public String buyDirectGet(Long id) {
+		return "redirect:detail?id=" + id;
+	}
+	@PostMapping("/buydirect")
+	public String getDirectPayment(Long id, Long col2, Long siz2, Long cnt2, Model model) {
+		int result = 0;
+		result = itemService.directCart(id, col2, siz2, cnt2);
+		model.addAttribute("result", result);
+		return "item/buyOk";
+	}	
 }

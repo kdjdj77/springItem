@@ -88,7 +88,6 @@
       </div>
       <div class="swiper-button-next me-5"></div>
       <div class="swiper-button-prev ms-5"></div>
-      <div class="swiper-pagination"></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
@@ -97,23 +96,21 @@
 	<div class="sub_wrap">
 		<c:forEach var="i" items="${itemList}">
 			<div class="container" id="container_wrap">
-				<form action="reserv" method="POST">
-					<div class="row">
-						<div id="card_box">
-							<a href="item/detail?id=${i.id }">
-								<img src="${pageContext.request.contextPath }/upload/${i.itemfiles[0].file}" class="card-img-top">
-							</a>
-							<div class="card-body">
-								<p class="card-title">${i.name }</p>
-							</div>
-							<ul class="list-group list-group-flush" id="discolor">
-								<li class="list-group-item"><span style="font-size:0.9rem; margin-right:1rem;">${i.discount }%</span> ${i.price*(100-i.discount)/100}원</li>
-								<li class="list-group-item"></li>
-							</ul>
-							<input type="hidden" name="itemId" value="${i.id }">
+				<div class="row">
+					<div id="card_box">
+						<a href="item/detail?id=${i.id }">
+							<img src="${pageContext.request.contextPath }/upload/${i.itemfiles[0].file}" class="card-img-top">
+						</a>
+						<div class="card-body">
+							<p class="card-title">${i.name }</p>
 						</div>
+						<ul class="list-group list-group-flush" id="discolor">
+							<li class="list-group-item"><span style="font-size:0.9rem; margin-right:1rem;">${i.discount }%</span> ${i.price*(100-i.discount)/100}원</li>
+							<li class="list-group-item"></li>
+						</ul>
+						<input type="hidden" name="itemId" value="${i.id }">
 					</div>
-				</form>
+				</div>
 			</div>
 		</c:forEach>
 	</div>
