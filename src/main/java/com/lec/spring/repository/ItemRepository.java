@@ -12,7 +12,7 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
 	Page<Item> findByIsvalidAndNameContaining(boolean b, String search, PageRequest of);
 	
-	List<Item> findTop30ByIsvalidOrderByIdDesc(boolean b);
+	List<Item> findTop20ByIsvalidOrderByIdDesc(boolean b);
 	
 	Item findByIsvalidAndId(boolean b, Long id);
 	

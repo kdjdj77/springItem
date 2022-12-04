@@ -65,52 +65,64 @@
 									<h2 class="fw-bold">${item.name }</h2>
 								</div>
 								<br>
-								<form name="cart" action="cart" method="POST">
-									<span style="text-decoration: line-through;">${item.price }원</span><br>
-									<span style="font-size: 1.5rem; margin-right: 1rem; color: hotpink;">${item.discount }<span style="font-size: 1rem;">%</span></span> 
-									<span style="font-size: 1.5rem; font-weight: bold; font-weight: bold;">${item.price*(100-item.discount)/100}<span style="font-size: 1rem; font-weight: bold;">원</span></span>
-									<hr>
-									<fieldset class="form-group">
-										<div class="row">
-											<p class="col-form-label col-sm-2 pt-0">색상</p>
-											<div class="col-sm-10">
-												<c:forEach var="color" items="${item.colors }">
-													<div class="form-check">
-														<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1_${color.id }" value="${color.id }" required> 
-														<label class="form-check-label" for="gridRadios1_${color.id }"> ${color.name } </label>
-													</div>
-												</c:forEach>
-											</div>
+								<span style="text-decoration: line-through;">${item.price }원</span><br>
+								<span style="font-size: 1.5rem; margin-right: 1rem; color: hotpink;">${item.discount }<span style="font-size: 1rem;">%</span></span> 
+								<span style="font-size: 1.5rem; font-weight: bold; font-weight: bold;">${item.price*(100-item.discount)/100}<span style="font-size: 1rem; font-weight: bold;">원</span></span>
+								<hr>
+								<fieldset class="form-group">
+									<div class="row">
+										<p class="col-form-label col-sm-2 pt-0">색상</p>
+										<div class="col-sm-10">
+											<c:forEach var="color" items="${item.colors }">
+												<div class="form-check">
+													<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1_${color.id }" value="${color.id }" required> 
+													<label class="form-check-label" for="gridRadios1_${color.id }"> ${color.name } </label>
+												</div>
+											</c:forEach>
 										</div>
-									</fieldset>
-									<hr>
-									<fieldset class="form-group">
-										<div class="row">
-											<p class="col-form-label col-sm-2 pt-0">사이즈</p>
-											<div class="col-sm-10">
-												<c:forEach var="size" items="${item.sizes }">
-													<div class="form-check">
-														<input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios2_${size.id }" value="${size.id }" required> 
-														<label class="form-check-label" for="gridRadios2_${size.id }"> ${size.name } </label>
-													</div>
-												</c:forEach>
-											</div>
+									</div>
+								</fieldset>
+								<hr>
+								<fieldset class="form-group">
+									<div class="row">
+										<p class="col-form-label col-sm-2 pt-0">사이즈</p>
+										<div class="col-sm-10">
+											<c:forEach var="size" items="${item.sizes }">
+												<div class="form-check">
+													<input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios2_${size.id }" value="${size.id }" required> 
+													<label class="form-check-label" for="gridRadios2_${size.id }"> ${size.name } </label>
+												</div>
+											</c:forEach>
 										</div>
-									</fieldset>
-									<hr><br>
-									<div id="append"></div>
-									<br>
-									<p style="border: 1px solid black;"></p>
-									<div style="display: flex; justify-content: space-between;">
-										<h4>총 결제금액</h4>
-										<h4 style="color: hotpink;" id="priceAppend"></h4>
 									</div>
-									<div style="width: 100%; height: 80px; display: flex; justify-content: space-between; margin: 30px 0;">
-										<input type="hidden" name="id" value="${item.id }">
-										<button type="submit" style="width: 320px; height: 80px; border-radius: 10px; line-height: 80px; text-align: center; color: white; background-color: rgb(55, 55, 55); outline : 0; border : 0; font-size: 1.5rem;">장바구니</button>
-										<button type="submit" style="width: 320px; height: 80px; border-radius: 10px; line-height: 80px; text-align: center; color: white; background-color: rgb(255, 111, 177); outline : 0; border : 0; font-size: 1.5rem;">구매하기</button>
-									</div>
-								</form>
+								</fieldset>
+								<hr><br>
+								<div id="append">
+								
+								</div>
+								<br>
+								<p style="border: 1px solid black;"></p>
+								<div style="display: flex; justify-content: space-between;">
+									<h4>총 결제금액</h4>
+									<h4 style="color: hotpink;" id="priceAppend"></h4>
+								</div>
+								<div style="width: 100%; height: 80px; display: flex; justify-content: space-between; margin: 30px 0;">
+									<input type="hidden" name="id" value="${item.id }">
+									
+									<form id="cartsubmit" action="cart" method="post">
+										<input type="hidden" name="id" value="${item.id}">
+										<input type="hidden" name="col" value="">
+										<input type="hidden" name="siz" value="">
+										<input type="hidden" name="cnt" value="">
+										<button style="width: 320px; height: 80px; border-radius: 10px; line-height: 80px; text-align: center; color: white; background-color: rgb(55, 55, 55); outline : 0; border : 0; font-size: 1.5rem;" onclick="return payment();">장바구니</button>
+									</form>
+									<form id="directsubmit" action="buydirect?id=${item.id}" method="post">
+										<input type="hidden" name="col2" value="">
+										<input type="hidden" name="siz2" value="">
+										<input type="hidden" name="cnt2" value="">
+										<button style="width: 320px; height: 80px; border-radius: 10px; line-height: 80px; text-align: center; color: white; background-color: rgb(255, 111, 177); outline : 0; border : 0; font-size: 1.5rem;" onclick="return payment2();">구매하기</button>
+									</form>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -173,6 +185,24 @@ function minus() {
 		document.getElementById("countbox").value = cnt;
 		document.getElementById("priceAppend").innerHTML = ${item.price*(100-item.discount)/100} * cnt + "원";
 	}
+}
+function payment() {
+	if ($("input[name='gridRadios']").val() == null || $("input[name='gridRadios']").val() == "") return false;
+	if ($("input[name='gridRadios2']").val() == null || $("input[name='gridRadios2']").val() == "") return false;
+	if ($("input[name='count']").val() == null || $("input[name='count']").val() == "") return false;
+	$("input[name='col']").val($("input[name='gridRadios']").val());
+	$("input[name='siz']").val($("input[name='gridRadios2']").val());
+	$("input[name='cnt']").val($("input[name='count']").val());
+	return true;
+}
+function payment2() {
+	if ($("input[name='gridRadios']").val() == null || $("input[name='gridRadios']").val() == "") return false;
+	if ($("input[name='gridRadios2']").val() == null || $("input[name='gridRadios2']").val() == "") return false;
+	if ($("input[name='count']").val() == null || $("input[name='count']").val() == "") return false;
+	$("input[name='col2']").val($("input[name='gridRadios']").val());
+	$("input[name='siz2']").val($("input[name='gridRadios2']").val());
+	$("input[name='cnt2']").val($("input[name='count']").val());
+	return true;
 }
 </script>
 </html>

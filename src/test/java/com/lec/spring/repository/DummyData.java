@@ -227,12 +227,18 @@ public class DummyData {
 		Like l5 = Like.builder().user(user2).item(i2).build(); likeRepository.save(l5);
 		Like l6 = Like.builder().user(user1).item(i3).build(); likeRepository.save(l6);
 // 구매내역
-		Buy b1 = Buy.builder().user(user1).item(i1).count(1L).build(); buyRepository.save(b1);
-		Buy b2 = Buy.builder().user(user1).item(i2).count(2L).build(); buyRepository.save(b2);
-		Buy b3 = Buy.builder().user(user1).item(i3).count(1L).build(); buyRepository.save(b3);
-		Buy b4 = Buy.builder().user(user2).item(i1).count(2L).build(); buyRepository.save(b4);
-		Buy b5 = Buy.builder().user(user2).item(i2).count(3L).build(); buyRepository.save(b5);
-		Buy b6 = Buy.builder().user(user2).item(i3).count(5L).build(); buyRepository.save(b6);
+		Buy b1 = Buy.builder().user(user1).item(i1).count(1L).color(c1)
+				.size(s1).build(); buyRepository.save(b1);
+		Buy b2 = Buy.builder().user(user1).item(i2).count(2L).color(c4)
+				.size(s4).build(); buyRepository.save(b2);
+		Buy b3 = Buy.builder().user(user1).item(i3).count(1L).color(c7)
+				.size(s7).build(); buyRepository.save(b3);
+		Buy b4 = Buy.builder().user(user2).item(i1).count(2L).color(c1)
+				.size(s1).build(); buyRepository.save(b4);
+		Buy b5 = Buy.builder().user(user2).item(i2).count(3L).color(c4)
+				.size(s4).build(); buyRepository.save(b5);
+		Buy b6 = Buy.builder().user(user2).item(i3).count(5L).color(c7)
+				.size(s7).build(); buyRepository.save(b6);
 		
 // 상품 (추가)
 		Item i4 = Item.builder()

@@ -1,5 +1,6 @@
 package com.lec.spring.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -7,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lec.spring.domain.Buy;
 import com.lec.spring.domain.Cart;
 import com.lec.spring.domain.Category;
 import com.lec.spring.domain.Color;
@@ -16,8 +18,8 @@ import com.lec.spring.domain.Size;
 import com.lec.spring.domain.Tag;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.ajax.QryItemCount;
-import com.lec.spring.domain.ajax.QryTagList;
 import com.lec.spring.domain.ajax.QryTotalPrice;
+import com.lec.spring.repository.BuyRepository;
 import com.lec.spring.repository.CartRepository;
 import com.lec.spring.repository.CategoryRepository;
 import com.lec.spring.repository.ColorRepository;
@@ -47,6 +49,8 @@ public class ItemService {
 	private ColorRepository colorRepository;
 	@Autowired
 	private CartRepository cartRepository;
+	@Autowired
+	private BuyRepository buyRepository;
 	
 	@Transactional
 	public List<Category> categoryList() {
@@ -60,7 +64,7 @@ public class ItemService {
 	
 	@Transactional
 	public List<Item> itemList() {
-		return itemRepository.findTop30ByIsvalidOrderByIdDesc(true);
+		return itemRepository.findTop20ByIsvalidOrderByIdDesc(true);
 	}
 	
 	@Transactional
@@ -141,6 +145,66 @@ public class ItemService {
 		list.setData(sum);
 		list.setStatus("OK");
 		return list;
+	}
+
+	public Category getCategoryById(Long id) {
+		Category c = categoryRepository.findById(id).get();
+		return c;
+	}
+
+	public Tag getTagById(Long id) {
+		Tag t = tagRepository.findById(id).get();
+		return t;
+	}
+	
+	public int getCartPayment() {
+		User user = U.getLoggedUser();
+		List<Cart> list = cartRepository.findByUser(user);
+		for(Cart cart : list) {
+			Buy buy = new Buy();
+			buy.setColor(cart.getColor());
+			buy.setCount(cart.getCount());
+			buy.setItem(cart.getItem());
+			buy.setSize(cart.getSize());
+			buy.setUser(user);
+			buyRepository.saveAndFlush(buy);
+			
+			Item item = cart.getItem();
+			item.setStock(item.getStock() - cart.getCount());
+			item.setSell(item.getSell() + cart.getCount());
+			itemRepository.saveAndFlush(item);
+		}
+		return 1;
+	}
+
+	public void deleteCartAll() {
+		cartRepository.deleteAll();	
+	}
+
+	public int directCart(Long id, Long color, Long size, Long count) {
+		User user = U.getLoggedUser();
+		Item i = itemRepository.findById(id).orElse(null);
+		Color c = colorRepository.findById(color).orElse(null);
+		Size s = sizeRepository.findById(size).orElse(null);
+		
+		Buy buy = new Buy();
+		buy.setUser(user);
+		buy.setItem(i);
+		buy.setColor(c);
+		buy.setSize(s);
+		buy.setCount(count);
+		buyRepository.saveAndFlush(buy);
+		
+		i.setStock(i.getStock() - count);
+		i.setSell(i.getSell() + count);
+		itemRepository.saveAndFlush(i);
+		
+		return 1;
+	}
+
+	public List<Buy> getBuyList() {
+		User user = U.getLoggedUser();
+		return buyRepository.findByUserOrderByIdDesc(user);
 	}
 	
 }
