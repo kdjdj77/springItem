@@ -38,4 +38,14 @@ public class BaseEntity {
 		if(this.regDate == null) return "";
 		return this.regDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));		
 	}	
+	@JsonIgnore
+	public String getRegDateTimeMonth() {
+		if(this.regDate == null) return "";
+		return this.regDate.format(DateTimeFormatter.ofPattern("yyyy-MM"));		
+	}	
+	@JsonIgnore
+	public String getRegDateTimeYear() {
+		if(this.regDate == null) return "";
+		return this.regDate.format(DateTimeFormatter.ofPattern("yyyy"));		
+	}
 }
