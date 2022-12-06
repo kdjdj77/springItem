@@ -103,16 +103,4 @@
 		</c:otherwise>
 	</c:choose>
 </body>
-<script>
-$(function(){
-	$('a').click(function(){
-		$('a').removeClass();
-			$(this).addClass('on');
-	})
-})
-
-$(".redText").on("click", function (e) {
-     $(this).css("color", "red");
-});
-</script>
 </html>

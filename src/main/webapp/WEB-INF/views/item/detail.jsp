@@ -17,6 +17,20 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <link href="/css/itemDetail.css" rel="stylesheet">
 <title>Insert title here</title>
+<style>
+		input[type=radio]{
+		    display: none;
+		}
+		input[type=radio]+label{
+		    border:1px solid black;
+		}
+		input[type=radio]:checked+label{
+		    border:2px solid hotpink;
+		}
+		input[type=radio]+label:hover{
+		    cursor : pointer;
+		}
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -202,5 +216,6 @@ function payment2() {
 	$("input[name='cnt2']").val($("input[name='count']").val());
 	return true;
 }
+
 </script>
 </html>
