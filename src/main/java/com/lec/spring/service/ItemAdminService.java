@@ -7,6 +7,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -25,6 +30,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.lec.spring.domain.Buy;
 import com.lec.spring.domain.Category;
 import com.lec.spring.domain.Color;
 import com.lec.spring.domain.Contentfile;
@@ -34,6 +40,7 @@ import com.lec.spring.domain.Size;
 import com.lec.spring.domain.Tag;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.ajax.QryTagList;
+import com.lec.spring.repository.BuyRepository;
 import com.lec.spring.repository.CategoryRepository;
 import com.lec.spring.repository.ColorRepository;
 import com.lec.spring.repository.ContentfileRepository;
@@ -55,6 +62,8 @@ public class ItemAdminService {
 	@Autowired private ContentfileRepository contentfileRepository;
 	@Autowired private ColorRepository colorRepository;
 	@Autowired private SizeRepository sizeRepository;
+	@Autowired private BuyRepository buyRepository;
+	@Autowired private UserRepository userRepository;
 	@Autowired ServletContext context;
 	@Value("${app.upload.path}") private String uploadDir;
 	
@@ -181,6 +190,92 @@ public class ItemAdminService {
 		item.setIsvalid(false);
 		itemRepository.saveAndFlush(item);
 		return 1;
+	}
+	public String getMonthRev() {
+		List<Buy> list = buyRepository.findAll();
+		LocalDate now = LocalDate.now();
+		String m = now.format(DateTimeFormatter.ofPattern("yyyy-MM"));
+		Long answer = 0L;
+		for(Buy a : list) {
+			if (a.getRegDateTimeMonth().equals(m)) {
+				answer += buyPrice(a);
+			}
+		}
+		String res = answer.toString().replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
+		return res;
+	}
+	public String getYearRev() {
+		List<Buy> list = buyRepository.findAll();
+		LocalDate now = LocalDate.now();
+		String m = now.format(DateTimeFormatter.ofPattern("yyyy"));
+		Long answer = 0L;
+		for(Buy a : list) {
+			if (a.getRegDateTimeYear().equals(m)) {
+				answer += buyPrice(a);
+			}
+		}
+		String res = answer.toString().replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
+		return res;
+	}
+	public String getMemberCnt() {
+		List<User> list = userRepository.findByIsvalid(true);
+		String res = Integer.toString(list.size());
+		return res.replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
+	}
+	public String getItemCnt() {
+		List<Item> list = itemRepository.findByIsvalid(true);
+		String res = Integer.toString(list.size());
+		return res.replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
+	}
+	public List<Long> getChartList() {
+		List<Long> list = new ArrayList<>();
+		for(int i = 1; i <= 12; i++) list.add(calcMonthRev(i));
+		return list;
+	}
+	private Long calcMonthRev(int mon) {
+		List<Buy> list = buyRepository.findAll();
+		LocalDate now = LocalDate.now();
+		String y = now.format(DateTimeFormatter.ofPattern("yyyy-"));
+		String m = y + String.format("%02d", mon);
+		Long answer = 0L;
+		for(Buy a : list) {
+			if (a.getRegDateTimeMonth().equals(m)) {
+				answer += buyPrice(a);
+			}
+		}
+		return answer;
+	}
+	public String[][] getrankList() {
+		String[][] res = new String[10][2];
+		HashMap<String, Long> map = new HashMap<>();
+		List<Buy> list = buyRepository.findAll();
+		List<Tag> cList = tagRepository.findAll();
+		for(Tag a : cList) {
+			Long ans = 0L;
+			for(Buy b : list) {
+				if (b.getItem().getTag() == a) ans += buyPrice(b);
+			}
+			map.put(a.getName(), ans);
+		}
+		for(int i = 0; i < 7; i++) {
+			String maxString = "";
+			Long max = 0L;
+			for(String a : map.keySet()) {
+				if (map.get(a) > max) {
+					max = map.get(a);
+					maxString = a;
+				}
+			}
+			res[i][0] = maxString;
+			res[i][1] = max.toString().replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
+			map.put(maxString, 0L);
+		}
+		return res;
+	}
+	private Long buyPrice(Buy a) {
+		Long price = a.getItem().getPrice();
+		price = Math.round(price - price * a.getItem().getDiscount() / 100);
+		return price * a.getCount();
 	}
 	
 	

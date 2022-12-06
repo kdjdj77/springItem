@@ -88,4 +88,14 @@ public class ItemAdminController {
 		model.addAttribute("result", result);
 		return "admin/deleteOk";
 	}
+	@GetMapping("/item/manage")
+	public String manageItem(Model model) {
+		model.addAttribute("box_month", itemadminService.getMonthRev());
+		model.addAttribute("box_year", itemadminService.getYearRev());
+		model.addAttribute("box_member", itemadminService.getMemberCnt());
+		model.addAttribute("box_item", itemadminService.getItemCnt());
+		model.addAttribute("ChartList", itemadminService.getChartList());
+		model.addAttribute("rankList", itemadminService.getrankList());
+		return "admin/manage";
+	}
 }

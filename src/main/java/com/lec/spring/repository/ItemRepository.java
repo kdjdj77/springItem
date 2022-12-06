@@ -15,5 +15,7 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 	List<Item> findTop20ByIsvalidOrderByIdDesc(boolean b);
 	
 	Item findByIsvalidAndId(boolean b, Long id);
+
+	List<Item> findByIsvalid(boolean b);
 	
 }
