@@ -18,6 +18,18 @@
 <link href="/css/itemDetail.css" rel="stylesheet">
 <title>Insert title here</title>
 <style>
+   	.like{
+		font-size:2.3rem;
+		text-shadow: 2px 2px 6px gray;
+		position:absolute; 
+		bottom:3px; 
+		right:8px; 
+		z-index:5;
+		transition:0.2s;
+	}
+	.like:hover{font-size:2.5rem; cursor:pointer;}
+	.like-ok{color:hotpink;}
+	.like-no{color:white;}
 </style>
 </head>
 <body>
@@ -45,9 +57,23 @@
 					<div class="container" id="container_wrap">
 						<div class="row">
 							<div id="card_box">
-								<a href="${pageContext.request.contextPath}/item/detail?id=${tagItem.id}">
-									<img src="${pageContext.request.contextPath }/upload/${tagItem.itemfiles[0].file}" class="card-img-top">
-								</a>
+								<div style="position:relative;">
+									<a href="${pageContext.request.contextPath}/item/detail?id=${tagItem.id}">
+										<img src="${pageContext.request.contextPath }/upload/${tagItem.itemfiles[0].file}" class="card-img-top">
+									</a>
+									<c:choose>
+										<c:when test="${likeList.contains(tagItem)}">
+											<div class="like like-ok" id="${tagItem.id}" onclick="clickLike(this);">
+												<i class="fa-solid fa-heart"></i>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<div class="like like-no" id="${tagItem.id}" onclick="clickLike(this);">
+												<i class="fa-solid fa-heart"></i>
+											</div>
+										</c:otherwise>
+									</c:choose>
+								</div>
 								<div class="card-body">
 									<p class="card-title redText">${tagItem.name }</p>	
 								</div>																													
@@ -89,9 +115,23 @@
 					<div class="container" id="container_wrap">
 						<div class="row">
 							<div id="card_box">
-								<a href="${pageContext.request.contextPath}/item/detail?id=${cateItem.id}">
-									<img src="${pageContext.request.contextPath }/upload/${cateItem.itemfiles[0].file}" class="card-img-top">
-								</a>
+								<div style="position:relative;">
+									<a href="${pageContext.request.contextPath}/item/detail?id=${cateItem.id}">
+										<img src="${pageContext.request.contextPath }/upload/${cateItem.itemfiles[0].file}" class="card-img-top">
+									</a>
+									<c:choose>
+										<c:when test="${likeList.contains(cateItem)}">
+											<div class="like like-ok" id="${cateItem.id}" onclick="clickLike(this);">
+												<i class="fa-solid fa-heart"></i>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<div class="like like-no" id="${cateItem.id}" onclick="clickLike(this);">
+												<i class="fa-solid fa-heart"></i>
+											</div>
+										</c:otherwise>
+									</c:choose>
+								</div>
 								<div class="card-body">
 									<p class="card-title">${cateItem.name }</p>
 								</div>
@@ -108,9 +148,33 @@
 		</c:otherwise>
 	</c:choose>
 </body>
+<sec:authorize access="isAuthenticated()">
 <script>
-$(".redColor").on("click", function (e) {
-     $(this).css("color", "red");
-});
+	function clickLike(e) {
+		const id = $(e).attr('id');
+		const data = { "itemId":id, };
+		$.ajax({
+			url: "data/likecontrol",
+			type: "GET",
+			data: data,
+			cache: false,
+			success: function(data, status, xhr) {
+				if (status == "success") {
+					if (data.status != "OK") return;
+					$(e).toggleClass("like-no");
+					$(e).toggleClass("like-ok");
+				}
+			},
+		});	
+	}
 </script>
+</sec:authorize>
+<sec:authorize access="isAnonymous()">
+<script>
+	function clickLike(e) {
+		alert("로그인 후 이용가능합니다");
+		return;
+	}
+</script>
+</sec:authorize>
 </html>

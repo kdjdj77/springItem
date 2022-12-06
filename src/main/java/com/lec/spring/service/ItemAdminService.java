@@ -10,6 +10,7 @@ import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -36,9 +37,11 @@ import com.lec.spring.domain.Color;
 import com.lec.spring.domain.Contentfile;
 import com.lec.spring.domain.Item;
 import com.lec.spring.domain.Itemfile;
+import com.lec.spring.domain.Like;
 import com.lec.spring.domain.Size;
 import com.lec.spring.domain.Tag;
 import com.lec.spring.domain.User;
+import com.lec.spring.domain.ajax.QryResult;
 import com.lec.spring.domain.ajax.QryTagList;
 import com.lec.spring.repository.BuyRepository;
 import com.lec.spring.repository.CategoryRepository;
@@ -46,6 +49,7 @@ import com.lec.spring.repository.ColorRepository;
 import com.lec.spring.repository.ContentfileRepository;
 import com.lec.spring.repository.ItemRepository;
 import com.lec.spring.repository.ItemfileRepository;
+import com.lec.spring.repository.LikeRepository;
 import com.lec.spring.repository.SizeRepository;
 import com.lec.spring.repository.TagRepository;
 import com.lec.spring.repository.UserRepository;
@@ -64,6 +68,7 @@ public class ItemAdminService {
 	@Autowired private SizeRepository sizeRepository;
 	@Autowired private BuyRepository buyRepository;
 	@Autowired private UserRepository userRepository;
+	@Autowired private LikeRepository likeRepository;
 	@Autowired ServletContext context;
 	@Value("${app.upload.path}") private String uploadDir;
 	
@@ -276,6 +281,68 @@ public class ItemAdminService {
 		Long price = a.getItem().getPrice();
 		price = Math.round(price - price * a.getItem().getDiscount() / 100);
 		return price * a.getCount();
+	}
+	public List<Item> getSearchList(Integer page, String search, Integer sort, Model model) {
+		if(page == null) page = 1; if(page < 1) page = 1;
+		HttpSession session = U.getSession();
+		Integer writePages = C.LIST_PAGES;
+		Integer pageRows = C.PAGE_ROWS;
+		session.setAttribute("page", page);
+		
+		String[] sList = {"id", "likecnt", "sell", "price"}; String s = sList[sort];
+		Page<Item> pageWrites;
+		if (sort != 3) pageWrites = itemRepository.findByIsvalidAndNameContaining(true, search, PageRequest.of(page - 1, pageRows, Sort.by(Order.desc(s))));
+		else pageWrites = itemRepository.findByIsvalidAndNameContaining(true, search, PageRequest.of(page - 1, pageRows, Sort.by(Order.asc(s))));
+		
+		long cnt = pageWrites.getTotalElements();   // 글 목록 전체의 개수
+		int totalPage = pageWrites.getTotalPages(); //총 몇 '페이지' 분량인가?
+		if(page > totalPage) page = totalPage;   // 페이지 보정
+		int startPage = ((int)((page - 1) / writePages) * writePages) + 1;
+		int endPage = startPage + writePages - 1;
+		if (endPage >= totalPage) endPage = totalPage;
+		model.addAttribute("cnt", cnt);  // 전체 글 개수
+		model.addAttribute("page", page); // 현재 페이지
+		model.addAttribute("totalPage", totalPage);  // 총 페이지 수
+		model.addAttribute("pageRows", pageRows);  // 한 페이지 에 표시할 글 개수
+		model.addAttribute("url", U.getRequest().getRequestURI());  // 목록 url
+		model.addAttribute("writePages", writePages); // 페이징 에 표시할 숫자 개수
+		model.addAttribute("startPage", startPage);  // 페이징 에 표시할 시작 페이지
+		model.addAttribute("endPage", endPage);   // 페이징 에 표시할 마지막 페이지
+		List<Item> list = pageWrites.getContent();
+		return list;
+	}
+	public List<Item> getLikeList() {
+		List<Item> list = new ArrayList<Item>();
+		User u;
+		try{ u = U.getLoggedUser(); }
+		catch (Exception e){ return null; }
+		
+		List<Like> likeList = likeRepository.findByUser(u);
+		for(Like a : likeList) {
+			list.add(a.getItem());
+		}
+		return list;
+	}
+	public QryResult likecontrol(Long itemId) {
+		User u = U.getLoggedUser();
+		Item i = itemRepository.findById(itemId).orElse(null);
+		Like l = likeRepository.findByUserAndItem(u, i);
+		if (l == null) {
+			l = new Like();
+			l.setItem(i);
+			l.setUser(u);
+			likeRepository.saveAndFlush(l);
+			i.setLikecnt(i.getLikecnt() + 1);
+			itemRepository.saveAndFlush(i);
+		} else {
+			likeRepository.delete(l);
+			i.setLikecnt(i.getLikecnt() - 1);
+			itemRepository.saveAndFlush(i);
+		}
+		QryResult list = new QryResult();
+		list.setCount(1);
+		list.setStatus("OK");
+		return list;
 	}
 	
 	
