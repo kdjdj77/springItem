@@ -35,12 +35,11 @@
 				style="display: flex; width: 1000px; height: 80px; text-align: center; margin: 0 auto;">
 				<c:forEach var="c" items="${tag.category.tags }">
 					<li style="list-style: none; width: 20%;">
-						<a href="${pageContext.request.contextPath}/item/list?tag=${c.id}" style="font-size: 1.2rem; font-weight: bold;">${c.name}</a>
+						<a href="${pageContext.request.contextPath}/item/list?tag=${c.id}" style="font-size: 1.2rem; font-weight: bold;" class="redColor">${c.name}</a>
 					</li>
 				</c:forEach>
 			</ul>
 			<hr>
-
 			<div class="sub_wrap">
 				<c:forEach var="tagItem" items="${tag.items}">
 					<div class="container" id="container_wrap">
@@ -50,7 +49,7 @@
 									<img src="${pageContext.request.contextPath }/upload/${tagItem.itemfiles[0].file}" class="card-img-top">
 								</a>
 								<div class="card-body">
-									<p class="card-title redText" >${tagItem.name }</p>	
+									<p class="card-title redText">${tagItem.name }</p>	
 								</div>																													
 								<ul class="list-group list-group-flush" id="discolor">
 									<li class="list-group-item"><span style="font-size:0.9rem; margin-right:1rem;">${tagItem.discount }%</span> ${tagItem.price*(100-tagItem.discount)/100} 원</li>
@@ -78,7 +77,13 @@
 					</li>
 				</c:forEach>
 			</ul>
-			<hr>
+			<hr><br>
+			<div style="width: 400px; display: flex; margin-left: auto; padding-right: 20px;">
+				<a href="${pageContext.request.contextPath}/item/orderByList?category=${category.id}&orby=0" style="width: 100px; text-align: center; font-weight: bold; color : hotpink;">최신순</a>
+				<a href="${pageContext.request.contextPath}/item/orderByList?category=${category.id}&orby=1" style="width: 100px; text-align: center; font-weight: bold; color : hotpink;">좋아요순</a>
+				<a href="${pageContext.request.contextPath}/item/orderByList?category=${category.id}&orby=2" style="width: 100px; text-align: center; font-weight: bold; color : hotpink;">판매량순</a>
+				<a href="${pageContext.request.contextPath}/item/orderByList?category=${category.id}&orby=3" style="width: 100px; text-align: center; font-weight: bold; color : hotpink;">낮은가격순</a>
+			</div><br>
 			<div class="sub_wrap">
 				<c:forEach var="cateItem" items="${category.items}">
 					<div class="container" id="container_wrap">
@@ -103,4 +108,9 @@
 		</c:otherwise>
 	</c:choose>
 </body>
+<script>
+$(".redColor").on("click", function (e) {
+     $(this).css("color", "red");
+});
+</script>
 </html>

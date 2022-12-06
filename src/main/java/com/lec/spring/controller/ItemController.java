@@ -61,6 +61,31 @@ public class ItemController {
 		return "item/list";
 	}
 	
+	@GetMapping("/orderByList")
+	public String orderByList(Long category, Long orby, Model model) {
+		if(orby == 0) { // 최신순
+			Category c = itemService.latestList(category);
+			model.addAttribute("category", c);
+			return "item/orderByList";
+		}
+		if(orby == 1) { // 좋아요순
+			Category c = itemService.likeList(category);
+			model.addAttribute("category", c);
+			return "item/orderByList";
+		}
+		if(orby == 2) { // 판매량순
+			Category c = itemService.salesList(category);
+			model.addAttribute("category", c);
+			return "item/orderByList";
+		}
+		if(orby == 3) { // 낮은가격순
+			Category c = itemService.lowpriceList(category);
+			model.addAttribute("category", c);
+			return "item/orderByList";
+		}
+		return "item/orderByList";
+	}
+	
 	@GetMapping("/optionchange")
 	public String GetOptionChange() {
 		return "redirect:cart";
