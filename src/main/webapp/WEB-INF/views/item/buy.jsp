@@ -17,20 +17,43 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <link href="/css/itemDetail.css" rel="stylesheet">
 <title>Insert title here</title>
+<style>
+table {
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<jsp:include page="/WEB-INF/views/common/header2.jsp" />
-	
-	<h2>구매내역</h2>
-	
+	<div>
+		<div style="width: 200px; margin: 0 auto; color: hotpink; font-size : 2.5rem; font-weight: bold;">구매내역</div>
+	</div>
+	<table style="width: 1000px; margin : 30px auto;">
 	<c:forEach var="buy" items="${buyList }">
-		<p>${buy.item.name }</p>
-		<img src="${pageContext.request.contextPath }/upload/${buy.item.itemfiles[0].file }" class="card-img-top" style="width:100px; height:100px;">
-		<p>${buy.count }</p>
-		<p>${buy.color.name }</p>
-		<p>${buy.size.name }</p>
-		<hr>
+	<tr style="border: 2px solid pink;">
+		<td><img src="${pageContext.request.contextPath }/upload/${buy.item.itemfiles[0].file }" class="img-thumbnail" style="width: 150px; height: 150px; margin-right : 30px;"></td>
+		<td style="width: 300px;">
+			<div>
+				<p><b>${buy.item.name }</b></p>
+				<p>개수 : ${buy.count }EA</p>
+				<p>색상 : ${buy.color.name }</p>
+				<p>사이즈 : ${buy.size.name }</p>
+				<p>가격 : ${buy.item.discountPrice * buy.count }원</p>
+			</div>
+		</td>
+		<td>
+			<div class="card border-light" style="width: 450px; height: 150px;">
+			  <div class="card-header">구매확정</div>
+			  <div class="card-body">
+			    <p class="card-text">구매가 완료되었습니다. 이용해주셔서 감사합니다. 상품의 이용방법, 반품 등에 대한 문의는 판매자에게 문의해주세요.</p>
+			  </div>
+			</div>
+		</td>
+	</tr>
+	<tr style="height: 30px;"></tr>
 	</c:forEach>
+	</table>
 </body>
 </html>

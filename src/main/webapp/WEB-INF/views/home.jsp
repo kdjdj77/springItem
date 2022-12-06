@@ -102,10 +102,10 @@
 							<img src="${pageContext.request.contextPath }/upload/${i.itemfiles[0].file}" class="card-img-top">
 						</a>
 						<div class="card-body">
-							<p class="card-title">${i.name }</p>
+							<p class="card-title"><a href="item/detail?id=${i.id }" style="text-decoration : none; color: black;">${i.name }</a></p>
 						</div>
 						<ul class="list-group list-group-flush" id="discolor">
-							<li class="list-group-item"><span style="font-size:0.9rem; margin-right:1rem;">${i.discount }%</span> ${i.price*(100-i.discount)/100}원</li>
+							<li class="list-group-item"><span style="font-size:0.9rem; margin-right:1rem;">${i.discount }%</span>${(i.price*(100-i.discount)/100) - (i.price*(100-i.discount)/100 % 100)}원</li>
 							<li class="list-group-item"></li>
 						</ul>
 						<input type="hidden" name="itemId" value="${i.id }">
@@ -115,6 +115,9 @@
 		</c:forEach>
 	</div>
 </body>
+<script>
+
+</script>
 </html>
  
 
