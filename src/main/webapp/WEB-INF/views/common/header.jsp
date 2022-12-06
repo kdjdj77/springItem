@@ -28,17 +28,17 @@
 <body>
 	<header class="fs-3 px-3 fw-bold" style="font-family: 'Nanum Gothic', sans-serif;">
 		<span class="fs-3 float-start ps-3" style="padding-right:10%;">
-			<a href="${pageContext.request.contextPath}/home">TEST</a>
+			<a href="${pageContext.request.contextPath}/home">BIMBO</a>
 		</span>
 		<div class="px-4 float-start" style="margin-top:1px; border-radius:25px; border:2px solid black;">
-			<form id="searchForm" action="${pageContext.request.contextPath}/item/search" method="GET">
+			<form id="searchForm" action="${pageContext.request.contextPath}/item/search?sort=0" method="GET">
 				<input class="fs-4" style="border:0px;" type="text" name="search">
 				<i style="cursor:pointer" id="listSearch" class="fa-solid fa-magnifying-glass"></i>
 			</form>
 		</div>
-		<a class="ps-3" href="#"><i class="fa-regular fa-heart"></i></a>
-		<a class="pe-3" href="${pageContext.request.contextPath}/item/cart"><i class="fa-solid fa-bag-shopping"></i></a>
-		<a class="pe-3" href="${pageContext.request.contextPath}/item/buy"><i class="fa-solid fa-ticket"></i></a>
+		<a class="ps-3" href="javascript:void(0);" onclick="toLikeList();"><i class="fa-regular fa-heart"></i></a>
+		<a class="pe-2" href="${pageContext.request.contextPath}/item/cart"><i class="fa-solid fa-bag-shopping"></i></a>
+		<a class="pe-1" href="${pageContext.request.contextPath}/item/buy"><i class="fa-solid fa-ticket"></i></a>
 		<!-- 로그인 안했을때는 로그인 form 보여주기 -->
 		<sec:authorize access="isAnonymous()">
 		<a class="btn btn-outline-dark float-end mt-1 fw-bold mx-1" type="submit" href="${pageContext.request.contextPath}/user/register">SignUp</a>
@@ -49,8 +49,8 @@
 		<form class="float-end mt-1" action="${pageContext.request.contextPath}/user/logout" method="POST">
 			<!--TODO : 로그아웃후 다시 돌아오기 -->
 			<span class="d-flex">
-				<span class="text-dark fs-6 p-2">
-					<span style="margin-top:-5px;">${userdetails.user.name}(${username})</span>
+				<span class="text-dark fs-6 p-1">
+					<span>${userdetails.user.name}(${username})</span>
 					<span><a style="font-size:1.3rem; color:black;" href="${pageContext.request.contextPath}/user/userinfo"><i class="fa-solid fa-gear"></i></a></span>
 				</span> 
 				<span><button class="btn btn-outline-dark mb-1 fw-bold" type="submit">Logout</button></span>
@@ -58,8 +58,8 @@
 		</form>
 		</sec:authorize>
 		<sec:authorize access="hasRole('ADMIN')">
-			<a class="nav-link active float-end fs-5" href="${pageContext.request.contextPath }/admin/item/manage">대시보드</a>
-			<a class="nav-link active float-end fs-5" href="${pageContext.request.contextPath }/admin/item/list">관리</a>
+			<a class="nav-link active float-end fs-5 p-2" href="${pageContext.request.contextPath }/admin/item/list"><i class="fa-solid fa-list-check"></i></a>
+			<a class="nav-link active float-end fs-5 p-2" href="${pageContext.request.contextPath }/admin/item/manage"><i class="fa-solid fa-chart-line"></i></a>
         </sec:authorize>
 	</header>
 	<script>
@@ -69,6 +69,21 @@
 			searchForm.submit();
 		}
 	</script>
+	<sec:authorize access="isAuthenticated()">
+		<script>
+			function toLikeList() {
+				location.href="${pageContext.request.contextPath}/item/like";
+			}
+		</script>
+	</sec:authorize>
+	<sec:authorize access="isAnonymous()">
+		<script>
+			function toLikeList() {
+				alert("로그인 후 이용가능합니다");
+				return;
+			}
+		</script>
+	</sec:authorize>
 	<div style="height:100px;"></div>
 </body>
 </html>

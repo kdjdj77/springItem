@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.authorizeRequests()
 			// URL과 접근권한 세팅(들)
 			// ↓ /board/detail/** 주소로 들어오는 요청은 '인증'만 필요.
-			.antMatchers("/item/cart", "/item/buydirect", "/item/buy").authenticated()
+			.antMatchers("/item/cart", "/item/buydirect", "/item/buy", "/item/like").authenticated()
 			// ↓ /board/write/** /board/update/** /board/delete/** 주소로 들어오는 요청은 '인증' 뿐 아니라 ROLE_MEMBER 나 ROLE_ADMIN 권한을 갖고 있어야 한다 ('인가')
 			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 			// ↓ 그 밖의 다른 요청은 모두 permit! (위 주소들만 아니면 누구나 접근 가능!)

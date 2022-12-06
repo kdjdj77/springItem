@@ -12,6 +12,7 @@ import com.lec.spring.domain.Category;
 import com.lec.spring.domain.Item;
 import com.lec.spring.domain.Tag;
 import com.lec.spring.domain.User;
+import com.lec.spring.service.ItemAdminService;
 import com.lec.spring.service.ItemService;
 import com.lec.spring.util.U;
 
@@ -21,6 +22,8 @@ public class ItemController {
 
 	@Autowired
 	private ItemService itemService;
+	@Autowired
+	private ItemAdminService itemAdminService;
 	
 	@GetMapping("/detail")
 	public String itemDetail(String id, Model model) {
@@ -47,6 +50,7 @@ public class ItemController {
 	
 	@GetMapping("/list")
 	public String tagList(Long category,Long tag, Model model) {
+		model.addAttribute("likeList", itemAdminService.getLikeList());
 		if(category != null) {
 			Category c = itemService.getCategoryById(category);
 			model.addAttribute("category", c);		
