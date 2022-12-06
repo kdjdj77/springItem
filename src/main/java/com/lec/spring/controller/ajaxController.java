@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lec.spring.domain.ajax.QryItemCount;
+import com.lec.spring.domain.ajax.QryResult;
 import com.lec.spring.domain.ajax.QryTagList;
 import com.lec.spring.domain.ajax.QryTotalPrice;
 import com.lec.spring.service.ItemAdminService;
@@ -35,5 +36,9 @@ public class ajaxController {
 	public QryTotalPrice getPrice() {
 		QryTotalPrice data = itemService.getTotalPrice();
 		return data;
+	}
+	@GetMapping("/item/data/likecontrol")
+	public QryResult likecontrol(Long itemId) {
+		return itemAdminService.likecontrol(itemId);
 	}
 }

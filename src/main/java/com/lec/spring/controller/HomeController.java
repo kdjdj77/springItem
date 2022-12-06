@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lec.spring.service.ItemAdminService;
 import com.lec.spring.service.ItemService;
 
 @Controller
@@ -16,10 +17,13 @@ public class HomeController {
 	
 	@Autowired
 	private ItemService itemService;
+	@Autowired
+	private ItemAdminService itemAdminService;
 	
 	@RequestMapping("/home")
 	public void home(Model model) {
 		model.addAttribute("itemList", itemService.itemList());
+		model.addAttribute("likeList", itemAdminService.getLikeList());
 	}
 	
 	// 현재 로그인한(인증된) 정보 Authentication 보기
