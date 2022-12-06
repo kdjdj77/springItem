@@ -139,7 +139,7 @@ public class ItemService {
 		List<Cart> carts = cartRepository.findByUser(U.getLoggedUser());
 		Long sum = 0L;
 		for(Cart c : carts) {
-			sum += c.getCount() * Math.round(c.getItem().getPrice() - c.getItem().getPrice() * c.getItem().getDiscount() / 100);
+			sum += c.getCount() * c.getItem().getDiscountPrice();
 		}
 		list.setCount(1);
 		list.setData(sum);

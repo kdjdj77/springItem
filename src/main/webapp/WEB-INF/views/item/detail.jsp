@@ -67,8 +67,8 @@
 								<br>
 								<span style="text-decoration: line-through;">${item.price }원</span><br>
 								<span style="font-size: 1.5rem; margin-right: 1rem; color: hotpink;">${item.discount }<span style="font-size: 1rem;">%</span></span> 
-								<span style="font-size: 1.5rem; font-weight: bold; font-weight: bold;">${item.price*(100-item.discount)/100}<span style="font-size: 1rem; font-weight: bold;">원</span></span>
-								<hr>
+								<span style="font-size: 1.5rem; font-weight: bold; font-weight: bold;">${(item.price*(100-item.discount)/100) - (item.price*(100-item.discount)/100 % 100)}<span style="font-size: 1rem; font-weight: bold;">원</span></span>
+								<hr>													
 								<fieldset class="form-group">
 									<div class="row">
 										<p class="col-form-label col-sm-2 pt-0">색상</p>
@@ -133,11 +133,9 @@
 	<br><br><br><br><br><hr>
 	<div style="width: 1000px; height: hidden; margin: 0 auto;">
 		<img src="${pageContext.request.contextPath }/upload/test1.jpg" alt="..">
-		<img style="margin: 30px 0;" src="${pageContext.request.contextPath }/upload/test2.jpg" alt="..">
-		<img style="margin: 30px 0;" src="${pageContext.request.contextPath }/upload/test3.jpg" alt="..">
-		<img style="margin: 30px 0;" src="${pageContext.request.contextPath }/upload/test4.jpg" alt="..">
-		<img style="margin: 30px 0;" src="${pageContext.request.contextPath }/upload/test5.jpg" alt="..">
-		<img style="margin: 30px 0;" src="${pageContext.request.contextPath }/upload/test6.jpg" alt="..">
+		<c:forEach var="contentfile" items="${item.contentfiles }">
+			<img style="margin: 30px 0;" src="${pageContext.request.contextPath }/upload/${contentfile.file}" alt="..">
+		</c:forEach>
 	</div>
 	
 	<br><br><br><br><br>	
@@ -154,21 +152,21 @@ $(function() {
 
 		let size = $(this).attr("id");
 		let anText2 = $("label[for='"+size+"']").text();
-		let price = ${item.price*(100-item.discount)/100}.toFixed(0);
+		let price = ${(item.price*(100-item.discount)/100) - (item.price*(100-item.discount)/100 % 100)}.toFixed(0);
 		$("#append").html(`
 				<div style="width: 100%; display: flex; justify-content: space-around;">
 					<div style="font-size:1.2rem; font-weight:bold;">` + anText + `/` + anText2 + `</div>
-					<div>
-						<button type="button" onclick="minus();">-</button>
-						<input style="width:2rem" id="countbox" name="count" type="text" value="1">
-						<button type="button" onclick="plus();">+</button>
+					<div style="width: 200px; height: 40px; display:flex;">
+						<button type="button" class="btn btn-outline-dark" onclick="minus();">-</button>
+						<input style="width:2rem; height: 40px; text-align:center;" id="countbox" name="count" type="text" value="1">
+						<button type="button" class="btn btn-outline-dark" onclick="plus();">+</button>
 					</div>
-					<div>${item.price*(100-item.discount)/100}원</div>
+					<div>${(item.price*(100-item.discount)/100) - (item.price*(100-item.discount)/100 % 100)}원</div>
 				</div><br>
 				`);
 		
 		$("#priceAppend").html(
-				${item.price*(100-item.discount)/100}.toFixed(0) + "원"
+				${(item.price*(100-item.discount)/100) - (item.price*(100-item.discount)/100 % 100)}.toFixed(0) + "원"
 				);
 	});
 });
@@ -177,13 +175,13 @@ let cnt = 1;
 function plus() {
 	cnt++; 
 	document.getElementById("countbox").value = cnt;
-	document.getElementById("priceAppend").innerHTML = ${item.price*(100-item.discount)/100} * cnt + "원";
+	document.getElementById("priceAppend").innerHTML = ${(item.price*(100-item.discount)/100) - (item.price*(100-item.discount)/100 % 100)} * cnt + "원";
 }
 function minus() {
 	if (cnt > 1) {
 		cnt--;
 		document.getElementById("countbox").value = cnt;
-		document.getElementById("priceAppend").innerHTML = ${item.price*(100-item.discount)/100} * cnt + "원";
+		document.getElementById("priceAppend").innerHTML = ${(item.price*(100-item.discount)/100) - (item.price*(100-item.discount)/100 % 100)} * cnt + "원";
 	}
 }
 function payment() {

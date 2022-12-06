@@ -35,8 +35,8 @@
 		    <tr>
 		      <th scope="col"></th>
 		      <th scope="col">주문상품정보</th>
-		      <th scope="col">수량</th>
-		      <th scope="col">가격</th>
+		      <th scope="col" style="text-align: center;">수량</th>
+		      <th scope="col" style="text-align: center;">가격</th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -47,19 +47,19 @@
 			  </td>
 		      <td>
 		      	<div>${cart.item.name}</div>
-		      	<div>${cart.color.name}/${cart.size.name}</div>
+		      	<div>${cart.color.name} / ${cart.size.name}</div><br>
 		      	<div>
 		      		<form action="optionchange" method="post">
 		      			<input type="hidden" name="id" value="${cart.id}">
-			      		<input id="optionChange" type="button" name="changeOption" value="옵션변경" onclick="change(${cart.id})">
-			      		<div id="appends${cart.id}" class="d-none">
-			      			<select name="color">
+			      		<input class="btn btn-outline-dark" id="optionChange" type="button" name="changeOption" value="옵션변경" onclick="change(${cart.id})">
+			      		<div id="appends${cart.id}" class="d-none" style="margin-top : 15px;">
+			      			<select name="color" style="width: 70px; height: 30px;">
 				      			<option value="">-선택-</option>
 				      			<c:forEach var="color" items="${cart.item.colors}">
 				      				<option value="${color.id}">${color.name}</option>
 				      			</c:forEach>
 			      			</select>
-			      			<select name="size">
+			      			<select name="size" style="width: 70px; height: 30px;">
 				      			<option value="">-선택-</option>
 				      			<c:forEach var="size" items="${cart.item.sizes}">
 				      				<option value="${size.id}">${size.name}</option>
@@ -72,18 +72,23 @@
 		      	</div>
 		      </td>
 		      <td>
-		      	<button type="button" onclick="minus(${cart.id});">-</button>
-		      	<input style="width:2rem;" id="countinput${cart.id}" name="count" value="${cart.count}" readonly>
-		      	<button type="button" onclick="plus(${cart.id});">+</button>
+		     	<div style="width: 100px; height: 40px; display : flex; margin-right: 30px; margin-top : 50px;">
+		      	<button type="button" class="btn btn-outline-primary" onclick="minus(${cart.id});">-</button>
+		      	<input style="width:3rem; height: 38px; text-align: center;" id="countinput${cart.id}" name="count" value="${cart.count}" readonly>
+		      	<button type="button" class="btn btn-outline-success" onclick="plus(${cart.id});">+</button>
+		      	</div>
+		      	
 		      </td>
-		      <td><div>
+		      <td>
+		      	<div style="width: 90px; height: 50px; margin-top : 50px; margin-right:20px; text-align:right;">
 			      <span style="text-decoration: line-through;">${cart.item.price}원</span><br>
-				  <span class="prices">${Math.round(cart.item.price*(100-cart.item.discount)/100)}</span><span>원</span>
-			  </div></td>
+				  <span class="prices" style="font-weight: bold; color: hotpink;">${cart.item.discountPrice }</span><span>원</span>
+			  	</div>
+			  </td>
 			  <td>
 				<form action="delCart" method="post">
 					<input type="hidden" name="id" value="${cart.id}">
-					<button>X</button>
+					<button style="margin-top : 50px;" class="btn btn-dark">X</button>
 				</form>
 			  </td>
 		    </tr>
@@ -91,11 +96,24 @@
 		  </tbody>
 		</table>
 		<div>
-			결제금액<span id="orderprice" name="orderprice"></span><span>원</span><br>
-			총 상품금액<span id="totalprice"></span><span>원</span><br>
-			배송비<span id="delivery"></span><span>원</span><br>
+			<div style="width: 300px; height: 200px; margin-top : 50px; background-color : #e0e0e0; padding: 10px;">
+			<p style="font-weight: bold; font-size: 1.2rem;">결제금액</p>
+			<span id="orderprice" name="orderprice" style="font-weight: bold; color : hotpink; font-size: 1.2rem;"></span><span>원</span><br><br>
+
+			<table style="width: 300px; height: 100px;">
+				<tr style="width: 200px; height: 50px;">
+					<td>총 상품금액</td>
+					<td><span id="totalprice"></span><span>원</span></td>
+				</tr>
+				<tr style="width: 200px; height: 50px;">
+					<td>배송비</td>
+					<td><span id="delivery"></span><span>원</span></td>
+				</tr>
+			</table>
+			</div>
+			
 			<form action="buy" method="post">
-				<button class="btn btn-outline-dark">주문하기</button>
+				<button class="btn btn-outline-dark" style="width: 300px; height: 40px; margin-top: 30px; line-height:30px;">주문하기</button>
 			</form>
 		</div>
 	</div>

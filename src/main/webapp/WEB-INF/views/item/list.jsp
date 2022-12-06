@@ -17,6 +17,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <link href="/css/itemDetail.css" rel="stylesheet">
 <title>Insert title here</title>
+<style>
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -48,10 +50,10 @@
 									<img src="${pageContext.request.contextPath }/upload/${tagItem.itemfiles[0].file}" class="card-img-top">
 								</a>
 								<div class="card-body">
-									<p class="card-title">${tagItem.name }</p>
-								</div>
+									<p class="card-title redText" >${tagItem.name }</p>	
+								</div>																													
 								<ul class="list-group list-group-flush" id="discolor">
-									<li class="list-group-item"><span style="font-size:0.9rem; margin-right:1rem;">${tagItem.discount }%</span> ${tagItem.price*(100-tagItem.discount)/100}원</li>
+									<li class="list-group-item"><span style="font-size:0.9rem; margin-right:1rem;">${tagItem.discount }%</span> ${tagItem.price*(100-tagItem.discount)/100} 원</li>
 									<li class="list-group-item"></li>
 								</ul>
 								<input type="hidden" name="itemId" value="${tagItem.id }">
@@ -101,4 +103,16 @@
 		</c:otherwise>
 	</c:choose>
 </body>
+<script>
+$(function(){
+	$('a').click(function(){
+		$('a').removeClass();
+			$(this).addClass('on');
+	})
+})
+
+$(".redText").on("click", function (e) {
+     $(this).css("color", "red");
+});
+</script>
 </html>
