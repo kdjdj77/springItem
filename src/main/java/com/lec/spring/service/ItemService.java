@@ -1,6 +1,5 @@
 package com.lec.spring.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -27,7 +26,6 @@ import com.lec.spring.repository.ContentfileRepository;
 import com.lec.spring.repository.ItemRepository;
 import com.lec.spring.repository.SizeRepository;
 import com.lec.spring.repository.TagRepository;
-import com.lec.spring.repository.UserRepository;
 import com.lec.spring.util.U;
 
 @Service
@@ -35,8 +33,6 @@ public class ItemService {
 	
 	@Autowired
 	private ItemRepository itemRepository;
-	@Autowired
-	private UserRepository userRepository;
 	@Autowired
 	private CategoryRepository categoryRepository;
 	@Autowired
@@ -205,6 +201,23 @@ public class ItemService {
 	public List<Buy> getBuyList() {
 		User user = U.getLoggedUser();
 		return buyRepository.findByUserOrderByIdDesc(user);
+	}
+
+	public Category latestList(Long category) {
+		Category c = null;
+		return c;
+	}
+	public Category likeList(Long category) {
+		Category c = null;
+		return c;
+	}
+	public Category salesList(Long category) {
+		Category c = null;
+		return c;
+	}
+	public Category lowpriceList(Long category) {
+		Category c = null;
+		return c;
 	}
 	
 }
