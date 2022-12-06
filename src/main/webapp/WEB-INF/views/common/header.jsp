@@ -50,13 +50,17 @@
 			<!--TODO : 로그아웃후 다시 돌아오기 -->
 			<span class="d-flex">
 				<span class="text-dark fs-6 p-2">
-					<span TODO="">${userdetails.user.name}(${username})</span>
+					<span style="margin-top:-5px;">${userdetails.user.name}(${username})</span>
 					<span><a style="font-size:1.3rem; color:black;" href="${pageContext.request.contextPath}/user/userinfo"><i class="fa-solid fa-gear"></i></a></span>
 				</span> 
 				<span><button class="btn btn-outline-dark mb-1 fw-bold" type="submit">Logout</button></span>
 			</span>
 		</form>
 		</sec:authorize>
+		<sec:authorize access="hasRole('ADMIN')">
+			<a class="nav-link active float-end fs-5" href="${pageContext.request.contextPath }/admin/item/manage">대시보드</a>
+			<a class="nav-link active float-end fs-5" href="${pageContext.request.contextPath }/admin/item/list">관리</a>
+        </sec:authorize>
 	</header>
 	<script>
 		let listSearch = document.getElementById("listSearch");
