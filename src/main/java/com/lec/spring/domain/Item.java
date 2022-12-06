@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
@@ -59,6 +60,9 @@ public class Item {
 	@ColumnDefault(value = "0")
 	private	Long likecnt;
 	
+	@Transient
+	private Long discountPrice;
+	
 	@ManyToOne
 	@ToString.Exclude
 	private Tag tag;
@@ -66,6 +70,12 @@ public class Item {
 	@ManyToOne
 	@ToString.Exclude
 	private Category category;
+	
+	public Long getDiscountPrice() {
+		Long a = Math.round(this.price - (this.price * this.discount / 100));
+		
+		return a - (a%100); 
+	}
 	
 	@OneToMany(mappedBy ="item" , cascade = CascadeType.ALL)
     @ToString.Exclude
