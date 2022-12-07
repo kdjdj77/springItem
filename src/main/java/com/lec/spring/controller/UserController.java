@@ -59,6 +59,8 @@ public class UserController {
 			result.rejectValue("username", "이미 존재하는 아이디(username) 입니다");
 		}
 		
+		if (user.getAddress() == null) user.setAddress("-");
+		
 		// 에러가 있었다면 redirect 한다.
 		if(result.hasErrors()) {
 			redirectAttrs.addFlashAttribute("username", user.getUsername());
@@ -75,11 +77,16 @@ public class UserController {
 		}
 		
 		// 에러가 없었으면 회원등록 진행
-		String page = "/user/registerOk";
 		int cnt = userService.register(user);
-		model.addAttribute("result", cnt);
 		
-		return page;
+		// api로그인이라면 바로 로그인까지 실행
+		if (user.getProvider().equals("api")) {
+			model.addAttribute("username", user.getUsername());
+			return "/user/apiLogin";
+		}
+				
+		model.addAttribute("result", cnt);
+		return "/user/registerOk";
 		
 	}
 	
@@ -158,6 +165,26 @@ public class UserController {
 	protected boolean isValidPassword(String id, String chkpassword) {
 		User user = userRepository.findById(Long.parseLong(id)).orElse(null);
 		return principalDetailService.checkMemberPassword(chkpassword, user.getUsername());
+	}
+	@PostMapping("/apiLogin")
+	public String apiLogin(
+			String id, String name, 
+			String phonenum, String email, Model model) {
+		model.addAttribute("username", id);
+		
+		if (userService.isExist(id)) return "/user/apiLogin";
+		
+		model.addAttribute("name", name);
+		if (phonenum != null) model.addAttribute("phonenum", phonenum.replaceAll("-", ""));
+		else model.addAttribute("phonenum", "00000000000");
+		if (email != null) model.addAttribute("email", email);
+		else model.addAttribute("email", "test@test.com");
+		model.addAttribute("address", "-");
+		return "/user/apiRegister";
+	}
+	@GetMapping("/naverOK")
+	public String naverOk() {
+		return "/common/naverOK";
 	}
 }
 

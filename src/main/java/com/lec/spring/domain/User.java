@@ -55,8 +55,10 @@ public class User extends BaseEntity {
 	private String address;
 	@ColumnDefault(value="true")
 	private Boolean isvalid; // true이면 회원, false이면 탈퇴한 회원
-	@Column(nullable = false)
+	@ColumnDefault(value="0")
 	private Long point;
+	@Transient
+	private String provider;
 	
 	@OneToMany(mappedBy ="user" , cascade = CascadeType.ALL)
     @ToString.Exclude

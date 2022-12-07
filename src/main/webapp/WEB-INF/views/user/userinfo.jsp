@@ -40,7 +40,9 @@
                      <div class="profile-header-info mb-5">
                         <h4 class="m-t-10 m-b-5">회원정보 - ${userdetails.user.name}
                         	<a href="update" class="btn btn-xs btn-warning">수정</a>
-                        	<a href="delete?id=${userdetails.user.id}" onclick="return confirm('정말로 탈퇴하시겠습니까?')" class="btn btn-xs btn-danger">탈퇴</a>
+                        	<c:if test="${user.username.length() < 16 }">
+                        		<a href="delete?id=${userdetails.user.id}" onclick="return confirm('정말로 탈퇴하시겠습니까?')" class="btn btn-xs btn-danger">탈퇴</a>
+                     		</c:if>
                      	</h4>
                      </div>
                      <!-- END profile-header-info -->
@@ -64,6 +66,10 @@
                               <tr class="highlight">
                                  <td class="field">Name</td>
                                  <td>${userdetails.user.name}</td>
+                              </tr>
+                              <tr class="highlight">
+                                 <td class="field">UserName</td>
+                                 <td>${userdetails.user.username}</td>
                               </tr>
                               <tr class="divider">
                                  <td colspan="2"></td>
@@ -96,7 +102,9 @@
                               </tr>
                            </tbody>
                         </table>
-                        <a class="btn btn-outline-dark" href="updatePassword">비밀번호 변경</a>
+                        <c:if test="${user.username.length() < 16 }">
+                        	<a class="btn btn-outline-dark" href="updatePassword">비밀번호 변경</a>
+                        </c:if>
                      </div>
                      <!-- end table -->
                   </div>
