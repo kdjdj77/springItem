@@ -23,9 +23,11 @@
 		}
 		input[type=radio]+label{
 		    border:1px solid black;
+		    border-radius : 5px;
 		}
 		input[type=radio]:checked+label{
 		    border:2px solid hotpink;
+		    border-radius : 5px;
 		}
 		input[type=radio]+label:hover{
 		    cursor : pointer;

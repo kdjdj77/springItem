@@ -18,6 +18,7 @@
 <link href="/css/itemDetail.css" rel="stylesheet">
 <title>Insert title here</title>
 <style>
+
    	.like{
 		font-size:2.3rem;
 		text-shadow: 2px 2px 6px gray;
@@ -104,12 +105,6 @@
 				</c:forEach>
 			</ul>
 			<hr><br>
-			<div style="width: 400px; display: flex; margin-left: auto; padding-right: 20px;">
-				<a href="${pageContext.request.contextPath}/item/orderByList?category=${category.id}&orby=0" style="width: 100px; text-align: center; font-weight: bold; color : hotpink;">최신순</a>
-				<a href="${pageContext.request.contextPath}/item/orderByList?category=${category.id}&orby=1" style="width: 100px; text-align: center; font-weight: bold; color : hotpink;">좋아요순</a>
-				<a href="${pageContext.request.contextPath}/item/orderByList?category=${category.id}&orby=2" style="width: 100px; text-align: center; font-weight: bold; color : hotpink;">판매량순</a>
-				<a href="${pageContext.request.contextPath}/item/orderByList?category=${category.id}&orby=3" style="width: 100px; text-align: center; font-weight: bold; color : hotpink;">낮은가격순</a>
-			</div><br>
 			<div class="sub_wrap">
 				<c:forEach var="cateItem" items="${category.items}">
 					<div class="container" id="container_wrap">
