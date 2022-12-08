@@ -64,37 +64,45 @@
                            <thead></thead>
                            <tbody>
                               <tr class="highlight">
-                                 <td class="field">Name</td>
+                                 <td class="field">이름</td>
                                  <td>${userdetails.user.name}</td>
                               </tr>
                               <tr class="highlight">
-                                 <td class="field">UserName</td>
+                                 <td class="field">아이디</td>
                                  <td>${userdetails.user.username}</td>
                               </tr>
                               <tr class="divider">
                                  <td colspan="2"></td>
                               </tr>
                               <tr>
-                                 <td class="field">Phone</td>
+                                 <td class="field">연락처</td>
                                  <td><i class="fa fa-mobile fa-lg m-r-5"></i> +82) ${userdetails.user.phonenum}</td>
                               </tr>
                               <tr>
-                                 <td class="field">Email</td>
+                                 <td class="field">이메일</td>
                                  <td>${userdetails.user.email}</td>
                               </tr>
                               <tr class="highlight">
-                                 <td class="field">Address</td>
-                                 <td>${userdetails.user.address}</td>
+                                 <td class="field">우편번호</td>
+                                 <td>${userdetails.user.address1}</td>
+                              </tr>
+                              <tr class="highlight">
+                                 <td class="field">주소</td>
+                                 <td>${userdetails.user.address2}</td>
+                              </tr>
+                              <tr class="highlight">
+                                 <td class="field">상세주소</td>
+                                 <td>${userdetails.user.address3}</td>
                               </tr>
                               <tr class="divider">
                                  <td colspan="2"></td>
                               </tr>
                               <tr>
-                                 <td class="field">Point</td>
+                                 <td class="field">포인트</td>
                                  <td>${userdetails.user.point} p</td>
                               </tr>
                               <tr>
-                                 <td class="field">regDate</td>
+                                 <td class="field">가입일</td>
                                  <td>${userdetails.user.regDateTime}</td>
                               </tr>
                               <tr class="divider">
@@ -102,7 +110,7 @@
                               </tr>
                            </tbody>
                         </table>
-                        <c:if test="${user.username.length() < 16 }">
+                        <c:if test="${userdetails.user.username.length() < 16 }">
                         	<a class="btn btn-outline-dark" href="updatePassword">비밀번호 변경</a>
                         </c:if>
                      </div>

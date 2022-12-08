@@ -58,6 +58,7 @@
 		</form>
 		</sec:authorize>
 		<sec:authorize access="hasRole('ADMIN')">
+			<a class="nav-link active float-end fs-5 p-2" href="${pageContext.request.contextPath }/admin/buy/list"><i class="fa-solid fa-truck"></i></a>
 			<a class="nav-link active float-end fs-5 p-2" href="${pageContext.request.contextPath }/admin/item/list"><i class="fa-solid fa-list-check"></i></a>
 			<a class="nav-link active float-end fs-5 p-2" href="${pageContext.request.contextPath }/admin/item/manage"><i class="fa-solid fa-chart-line"></i></a>
         </sec:authorize>

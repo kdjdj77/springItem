@@ -52,13 +52,24 @@ public class User extends BaseEntity {
 	@Column(nullable = false)
 	private String email;
 	@Column(nullable = false)
-	private String address;
+	private String address1; // 우편번호
+	@Column(nullable = false)
+	private String address2; // 도로명주소
+	@Column(nullable = false)
+	private String address3; // 상세주소
 	@ColumnDefault(value="true")
 	private Boolean isvalid; // true이면 회원, false이면 탈퇴한 회원
 	@ColumnDefault(value="0")
 	private Long point;
 	@Transient
 	private String provider;
+	@Transient
+	@ToString.Exclude
+	private String phone2;
+	
+	@Transient
+	@ToString.Exclude
+	private String random;
 	
 	@OneToMany(mappedBy ="user" , cascade = CascadeType.ALL)
     @ToString.Exclude

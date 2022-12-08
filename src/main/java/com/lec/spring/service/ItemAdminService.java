@@ -344,6 +344,38 @@ public class ItemAdminService {
 		list.setStatus("OK");
 		return list;
 	}
+	public List<Buy> getBuyList(Pageable pageable, Integer page, Model model) {
+		if(page == null) page = 1; if(page < 1) page = 1;
+		HttpSession session = U.getSession();
+		Integer writePages = C.LIST_PAGES;
+		Integer pageRows = C.PAGE_ROWS;
+		session.setAttribute("page", page);
+		
+		Page<Buy> pageWrites;
+		pageWrites = buyRepository.findByIsOrder(true, PageRequest.of(page - 1, pageRows, Sort.by(Order.asc("id"))));
+		
+		long cnt = pageWrites.getTotalElements();   // 글 목록 전체의 개수
+		int totalPage = pageWrites.getTotalPages(); //총 몇 '페이지' 분량인가?
+		if(page > totalPage) page = totalPage;   // 페이지 보정
+		int startPage = ((int)((page - 1) / writePages) * writePages) + 1;
+		int endPage = startPage + writePages - 1;
+		if (endPage >= totalPage) endPage = totalPage;
+		model.addAttribute("cnt", cnt);  // 전체 글 개수
+		model.addAttribute("page", page); // 현재 페이지
+		model.addAttribute("totalPage", totalPage);  // 총 페이지 수
+		model.addAttribute("pageRows", pageRows);  // 한 페이지 에 표시할 글 개수
+		model.addAttribute("url", U.getRequest().getRequestURI());  // 목록 url
+		model.addAttribute("writePages", writePages); // 페이징 에 표시할 숫자 개수
+		model.addAttribute("startPage", startPage);  // 페이징 에 표시할 시작 페이지
+		model.addAttribute("endPage", endPage);   // 페이징 에 표시할 마지막 페이지
+		List<Buy> list = pageWrites.getContent();
+		return list;
+	}
+	public void deliveryOk(Long id) {
+		Buy b = buyRepository.findById(id).orElse(null);
+		b.setIsOrder(false);
+		buyRepository.saveAndFlush(b);
+	}
 	
 	
 //file//////////////////////////////////////////////////////////////////////////////
