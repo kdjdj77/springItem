@@ -64,15 +64,15 @@ public class DummyData {
 		User user1 = User.builder()
 				.username("USER1").password(passwordEncoder.encode("1234"))
 				.name("회원1").phonenum("01011111111").email("111@gmail.com")
-				.address("경기도 평택시").point(200L).build();		
+				.address1("64841").address2("경기도 평택시").address3("101-1503").point(200L).build();		
 		User user2 = User.builder()
 				.username("USER2").password(passwordEncoder.encode("1234"))
 				.name("회원2").phonenum("01022222222").email("222@gmail.com")
-				.address("경기도 하남시").point(50L).build();
+				.address1("46815").address2("경기도 하남시").address3("103-203").point(50L).build();
 		User admin = User.builder()
 				.username("ADMIN").password(passwordEncoder.encode("1234"))
 				.name("관리자").phonenum("01076767676").email("asdf@gmail.com")
-				.address("서울특별시 강서구").point(400L).build();
+				.address1("98754").address2("서울특별시 강서구").address3("107-1105").point(400L).build();
 		
 		user1.addAuthority(auth_member); user2.addAuthority(auth_member); admin.addAuthority(auth_admin);
 		user1 = userRepository.save(user1); user2 = userRepository.save(user2); 

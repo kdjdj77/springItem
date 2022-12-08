@@ -50,7 +50,7 @@
 			<!--TODO : 로그아웃후 다시 돌아오기 -->
 			<span class="d-flex">
 				<span class="text-dark fs-6 p-1">
-					<span>${userdetails.user.name}(${username})</span>
+					<span>${userdetails.user.name}</span>
 					<span><a style="font-size:1.3rem; color:black;" href="${pageContext.request.contextPath}/user/userinfo"><i class="fa-solid fa-gear"></i></a></span>
 				</span> 
 				<span><button class="btn btn-outline-dark mb-1 fw-bold" type="submit">Logout</button></span>
@@ -58,6 +58,7 @@
 		</form>
 		</sec:authorize>
 		<sec:authorize access="hasRole('ADMIN')">
+			<a class="nav-link active float-end fs-5 p-2" href="${pageContext.request.contextPath }/admin/buy/list"><i class="fa-solid fa-truck"></i></a>
 			<a class="nav-link active float-end fs-5 p-2" href="${pageContext.request.contextPath }/admin/item/list"><i class="fa-solid fa-list-check"></i></a>
 			<a class="nav-link active float-end fs-5 p-2" href="${pageContext.request.contextPath }/admin/item/manage"><i class="fa-solid fa-chart-line"></i></a>
         </sec:authorize>

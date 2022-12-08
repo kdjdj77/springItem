@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.lec.spring.domain.Buy;
 import com.lec.spring.domain.Item;
 import com.lec.spring.service.ItemAdminService;
 
@@ -97,5 +98,20 @@ public class ItemAdminController {
 		model.addAttribute("ChartList", itemadminService.getChartList());
 		model.addAttribute("rankList", itemadminService.getrankList());
 		return "admin/manage";
+	}
+	@GetMapping("/buy/list")
+	public String buyList(Pageable pageable, 
+			Integer page, Model model) {
+		if(page == null) page = 1;
+		if(page < 1) page = 1;
+		List<Buy> buyList = itemadminService.getBuyList(pageable, page, model);
+		model.addAttribute("buyList", buyList);
+		return "admin/delivery";		
+	}
+	@GetMapping("/buy/delivery")
+	public String setIsOrderFalse(Long id) {
+		itemadminService.deliveryOk(id);
+		
+		return "redirect:list";
 	}
 }
