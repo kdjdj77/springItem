@@ -16,7 +16,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <div class="container mt-3 text-center" style="width:40%;">
         <form action="${pageContext.request.contextPath }/user/login" method="POST">
-            <h1 class="h3 mb-3 fw-normal">로그인 하세요</h1>
+            <h1 class="h3 mb-3 fw-normal">BIMBO</h1>
 	        <div class="row mt-5">
 	            <div class="col-12 text-danger">
 	                ${errorMessage} <%-- ← 에러메세지 --%>
@@ -38,7 +38,9 @@
             </div>
             <button class="w-100 btn btn-lg btn-primary my-1" type="submit">로그인</button>
             <a class="w-100 btn btn-lg btn-primary my-1" href="${pageContext.request.contextPath}/user/register">회원가입</a>
-            <p class="mt-2 mb-3 text-muted">&copy; 2017–2022</p>
+            <p></p>
+            <jsp:include page="/WEB-INF/views/common/apiLogin.jsp"/>            
+            <p class="mt-2 mb-3 text-muted">Copyright &copy; BIMBO 2022</p>
         </form>
     </div>
 
