@@ -1,0 +1,5 @@
+1. 삭제 대신 boolean 타입으로 하는 것은 이름을 isvalid로 하자
+	현재 color와 size에 isvalid 추가함
+2. ajax 호출 시에는 ajaxController를 이용하자 (QryList만 만들면 됨)
+3. ColumnDefault 사용시 Dynamic~ 붙이기
+4. 프론트에서 isvalid로 검증하는 대신 get~함수에서 검증
