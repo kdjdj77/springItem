@@ -56,7 +56,6 @@ public class UserController {
 			, Model model //★ BindingResult 보다 Model 은 뒤에 있어야 한다. 순서중요! 아니면 에러남
 			, RedirectAttributes redirectAttrs // redirect 될 페이지에 넘겨줄 값들을 담을 객체
 			) {
-		
 		// 이미 중독된 아이디(username) 이 있다면
 		if(userService.isExist(user.getUsername())) {
 			result.rejectValue("username", "이미 존재하는 아이디(username) 입니다");

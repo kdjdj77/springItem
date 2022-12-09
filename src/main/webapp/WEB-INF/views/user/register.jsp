@@ -33,21 +33,27 @@
             </div>
         </div>
         <div class="row">
-            <form id="frm" method="POST" action="${pageContext.request.contextPath}/user/register">
+            <form id="frm" method="POST">
                 <div class="form-group mt-3">
                     <label for="username">사용자 아이디</label>
                     <input type="text" class="form-control" id="username" name="username" placeholder="사용자아이디" value="${username }" required>
+                	<button type="button" onclick="isExistId();" class="btn btn-outline-dark btn-sm">중복확인</button>
+                	<span id="idexisttxt" style="font-size:0.7rem;"></span>
                 </div>
                 <div class="form-group mt-3">
                     <label for="name">사용자 이름</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="사용자 이름" value="${name }" required>
                 </div>
                 <div class="form-group mt-3">
+                    <label for="email">이메일</label>
+                	<input type="email" id="email" name="email" class="form-control" pattern="[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}" placeholder="예) id@domain.com" value="${email }" required/>
+                </div>
+                <div class="form-group mt-3">
                     <label for="password">비밀번호</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호" required>
                 </div>
                 <div class="form-group mt-3">
-                    <label for="re-password">비밀번호 확인</label>   <%-- binding 을 위해 hyphen 사용 자제 --%>
+                    <label for="re-password">비밀번호 확인<span style="font-size:0.7rem" id="repasstxt"></span></label>   <%-- binding 을 위해 hyphen 사용 자제 --%>
                     <input type="password" class="form-control" id="re_password" name="re_password" placeholder="비밀번호 확인" required>
                 </div>
                 <div class="form-group mt-3">
@@ -60,15 +66,13 @@
 					<input type="hidden" id="phoneDoubleChk"/>
                 </div>
                 <div class="form-group mt-3">
-                	<input type="text" class="form-control d-inline-flex w-50" id="sample4_postcode" name="address1" placeholder="우편번호" disabled required>
-					<input type="button" class="btn btn-outline-dark mb-1" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-					<input type="text" class="form-control" id="sample4_roadAddress" name="address2" placeholder="도로명주소" size="60" disabled required><br>
-					<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소"  size="60">
+                	<input type="text" class="form-control d-inline-flex w-50" id="sample4_postcode" placeholder="우편번호" disabled required>
+					<button type="button" class="btn btn-outline-dark mb-1" onclick="sample4_execDaumPostcode()">우편번호 찾기</button><br>
+					<input type="text" class="form-control" id="sample4_roadAddress" placeholder="도로명주소" size="60" disabled required><br>
 					<span id="guide" style="color:#999;display:none"></span>
-					<input type="text" class="form-control" id="sample4_detailAddress" name="address3" placeholder="상세주소"  size="60" required><br>
-					<input type="hidden" id="sample4_extraAddress" placeholder="참고항목"  size="60">
-					<input type="hidden" id="sample4_engAddress" placeholder="영문주소"  size="60" ><br>
+					<input type="text" class="form-control" id="sample4_detailAddress" name="address3" placeholder="상세주소" size="60" required><br>
                 </div>
+                <input type="hidden" name="provider" value="normal">
                 <button type="button" onclick="frmsubmit()" class="w-100 btn btn-lg btn-primary mt-3">등록</button>
             </form>
         </div>
@@ -117,7 +121,6 @@ $("#phoneChk").click(function(){
 
 //휴대폰 인증번호 대조
 $("#phoneChk2").click(function(){
-	console.log(phoneChk2);
 	
 	if(code2.length <= 0 ){
 		$("#phone2").attr("disabled",false);
@@ -144,13 +147,23 @@ $("#phoneChk2").click(function(){
 </script>
 <script>
 	let frm = document.getElementById("frm");
-	function frmsubmit() {
+	function frmsubmit() {	
+		frm.action="${pageContext.request.contextPath}/user/register?address1=" + address1 + "&address2=" + address2;
+		// 주소 검증
+		if ($("input[name='address1']").val() == "" 
+				|| $("input[name='address2']").val() == "" 
+				|| $("input[name='address3']").val() == "") {
+			alert("주소를 확인해주세요");
+			return;
+		}
 		if (checkNum == true) frm.submit();
 		else alert("인증번호를 확인해 주세요");
 	}
 </script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
+let address1 = "";
+let address2 = "";
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function sample4_execDaumPostcode() {
         new daum.Postcode({
@@ -172,42 +185,60 @@ $("#phoneChk2").click(function(){
                    extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
                 }
                 // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                if(extraRoadAddr !== ''){
-                    extraRoadAddr = ' (' + extraRoadAddr + ')';
-                }
+                if(extraRoadAddr !== '') extraRoadAddr = ' (' + extraRoadAddr + ')';
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('sample4_postcode').value = data.zonecode;
-                document.getElementById("sample4_roadAddress").value = roadAddr;
-                document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
-         
-                document.getElementById("sample4_engAddress").value = data.addressEnglish;
-                       
-                // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-                if(roadAddr !== ''){
-                    document.getElementById("sample4_extraAddress").value = extraRoadAddr;
-                } else {
-                    document.getElementById("sample4_extraAddress").value = '';
-                }
-
-                var guideTextBox = document.getElementById("guide");
-                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-                if(data.autoRoadAddress) {
-                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-                    guideTextBox.style.display = 'block';
-
-                } else if(data.autoJibunAddress) {
-                    var expJibunAddr = data.autoJibunAddress;
-                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-                    guideTextBox.style.display = 'block';
-                } else {
-                    guideTextBox.innerHTML = '';
-                    guideTextBox.style.display = 'none';
-                }
-            }
+                document.getElementById("sample4_roadAddress").value = roadAddr + extraRoadAddr;
+                address1 = data.zonecode;
+                address2 = roadAddr + extraRoadAddr;
+            }	
         }).open();
     }
+</script>
+<script>
+	$("input[name='re_password']").on("propertychange change keyup paste input", function(){
+		let pass1 = $("input[name='password']").val();
+		let pass2 = $("input[name='re_password']").val();
+		if (pass1 == pass2) {
+			$("#repasstxt").text("  비밀번호와 일치합니다");
+			$("#repasstxt").css("color", "green");
+		}
+		else {
+			$("#repasstxt").text("  비밀번호와 다릅니다");
+			$("#repasstxt").css("color", "red");
+		}
+	})
+	$("input[name='password']").on("propertychange change keyup paste input", function(){
+		let pass1 = $("input[name='password']").val();
+		let pass2 = $("input[name='re_password']").val();
+		if (pass1 == pass2) {
+			$("#repasstxt").text("  비밀번호와 일치합니다");
+			$("#repasstxt").css("color", "green");
+		}
+		else {
+			$("#repasstxt").text("  비밀번호와 다릅니다");
+			$("#repasstxt").css("color", "red");
+		}
+	})
+</script>
+<script>
+	function isExistId() {
+		$.ajax({
+	        type:"GET",
+	        url:"isexistid?id=" + $("input[name='username']").val(),
+	        cache : false,
+	        success:function(data){
+	        	if(data){
+	        		$("#idexisttxt").text("이미 존재하는 아이디입니다");
+	        		$("#idexisttxt").css("color", "red");
+	        	}else{	        		
+	        		$("#idexisttxt").text("사용가능한 아이디입니다");
+	        		$("#idexisttxt").css("color", "green");
+	        	}
+	        }
+	    });
+	}
 </script>
 </html>
 

@@ -32,7 +32,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 <div class="container" style="width:50%;">
-	<form id="frm" action="updateOk" method="POST">
+	<form id="frm" method="POST">
 	<input type="hidden" name="id" value="${userdetails.user.id}">
    <div class="row">
       <div class="col-md-12">
@@ -99,15 +99,14 @@
                               <tr class="highlight">
                                  <td class="field">우편번호</td>
                                  <td>
-                              
-				                	<input type="text" class="" id="sample4_postcode" name="address1" placeholder="우편번호" value="${userdetails.user.address1}" disabled required>
+				                	<input type="text" class="" id="sample4_postcode" placeholder="우편번호" value="${userdetails.user.address1}" disabled required>
 									<input type="button" class="btn btn-outline-dark btn-sm mb-1" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
                     			</td>          
                               </tr>
                               <tr class="highlight">
                                  <td class="field">주소</td>
                                  <td>
-                                 	<input type="text" id="sample4_roadAddress" name="address2" placeholder="도로명주소" size="60" value="${userdetails.user.address2}" disabled required><br>
+                                 	<input type="text" id="sample4_roadAddress" placeholder="도로명주소" size="60" value="${userdetails.user.address2}" disabled required><br>
 									<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소"  size="60">
                                  	<span id="guide" style="color:#999;display:none"></span>
                                  </td>
@@ -116,8 +115,6 @@
                                  <td class="field">상세주소</td>
                                  <td>
                                  	<input type="text" id="sample4_detailAddress" name="address3" placeholder="상세주소" value="${userdetails.user.address3}" size="60" required><br>
-									<input type="hidden" id="sample4_extraAddress" placeholder="참고항목"  size="60">
-									<input type="hidden" id="sample4_engAddress" placeholder="영문주소"  size="60" ><br>
                                  </td>
                               </tr>
                               <tr class="divider">
@@ -227,6 +224,7 @@ $("#phoneChk2").click(function(){
 </script>
 <script>
 	let frm = document.getElementById("frm");
+	frm.action+="updateOk?address1=" + address1 + "&address2=" + address2;
 	function frmsubmit() {
 		if (checkNum == true) frm.submit();
 		else alert("인증번호를 확인해 주세요");
@@ -234,6 +232,8 @@ $("#phoneChk2").click(function(){
 </script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
+let address1 = "";
+let address2 = "";
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function sample4_execDaumPostcode() {
         new daum.Postcode({
@@ -261,33 +261,10 @@ $("#phoneChk2").click(function(){
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('sample4_postcode').value = data.zonecode;
-                document.getElementById("sample4_roadAddress").value = roadAddr;
-                document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
-         
-                document.getElementById("sample4_engAddress").value = data.addressEnglish;
-                       
-                // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-                if(roadAddr !== ''){
-                    document.getElementById("sample4_extraAddress").value = extraRoadAddr;
-                } else {
-                    document.getElementById("sample4_extraAddress").value = '';
-                }
-
+                document.getElementById("sample4_roadAddress").value = roadAddr + extraRoadAddr;
+                address1 = data.zonecode;
+                address2 = roadAddr + extraRoadAddr;
                 var guideTextBox = document.getElementById("guide");
-                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-                if(data.autoRoadAddress) {
-                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-                    guideTextBox.style.display = 'block';
-
-                } else if(data.autoJibunAddress) {
-                    var expJibunAddr = data.autoJibunAddress;
-                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-                    guideTextBox.style.display = 'block';
-                } else {
-                    guideTextBox.innerHTML = '';
-                    guideTextBox.style.display = 'none';
-                }
             }
         }).open();
     }
