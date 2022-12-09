@@ -32,7 +32,31 @@
 		input[type=radio]+label:hover{
 		    cursor : pointer;
 		}
+		#star {
+		  display: flex;
+		}
+		
+		.star {
+		  font-size: 2rem;
+		  margin: 10px 0;
+		  cursor: pointer;
+		}
+		
+		.star:not(.on) {
+		  color: #ccc;
+		}
+		
+		.star.on {
+		  color: orange;
+		}
+		#starrr{
+		color:#FFB400;}
 </style>
+<script>
+	const conPath = "${pageContext.request.contextPath }";
+	const logged_id = ${userdetails.user.id};
+</script>
+<script src="${pageContext.request.contextPath }/js/itemReview.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -123,8 +147,8 @@
 									<h4 style="color: hotpink;" id="priceAppend"></h4>
 								</div>
 								<div style="width: 100%; height: 80px; display: flex; justify-content: space-between; margin: 30px 0;">
-									<input type="hidden" name="id" value="${item.id }">
-									
+									<input type="hidden" name="id" id="id" value="${item.id }">
+									<input type="hidden" name="address" id="address" value="${userdetails.user.address2}">
 									<form id="cartsubmit" action="cart" method="post">
 										<input type="hidden" name="id" value="${item.id}">
 										<input type="hidden" name="col" value="">
@@ -147,14 +171,20 @@
 		</div>
 	</div>
 	<br><br><br><br><br><hr>
+	
+	<img src="${pageContext.request.contextPath }/upload/test1.jpg" style="width: 1000px; height: hidden; margin: 0 auto; display : block;"><br>
 	<div style="width: 1000px; height: hidden; margin: 0 auto;">
-		<img src="${pageContext.request.contextPath }/upload/test1.jpg" alt="..">
+		${item.content}
+	</div>
+	<div style="width: 1000px; height: hidden; margin: 0 auto;">
 		<c:forEach var="contentfile" items="${item.contentfiles }">
 			<img style="margin: 30px 0;" src="${pageContext.request.contextPath }/upload/${contentfile.file}" alt="..">
 		</c:forEach>
 	</div>
 	
 	<br><br><br><br><br>	
+	<!-- 댓글 -->
+	<jsp:include page="review.jsp" />
 </body>
 <script>
 $(function() {
@@ -210,6 +240,10 @@ function payment() {
 	return true;
 }
 function payment2() {
+	if ($("input[name='address']").val() == "-") {
+		alert("주소를 등록 후 구매해주세요");
+		return false;
+	}
 	if ($("input[name='gridRadios']").val() == null || $("input[name='gridRadios']").val() == "") return false;
 	if ($("input[name='gridRadios2']").val() == null || $("input[name='gridRadios2']").val() == "") return false;
 	if ($("input[name='count']").val() == null || $("input[name='count']").val() == "") return false;

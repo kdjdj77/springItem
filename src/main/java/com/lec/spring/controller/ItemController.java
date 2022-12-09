@@ -6,15 +6,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.lec.spring.domain.Cart;
 import com.lec.spring.domain.Category;
 import com.lec.spring.domain.Item;
 import com.lec.spring.domain.Tag;
-import com.lec.spring.domain.User;
+import com.lec.spring.domain.ajax.QryResult;
+import com.lec.spring.domain.ajax.QryReviewList;
 import com.lec.spring.service.ItemAdminService;
 import com.lec.spring.service.ItemService;
-import com.lec.spring.util.U;
 
 @Controller
 @RequestMapping("/item")
@@ -133,4 +133,5 @@ public class ItemController {
 		model.addAttribute("result", result);
 		return "item/buyOk";
 	}	
+
 }
