@@ -41,7 +41,7 @@
 		<c:when test="${category == null}">
 			<div
 				style="width: 1000px; height: 80px; margin: 0 auto; margin-top: 100px; text-align: center;">
-				<p style="font-weight: 900; font-size: 3rem; color: hotpink;">${tag.category.name}</p>
+				<p style="font-weight: 900; font-size: 3rem; color: hotpink;">${tag.category.name}(${tag.name})</p>
 			</div>
 			<br>
 			<ul
@@ -59,8 +59,15 @@
 						<div class="row">
 							<div id="card_box">
 								<div style="position:relative;">
-									<a href="${pageContext.request.contextPath}/item/detail?id=${tagItem.id}">
-										<img src="${pageContext.request.contextPath }/upload/${tagItem.itemfiles[0].file}" class="card-img-top">
+									<a href="${pageContext.request.contextPath}/item/detail?id=${i.id}">
+										<c:if test="${tagItem.itemfiles[0].file == null}">
+											<div class="card-img-top" style="color:black; text-decoration:none; text-align:center; border:1px solid black;background-color:ivory; width:300px; height:293px;">
+												NO IMAGE
+											</div>
+										</c:if>
+										<c:if test="${tagItem.itemfiles[0].file != null}">
+											<img src="${pageContext.request.contextPath }/upload/${tagItem.itemfiles[0].file}" class="card-img-top">
+										</c:if>
 									</a>
 									<c:choose>
 										<c:when test="${likeList.contains(tagItem)}">
@@ -111,8 +118,15 @@
 						<div class="row">
 							<div id="card_box">
 								<div style="position:relative;">
-									<a href="${pageContext.request.contextPath}/item/detail?id=${cateItem.id}">
-										<img src="${pageContext.request.contextPath }/upload/${cateItem.itemfiles[0].file}" class="card-img-top">
+									<a href="${pageContext.request.contextPath}/item/detail?id=${i.id}">
+										<c:if test="${cateItem.itemfiles[0].file == null}">
+											<div class="card-img-top" style="color:black; text-decoration:none; text-align:center; border:1px solid black;background-color:ivory; width:300px; height:293px;">
+												NO IMAGE
+											</div>
+										</c:if>
+										<c:if test="${cateItem.itemfiles[0].file != null}">
+											<img src="${pageContext.request.contextPath }/upload/${cateItem.itemfiles[0].file}" class="card-img-top">
+										</c:if>
 									</a>
 									<c:choose>
 										<c:when test="${likeList.contains(cateItem)}">

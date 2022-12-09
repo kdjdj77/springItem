@@ -48,10 +48,17 @@ public class ajaxController {
 		return itemAdminService.likecontrol(itemId);
 	}
 	// review *********************************************************
-	@GetMapping("/list")
-	public QryReviewList list(Item itemId) {
-		System.out.println("itemid = "+itemId);
-		return itemService.reviewList(itemId);
+	@PostMapping("/item/registerReview")
+	public QryResult registerReview(Long itemId, Long user_id, String content, Long star) {
+		return itemService.registerReview(itemId, user_id, content, star);
+	}
+	@GetMapping("/item/reviewlist")
+	public QryReviewList list(Long id) {
+		return itemService.reviewList(id);
+	}
+	@PostMapping("/item/deleteReview")
+	public QryResult delete(Long id) {
+		return itemService.deleteComment(id);
 	}
 	// ****************************************************************
 
