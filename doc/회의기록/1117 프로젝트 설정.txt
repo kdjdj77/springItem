@@ -1,0 +1,30 @@
+프로젝트 사전 설정
+
+mysql -u root -p
+(비밀번호입력)
+<copy/paste>
+  CREATE DATABASE springitem default CHARACTER SET UTF8;
+  CREATE USER 'springitem'@'localhost' IDENTIFIED BY '1234';
+  GRANT ALL PRIVILEGES ON springitem.* TO 'springitem'@'localhost';
+  FLUSH PRIVILEGES;
+</>
+
+dbeaver 연결
+  database이름 : springitem
+  user이름 : springitem
+  password : 1234
+
+
+프로젝트 진행 규칙
+  파일명/함수명 같은 경우 같은 폴더 안에 있으면 이름 겹치지 않도록 할 것
+  Entity관계 설정할 때 FetchType.EAGER 두번 이상 쓰지 말 것
+  DB의 정수타입은 Entity에서 Long타입
+  DB의 문자타입은 Entity에서 String타입
+  DB의 실수타입은 Entity에서 Double타입
+  isvalid가 있는 엔티티 목록을 받을 때 findByIsvalid 사용
+
+초기 user 더미데이터
+  user1 (ROLE_MEMBER)
+  user2 (ROLE_MEMBER)
+  admin (ROLE_MEMBER, ROLE_ADMIN)
+

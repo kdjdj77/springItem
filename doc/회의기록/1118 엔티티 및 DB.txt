@@ -1,0 +1,27 @@
+buy
+	count 추가
+	Boolean isOrder 추가
+cart
+	count 추가
+category
+	categoryname -> name
+	tag -> tags
+item
+	itemname -> name
+	itemcontent -> content
+	itemflag -> onsale
+	sell 추가
+	like 추가
+contentfile 추가
+	Long id
+	Long item_id
+	String source
+	String file
+review
+	reviewcontent -> content
+size
+	size -> name
+tag
+	tagname -> name
+user
+	flag -> isusing
