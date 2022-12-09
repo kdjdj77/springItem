@@ -18,6 +18,8 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,6 +35,7 @@ import lombok.ToString;
 @Entity(name = "db_item")
 @DynamicInsert
 @DynamicUpdate
+@EqualsAndHashCode
 public class Item {
 
 	@Id
@@ -55,6 +58,9 @@ public class Item {
 	private Long reviewcnt;
 	@ColumnDefault(value = "0")
 	private Double avgstar;
+	public String getAvgstarStr() {
+		return String.format("%.1f", this.getAvgstar());
+	}
 	@ColumnDefault(value = "0")
 	private	Long sell;
 	@ColumnDefault(value = "0")
@@ -81,6 +87,7 @@ public class Item {
     @ToString.Exclude
     @Builder.Default
     @EqualsAndHashCode.Exclude
+    @JsonIgnore
     private List<Color> colors = new ArrayList<>();
 	public List<Color> getColors() {
 		List<Color> result = new ArrayList<>();
@@ -92,27 +99,24 @@ public class Item {
     @ToString.Exclude
     @Builder.Default
     @EqualsAndHashCode.Exclude
+    @JsonIgnore
     private List<Size> sizes = new ArrayList<>();
 	public List<Size> getSizes() {
 		List<Size> result = new ArrayList<>();
 		for(Size c : this.sizes) if (c.getIsvalid()) result.add(c);
 		return result;
 	}
-	
+	@JsonIgnore
 	@OneToMany(mappedBy ="item" , cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
     private List<Itemfile> itemfiles = new ArrayList<>();
 	
+	@JsonIgnore
 	@OneToMany(mappedBy ="item" , cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
     private List<Contentfile> contentfiles = new ArrayList<>();
-	
-	@OneToMany(mappedBy ="item" , cascade = CascadeType.ALL)
-    @ToString.Exclude
-    @Builder.Default
-    private List<Review> reviews = new ArrayList<>();
 	
 	public void addItemFiles(Itemfile... files) {  // xxxToMany 의 경우 만들어두면 편리
 		if(files != null) {

@@ -44,6 +44,7 @@ public class Category {
 	@OneToMany(mappedBy ="category" , cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
+    @EqualsAndHashCode.Exclude
     private List<Tag> tags = new ArrayList<>();
 	
 	@JsonIgnore

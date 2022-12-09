@@ -19,6 +19,8 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -71,6 +73,7 @@ public class User extends BaseEntity {
 	@ToString.Exclude
 	private String random;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy ="user" , cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
@@ -81,11 +84,13 @@ public class User extends BaseEntity {
     @Builder.Default
     private List<Cart> carts = new ArrayList<>();
 	
+	@JsonIgnore
 	@OneToMany(mappedBy ="user" , cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
     private List<Review> reviews = new ArrayList<>();
 	
+	@JsonIgnore
 	@OneToMany(mappedBy ="user" , cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default

@@ -10,4 +10,6 @@ import com.lec.spring.domain.Review;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 	List<Review> findByItem(Item itemId, Sort sort);
+
+	List<Review> findByItem(Item i);
 }
