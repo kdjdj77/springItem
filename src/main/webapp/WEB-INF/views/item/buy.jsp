@@ -45,7 +45,7 @@ table {
 		</td>
 		<td>
 			<div class="card border-light" style="width: 450px; height: 150px;">
-			  <div class="card-header">구매확정</div>
+			  <div class="card-header">${buy.isOrder ? "상품배송중" : "배송완료" }</div>
 			  <div class="card-body">
 			    <p class="card-text">구매가 완료되었습니다. 이용해주셔서 감사합니다. 상품의 이용방법, 반품 등에 대한 문의는 판매자에게 문의해주세요.</p>
 			  </div>

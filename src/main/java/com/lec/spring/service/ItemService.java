@@ -5,6 +5,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 
 import com.lec.spring.domain.Buy;
@@ -13,10 +15,13 @@ import com.lec.spring.domain.Category;
 import com.lec.spring.domain.Color;
 import com.lec.spring.domain.Contentfile;
 import com.lec.spring.domain.Item;
+import com.lec.spring.domain.Review;
 import com.lec.spring.domain.Size;
 import com.lec.spring.domain.Tag;
 import com.lec.spring.domain.User;
 import com.lec.spring.domain.ajax.QryItemCount;
+import com.lec.spring.domain.ajax.QryResult;
+import com.lec.spring.domain.ajax.QryReviewList;
 import com.lec.spring.domain.ajax.QryTotalPrice;
 import com.lec.spring.repository.BuyRepository;
 import com.lec.spring.repository.CartRepository;
@@ -24,8 +29,10 @@ import com.lec.spring.repository.CategoryRepository;
 import com.lec.spring.repository.ColorRepository;
 import com.lec.spring.repository.ContentfileRepository;
 import com.lec.spring.repository.ItemRepository;
+import com.lec.spring.repository.ReviewRepository;
 import com.lec.spring.repository.SizeRepository;
 import com.lec.spring.repository.TagRepository;
+import com.lec.spring.repository.UserRepository;
 import com.lec.spring.util.U;
 
 @Service
@@ -47,6 +54,10 @@ public class ItemService {
 	private CartRepository cartRepository;
 	@Autowired
 	private BuyRepository buyRepository;
+	@Autowired
+	private ReviewRepository reviewRepository;
+	@Autowired
+	private UserRepository userRepository;
 	
 	@Transactional
 	public List<Category> categoryList() {
@@ -220,4 +231,17 @@ public class ItemService {
 		return c;
 	}
 	
+	
+	// review *****************************************
+	public QryReviewList reviewList(Item itemId) {
+		QryReviewList list = new QryReviewList();
+		List<Review> review = null;
+		review = reviewRepository.findByItem(itemId, Sort.by(Order.desc("regDate")));
+		list.setCount(review.size());
+		list.setList(review);
+		list.setStatus("OK");
+		System.out.println("list : "+list);
+		return list;
+	}
+	// ***************************************************
 }
