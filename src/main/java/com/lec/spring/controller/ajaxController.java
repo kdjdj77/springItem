@@ -13,12 +13,15 @@ import com.lec.spring.domain.ajax.QryTagList;
 import com.lec.spring.domain.ajax.QryTotalPrice;
 import com.lec.spring.service.ItemAdminService;
 import com.lec.spring.service.ItemService;
+import com.lec.spring.service.UserService;
 
 @RestController
 @RequestMapping("/")
 public class ajaxController {
 	@Autowired
 	private ItemAdminService itemAdminService;
+	@Autowired
+	private UserService userService;
 	@Autowired
 	private ItemService itemService;
 	
@@ -40,5 +43,10 @@ public class ajaxController {
 	@GetMapping("/item/data/likecontrol")
 	public QryResult likecontrol(Long itemId) {
 		return itemAdminService.likecontrol(itemId);
+	}
+	@GetMapping("/user/isexistid")
+	public boolean isExistId(String id) {
+		if(userService.isExist(id)) return true;
+		else return false;
 	}
 }
