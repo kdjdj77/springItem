@@ -50,7 +50,7 @@
 		      	<div>${cart.color.name} / ${cart.size.name}</div><br>
 		      	<div>
 		      		<form action="optionchange" method="post">
-		      			<input type="hidden" name="id" value="${cart.id}">
+		      			<input type="hidden" name="id" id="id" value="${cart.id}">
 			      		<input class="btn btn-outline-dark" id="optionChange" type="button" name="changeOption" value="옵션변경" onclick="change(${cart.id})">
 			      		<div id="appends${cart.id}" class="d-none" style="margin-top : 15px;">
 			      			<select name="color" style="width: 70px; height: 30px;">
@@ -111,15 +111,17 @@
 				</tr>
 			</table>
 			</div>
+			<input type="hidden" name="address" id="address" value="${userdetails.user.address2}">
 			
 			<form action="buy" method="post">
-				<button class="btn btn-outline-dark" style="width: 300px; height: 40px; margin-top: 30px; line-height:30px;">주문하기</button>
+				<button class="btn btn-outline-dark" style="width: 300px; height: 40px; margin-top: 30px; line-height:30px;" onclick="return payment();">주문하기</button>
 			</form>
 		</div>
 	</div>
 </body>
 <script>
 setOrder();
+
 function setOrder() {
 	const data = {};
 	$.ajax({
@@ -144,6 +146,7 @@ function setOrder() {
 		},
 	});
 }
+
 function minus(id) {
 	let cnt = Number($("#countinput" + id).val());
 	if (cnt > 1) {
@@ -189,5 +192,20 @@ function setCount(cnt, id) {
 	});
 }
 
+function payment() {
+	if ($("input[name='id']").val() == null) {
+		alert("구매할 상품이 없습니다");
+		return false;
+	}
+	
+	if ($("input[name='address']").val() == "-") {
+		alert("주소를 등록 후 구매해주세요");
+		return false;
+	}
+	
+	return true;
+}
+
 </script>
+
 </html>

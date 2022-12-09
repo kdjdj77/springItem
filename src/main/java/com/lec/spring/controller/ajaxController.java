@@ -5,10 +5,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lec.spring.domain.Item;
 import com.lec.spring.domain.ajax.QryItemCount;
 import com.lec.spring.domain.ajax.QryResult;
+import com.lec.spring.domain.ajax.QryReviewList;
 import com.lec.spring.domain.ajax.QryTagList;
 import com.lec.spring.domain.ajax.QryTotalPrice;
 import com.lec.spring.service.ItemAdminService;
@@ -44,6 +47,14 @@ public class ajaxController {
 	public QryResult likecontrol(Long itemId) {
 		return itemAdminService.likecontrol(itemId);
 	}
+	// review *********************************************************
+	@GetMapping("/list")
+	public QryReviewList list(Item itemId) {
+		System.out.println("itemid = "+itemId);
+		return itemService.reviewList(itemId);
+	}
+	// ****************************************************************
+
 	@GetMapping("/user/isexistid")
 	public boolean isExistId(String id) {
 		if(userService.isExist(id)) return true;

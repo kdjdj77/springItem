@@ -87,6 +87,11 @@ public class PrincipalDetails implements UserDetails{
 	public String getUsername() {
 		return user.getUsername();
 	}
+	
+	// 로그인 한 사용자의 username 은 ?
+	public String getAddress2() {
+		return user.getAddress2();
+	}
 
 	// 계정이 만료된건 아닌지?
 	@Override
