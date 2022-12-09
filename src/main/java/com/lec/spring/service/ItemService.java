@@ -233,15 +233,57 @@ public class ItemService {
 	
 	
 	// review *****************************************
-	public QryReviewList reviewList(Item itemId) {
+	public QryResult registerReview(Long itemId, Long user_id, String content, Long star) {
+		Item i = itemRepository.findById(itemId).orElse(null);
+		User u = userRepository.findById(user_id).orElse(null);
+		Review r = new Review();
+		r.setContent(content);
+		r.setItem(i);
+		r.setStar((double)star);
+		r.setUser(u);
+		reviewRepository.saveAndFlush(r);
+		
+		List<Review> rList = reviewRepository.findByItem(i);
+		int cnt = rList.size();
+		Double sum = 0D;
+		for(Review re : rList) sum += re.getStar();
+		if (cnt != 0) i.setAvgstar(sum / cnt);
+		itemRepository.save(i);
+		
+		QryResult list = new QryResult();
+		list.setCount(1);
+		list.setStatus("OK");
+		return list;
+	}
+	public QryReviewList reviewList(Long id) {
 		QryReviewList list = new QryReviewList();
 		List<Review> review = null;
+		Item itemId = itemRepository.findById(id).orElse(null);
 		review = reviewRepository.findByItem(itemId, Sort.by(Order.desc("regDate")));
 		list.setCount(review.size());
 		list.setList(review);
 		list.setStatus("OK");
-		System.out.println("list : "+list);
 		return list;
+	}
+	public QryResult deleteComment(Long id) {
+		Review review = reviewRepository.findById(id).orElse(null);
+		
+		int count = 0 ;
+		String status = "FAIL";
+		
+		if(review != null) {
+			reviewRepository.delete(review);
+			count = 1;
+			status = "OK";
+		}
+		
+		QryResult result = QryResult.builder()
+				.count(count)
+				.status(status)
+				.build()
+				;
+		
+		return result;
 	}
 	// ***************************************************
 }

@@ -15,6 +15,7 @@
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link href="/css/itemDetail.css" rel="stylesheet">
 <title>Insert title here</title>
 <style>
@@ -24,6 +25,8 @@
 		input[type=radio]+label{
 		    border:1px solid black;
 		    border-radius : 5px;
+		    width:5rem;
+		    text-align:center;
 		}
 		input[type=radio]:checked+label{
 		    border:2px solid hotpink;
@@ -52,11 +55,6 @@
 		#starrr{
 		color:#FFB400;}
 </style>
-<script>
-	const conPath = "${pageContext.request.contextPath }";
-	const logged_id = ${userdetails.user.id};
-</script>
-<script src="${pageContext.request.contextPath }/js/itemReview.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -103,18 +101,19 @@
 							<div class="box-inner-2">
 								<div>
 									<h2 class="fw-bold">${item.name }</h2>
+									<p style="color:gold">★${item.avgstarStr}</p>
 								</div>
 								<br>
 								<span style="text-decoration: line-through;">${item.price }원</span><br>
 								<span style="font-size: 1.5rem; margin-right: 1rem; color: hotpink;">${item.discount }<span style="font-size: 1rem;">%</span></span> 
-								<span style="font-size: 1.5rem; font-weight: bold; font-weight: bold;">${(item.price*(100-item.discount)/100) - (item.price*(100-item.discount)/100 % 100)}<span style="font-size: 1rem; font-weight: bold;">원</span></span>
+								<span style="font-size: 1.5rem; font-weight: bold; font-weight: bold;">${item.discountPrice}<span style="font-size: 1rem; font-weight: bold;">원</span></span>
 								<hr>													
 								<fieldset class="form-group">
 									<div class="row">
 										<p class="col-form-label col-sm-2 pt-0">색상</p>
 										<div class="col-sm-10">
 											<c:forEach var="color" items="${item.colors }">
-												<div class="form-check">
+												<div class="form-check float-start">
 													<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1_${color.id }" value="${color.id }" required> 
 													<label class="form-check-label" for="gridRadios1_${color.id }" style="padding: 5px;"> ${color.name } </label>
 												</div>
@@ -128,7 +127,7 @@
 										<p class="col-form-label col-sm-2 pt-0">사이즈</p>
 										<div class="col-sm-10">
 											<c:forEach var="size" items="${item.sizes }">
-												<div class="form-check">
+												<div class="form-check float-start">
 													<input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios2_${size.id }" value="${size.id }" required> 
 													<label class="form-check-label" for="gridRadios2_${size.id }" style="padding: 5px;"> ${size.name } </label>
 												</div>
@@ -148,7 +147,9 @@
 								</div>
 								<div style="width: 100%; height: 80px; display: flex; justify-content: space-between; margin: 30px 0;">
 									<input type="hidden" name="id" id="id" value="${item.id }">
-									<input type="hidden" name="address" id="address" value="${userdetails.user.address2}">
+									<sec:authorize access="hasAnyRole('ADMIN','MEMBER')">
+										<input type="hidden" name="address" id="address" value="${userdetails.user.address2}">
+									</sec:authorize>
 									<form id="cartsubmit" action="cart" method="post">
 										<input type="hidden" name="id" value="${item.id}">
 										<input type="hidden" name="col" value="">
@@ -186,6 +187,16 @@
 	<!-- 댓글 -->
 	<jsp:include page="review.jsp" />
 </body>
+<script>
+	const conPath = "${pageContext.request.contextPath }";
+	let logged_id = 9999;
+</script>
+<sec:authorize access="isAuthenticated()">
+	<script>
+		logged_id = ${userdetails.user.id};
+	</script>
+</sec:authorize>
+<script src="${pageContext.request.contextPath }/js/itemReview.js"></script>
 <script>
 $(function() {
 	$("input[name='gridRadios']").change(function(){
