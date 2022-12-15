@@ -59,7 +59,7 @@
 						<div class="row">
 							<div id="card_box">
 								<div style="position:relative;">
-									<a href="${pageContext.request.contextPath}/item/detail?id=${i.id}">
+									<a href="${pageContext.request.contextPath}/item/detail?id=${tagItem.id}">
 										<c:if test="${tagItem.itemfiles[0].file == null}">
 											<div class="card-img-top" style="color:black; text-decoration:none; text-align:center; border:1px solid black;background-color:ivory; width:300px; height:293px;">
 												NO IMAGE
@@ -118,7 +118,7 @@
 						<div class="row">
 							<div id="card_box">
 								<div style="position:relative;">
-									<a href="${pageContext.request.contextPath}/item/detail?id=${i.id}">
+									<a href="${pageContext.request.contextPath}/item/detail?id=${cateItem.id}">
 										<c:if test="${cateItem.itemfiles[0].file == null}">
 											<div class="card-img-top" style="color:black; text-decoration:none; text-align:center; border:1px solid black;background-color:ivory; width:300px; height:293px;">
 												NO IMAGE
