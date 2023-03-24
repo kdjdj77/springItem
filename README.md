@@ -48,54 +48,26 @@
 
 
 ## 🔽 URL
-<span>
-| METHOD  | URI                                | 기능 |
-| ------- | ---------------------------------- |--------------------------- |
-| REQUEST | /home | 홈페이지 | 
-| POST    | /auth | 로그인한 유저 권한 | 
-| GET     | /user/isexistid | 아이디 중복여부 |
-| POST    | /user/login | 로그인 |
-| POST    | /user/register | 회원가입 |
-| REQUEST | /user/rejectAuth | 권한 거부 |
-| GET     | /user/userinfo | 유저정보 |
-| GET     | /user/update | 유저정보수정 페이지 |
-| POST    | /user/updateOk | 유저정보수정 |
-| GET     | /user/delete | 유저 삭제(비활성화) |
-| GET     | /user/updatePassword | 비밀번호 변경 페이지 |
-| POST    | /user/updatePasswordOk | 비밀번호 변경 |
-| POST    | /user/apiLogin | API를 사용한 로그인 |
-| GET     | /user/phoneCheck | 휴대폰 인증번호 |
-| GET     | /item/setcount | 장바구니 상품개수 변경 |
-| GET     | /item/getprice | 장바구니의 총 가격 |
-| GET     | /item/data/likecontrol | 상품 좋아요 관리 |
-| POST    | /item/registerReview | 상품댓글등록 |
-| GET     | /item/reviewlist | 상품댓글리스트 |
-  </span>
-  <span>
-| METHOD  | URI                                | 기능 |
-| ------- | ---------------------------------- |--------------------------- |
-| POST    | /item/deleteReview | 상품댓글삭제 |
-| GET     | /item/detail | 상품상세 |
-| GET     | /item/cart | 장바구니 목록 |
-| POST    | /item/cart | 장바구니 상품추가 |
-| GET     | /item/list | 카테고리/태그 상품목록 |
-| GET     | /item/orderByList | 상품 정렬 |
-| POST    | /item/optionchange | 상품옵션변경 |
-| POST    | /item/delCart | 장바구니 삭제 |
-| GET     | /item/buy | 구매목록 |
-| POST    | /item/buy | 장바구니 구매 |
-| POST    | /item/buydirect | 직접구매 |
+| METHOD  | URI                                | 기능 || METHOD  | URI                                | 기능 |
+| ------- | ---------------------------------- |--------------------------- || ------- | ---------------------------------- |--------------------------- |
+| REQUEST | /home | 홈페이지 | | POST    | /item/deleteReview | 상품댓글삭제 |
+| POST    | /auth | 로그인한 유저 권한 | | GET     | /item/detail | 상품상세 |
+| GET     | /user/isexistid | 아이디 중복여부 || GET     | /item/cart | 장바구니 목록 |
+| POST    | /user/login | 로그인 || POST    | /item/cart | 장바구니 상품추가 |
+| POST    | /user/register | 회원가입 || GET     | /item/list | 카테고리/태그 상품목록 |
+| REQUEST | /user/rejectAuth | 권한 거부 || GET     | /item/orderByList | 상품 정렬 |
+| GET     | /user/userinfo | 유저정보 || POST    | /item/optionchange | 상품옵션변경 |
+| GET     | /user/update | 유저정보수정 페이지 || POST    | /item/delCart | 장바구니 삭제 |
+| POST    | /user/updateOk | 유저정보수정 || GET     | /item/buy | 구매목록 |
+| GET     | /user/delete | 유저 삭제(비활성화) || POST    | /item/buy | 장바구니 구매 |
+| GET     | /user/updatePassword | 비밀번호 변경 페이지 || POST    | /item/buydirect | 직접구매 |
+| POST    | /user/updatePasswordOk | 비밀번호 변경 || GET     | /admin/item/delete | 상품삭제 | 
+| POST    | /user/apiLogin | API를 사용한 로그인 || GET     | /admin/item/manage | 관리자 페이지 | 
+| GET     | /user/phoneCheck | 휴대폰 인증번호 || GET     | /admin/item/data/tags | 카테고리 목록 | 
+| GET     | /item/setcount | 장바구니 상품개수 변경 || GET     | /admin/item/register | 상품등록 | 
+| GET     | /item/getprice | 장바구니의 총 가격 || POST    | /admin/item/registerOk | 상품등록확인 | 
+| GET     | /item/data/likecontrol | 상품 좋아요 관리 || GET     | /admin/item/update | 상품수정 | 
+| POST    | /item/registerReview | 상품댓글등록 || POST    | /admin/item/updateOk | 상품수정확인 | 
+| GET     | /item/reviewlist | 상품댓글리스트 || GET     | /admin/item/list | 상품관리리스트 | 
+| GET     | /item/like | 좋아요 표시한 상품 목록 || GET     | /admin/buy/delivery | 배송확인 | 
 | GET     | /item/search | 검색결과 목록(페이징, 정렬) |
-| GET     | /item/like | 좋아요 표시한 상품 목록 |
-| GET     | /admin/item/data/tags | 카테고리 목록 | 
-| GET     | /admin/item/register | 상품등록 | 
-| POST    | /admin/item/registerOk | 상품등록확인 | 
-| GET     | /admin/item/update | 상품수정 | 
-| POST    | /admin/item/updateOk | 상품수정확인 | 
-| GET     | /admin/item/list | 상품관리리스트 | 
-| GET     | /admin/item/delete | 상품삭제 | 
-| GET     | /admin/item/manage | 관리자 페이지 | 
-| GET     | /admin/buy/delivery | 배송확인 | 
-  </span>
-
-
