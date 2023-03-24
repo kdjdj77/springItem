@@ -48,7 +48,7 @@
 
 
 ## 🔽 URL
-
+<span>
 | METHOD  | URI                                | 기능 |
 | ------- | ---------------------------------- |--------------------------- |
 | REQUEST | /home | 홈페이지 | 
@@ -70,6 +70,10 @@
 | GET     | /item/data/likecontrol | 상품 좋아요 관리 |
 | POST    | /item/registerReview | 상품댓글등록 |
 | GET     | /item/reviewlist | 상품댓글리스트 |
+  </span>
+  <span>
+| METHOD  | URI                                | 기능 |
+| ------- | ---------------------------------- |--------------------------- |
 | POST    | /item/deleteReview | 상품댓글삭제 |
 | GET     | /item/detail | 상품상세 |
 | GET     | /item/cart | 장바구니 목록 |
@@ -92,6 +96,6 @@
 | GET     | /admin/item/delete | 상품삭제 | 
 | GET     | /admin/item/manage | 관리자 페이지 | 
 | GET     | /admin/buy/delivery | 배송확인 | 
-
+  </span>
 
 
